@@ -124,3 +124,45 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 ; Var 21 = Fuel
 ;---------------------------------------------------------------------------
 
+
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+;This controller plays a sound everytime Ayla lands from a jump, or
+;from his back-dash.
+
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 52 ;Jump land
+trigger2 = stateno = 106 ;Run-back land
+value = S8,0
+
+[State -3, Fuel]
+type = VarAdd
+trigger1 = Statetype != A
+trigger1 = var(21) < 90
+var(21) = 1
+
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = stateno = 100 
+trigger1 = (AnimElemTime(1) = 1)
+trigger2 = (AnimElemTime(3) = 1)
+value = S8,2
+
+[State -3, Landing Sound]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 50 ;Jump 
+trigger1 = (PrevStateNo != [200,1099]) && (PrevStateNo != [2000,2099])
+trigger2 = stateno = 105 ;Run-back
+value = S1,2
+volumescale = 35
