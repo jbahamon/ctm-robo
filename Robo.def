@@ -12,11 +12,17 @@ localcoord = 320,240        ;Local coordinate space width and height
 [Files]
 cmd     = Robo.cmd           ;Command set
 cns     = Robo.cns           ;Constants
-st      = Robo.cns           ;States
 stcommon = common1.cns      ;Common states (from data/ or motif)
 sprite  = Robo.sff           ;Sprite
 anim    = Robo.air           ;Animation
 sound   = Robo.snd           ;Sound
+st      = Robo.cns           ;States
+st1     = States/System.st
+st2     = States/Normal.st 
+st3     = States/Specials.st
+st4     = States/Supers.st
+st5     = States/Helpers.st
+st6     = States/Custom.st
 
 ; Maps character selection buttons to palette numbers.
 [Palette Keymap]
