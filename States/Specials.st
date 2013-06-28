@@ -642,17 +642,19 @@ movetype= A
 physics = S
 juggle  = 16
 ctrl = 0
-anim = 1010
 sprpriority = 1
 poweradd = 72
 facep2 = 1
 
-[State 1010, Change]
+[State 1010, Strength]
+type = VarSet
+trigger1 = !Time
+var(0) = ifelse(command = "dfc", 2, ifelse(command = "dfb", 1, 0))
+
+[State 1010, Anim]
 type = ChangeAnim
-trigger1 = prevstateno != 0 && prevstateno != 11 && prevstateno != 20
-value = 1010
-elem = 10
-persistent = 0
+trigger1 = !Time
+value = 1010 + Var(0)
 
 [State 1010, Explod]
 type = Explod
@@ -677,10 +679,10 @@ ownpal = 1
 removeongethit = 1
 ignorehitpause = 1
 
-[State 1010, Strength]
-type = VarSet
-trigger1 = !Time
-var(0) = ifelse(command = "dfc", 2, ifelse(command = "dfb", 1, 0))
+[State 1010, Anim]
+type = ChangeAnim
+trigger1 = !AnimTime && Anim = [1010, 1012]
+value = 1013
 
 [State 1100, nothitby]
 type = nothitby
@@ -691,27 +693,29 @@ ignorehitpause = 1
 
 [State 1010, Jump]
 type = StateTypeSet
-trigger1 = AnimElemTime(11) > 0
+trigger1 = Anim = 1013
 statetype = A
 physics = N
 
 [State 1010, Jump]
 type = PlaySnd
-trigger1 = AnimElem = 11
+trigger1 = Anim = 1013
 value = S3,1
 channel = 0
+persistent = 0
 
 [State 1010, Jump]
 type = VelSet
-trigger1 = AnimElem = 11
-x = ifelse(var(0) = 2, 2.7, ifelse(var(0) = 1, 4, 5))
-y = ifelse(var(0) = 2, -5, ifelse(var(0) = 1, -4, -2.7))
+trigger1 = Anim = 1013
+x = ifelse(var(0) = 2, 5, ifelse(var(0) = 1, 3.5, 2.5))
+y = ifelse(var(0) = 2, -5, ifelse(var(0) = 1, -3.5, -2.5))
+persistent = 0
 
 [State 1010, HitDef]
 type = HitDef
 trigger1 = !Time
 attr = A, SA
-damage = ifelse(var(0) = 2, 125, ifelse(var(0) = 1, 118, 111)),15
+damage = ifelse(var(0) = 2, 128, ifelse(var(0) = 1, 110, 101)),15
 animtype = Back
 air.type = Low
 guardflag = M
@@ -748,30 +752,93 @@ palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
 
+[State 2011, AfterImage]
+type = Explod
+trigger1 = Anim = 1013 && GameTime % 3 = 0
+anim = 1016
+ID = 1010
+pos = 0,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+removetime = 20
+scale = 1,1
+sprpriority = 0
+ownpal = 1
+removeongethit = 0
+
+
 [State 1010, End]
 type = ChangeState
-trigger1 = AnimElemTime(11) > 13 || MoveContact
+trigger1 = Anim = 1013 
+trigger1 = AnimTime >= IfElse(var(0) = 2, 15, ifelse(var(0) = 1, 13, 10))
 value = 1011
 ctrl = 0
 
 ;---------------------------------------------------------------------------
 ;Falling after Tackle
 [Statedef 1011]
-type    = S
+type    = A
 movetype= I
-physics = A
+physics = N
 juggle  = 3
 ctrl = 0
-anim = 1011
+anim = 1014
 sprpriority = 1
 poweradd = 0
 facep2 = 0
 
+[State 1011, Explods]
+type = RemoveExplod
+trigger1 = AnimElem = 2 && Anim = 1014
+ID = 1010
+ignorehitpause = 1
+
 [State 1011, Vel]
 trigger1 = !Time
 type = VelMul
-X = 0.7
+X = 0.5
 Y = 0.7
+
+[State 1011, Gravity]
+trigger1 = 1
+type = VelAdd
+Y = 0.49
+
+[State 1011, Change]
+type = StateTypeSet
+trigger1 = Pos Y > - Vel Y
+trigger1 = Vel Y > 0
+statetype = S
+physics = S
+
+[State 1011, Pos]
+type = PosSet
+trigger1 = Pos Y > - Vel Y
+trigger1 = Vel Y > 0
+Y = 0
+
+[State 1011, Pos]
+type = VelSet
+trigger1 = Pos Y >= - Vel Y
+trigger1 = Vel Y > 0
+Y = 0
+
+[State 1011, End]
+type = ChangeAnim
+trigger1 = StateType = S 
+value = 1015
+persistent = 0
+
+[State 1011, End]
+type = ChangeState
+trigger1 = Anim = 1015
+trigger1 = AnimTime >= IfElse(Var(0) = 2, 13, IfElse(Var(0) = 1, 9, 5))
+value = 0
+ctrl = 1
 
 ;---------------------------------------------------------------------------
 ;Area Bomb

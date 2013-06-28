@@ -615,9 +615,22 @@ keyctrl = 0
 ownpal = 1
 
 [State 2020, ChangeState]
+type = ChangeAnim
+trigger1 = Anim = 2021
+trigger1 = AnimElemNo(0) = 3
+trigger1 = !NumHelper(2020)
+value = 2022
+
+[State 2020, Cooldown Sound]
+type = PlaySnd
+trigger1 = Anim = 2022
+value = S8,1
+persistent = 0
+
+[State 2020, ChangeState]
 type = ChangeState
 trigger1 = !AnimTime
-trigger1 = Anim = 2021
+trigger1 = Anim = 2022
 value = 0
 ctrl = 1
 
@@ -708,27 +721,35 @@ type = VelSet
 trigger1 = var(1) = [0,30]
 X = .2 * (30 - var(1))
 
+
 [State 2022, Move]
 type = VelAdd;PosSet
-trigger1 = 1;Time > 30
-Y = IfElse(((EnemyNear(0), Pos Y) + EnemyNear(0), Const(size.mid.pos.y)) > Pos Y, .2, -.2)  ;FVar(2) - (30 + (Cos(Pi + Pi * (Time)/20.0) * 30))
+trigger1 = Vel Y = [-4,4]
+Y = IfElse(((EnemyNear(0), Pos Y) + EnemyNear(0), Const(size.mid.pos.y)) > Pos Y, .1, -.1)  ;FVar(2) - (30 + (Cos(Pi + Pi * (Time)/20.0) * 30))
+
+[State 2022, Move]
+type = PosSet;PosSet
+trigger1 = Abs(Parent, Pos Y - Pos Y) > 100
+Y = IfElse(Pos Y > Parent, Pos Y, Parent, Pos Y + 100, Parent, Pos Y - 100)
+ignorehitpause = 1
 
 [State 2022, Move]
 type = VarSet
 trigger1 = 1
-fvar(0) = ScreenPos X - Parent, ScreenPos X + 5
+fvar(0) = ScreenPos X - Parent, ScreenPos X + 10
 ignorehitpause = 1
 
 [State 2022, Move]
 type = VarSet
 trigger1 = 1
 ignorehitpause = 1
-fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 20
+fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 25 + Vel Y
+
 
 [State 2022, Scale]
 type = AngleDraw
 trigger1 = 1
-scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/110, .5
+scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/120, .4
 value = IfElse(Facing > 0, -ATan(fvar(1)/fvar(0))*180.0/Pi, ATan(fvar(1)/fvar(0))*180.0/Pi)
 ignorehitpause = 1
 
@@ -790,9 +811,11 @@ palfx.add = 150, 118, 160
 palfx.invertall = 1
 ignorehitpause = 1
 
+
 [State 2022, DestroySelf]
 type = DestroySelf
 trigger1 = Parent, StateNo != 2020
+trigger2 = Time > 100
 ignorehitpause = 1
 
 ;HitOverride
@@ -803,19 +826,19 @@ MoveType = H
 [State 2022, Move]
 type = VarSet
 trigger1 = 1
-fvar(0) = ScreenPos X - Parent, ScreenPos X + 5
+fvar(0) = ScreenPos X - Parent, ScreenPos X + 10
 ignorehitpause = 1
 
 [State 2022, Move]
 type = VarSet
 trigger1 = 1
 ignorehitpause = 1
-fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 20
+fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 25 + Vel Y
 
 [State 2022, Scale]
 type = AngleDraw
 trigger1 = 1
-scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/110, .5
+scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/120, .5
 value = IfElse(Facing > 0, -ATan(fvar(1)/fvar(0))*180.0/Pi, ATan(fvar(1)/fvar(0))*180.0/Pi)
 ignorehitpause = 1
 
