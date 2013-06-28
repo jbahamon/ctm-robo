@@ -14,7 +14,7 @@ fall.defence_up = 50
 ;Time which player lies down for, before getting up
 liedown.time = 60
 ;Number of points for juggling
-airjuggle = 32
+airjuggle = 20
 ;Default hit spark number for HitDefs
 sparkno = 2
 ;Default guard spark number
@@ -55,8 +55,8 @@ walk.back = -1.5     ;Walk backward
 run.fwd  = 2.5, 0    ;Run forward (x, y)
 run.back = -2.5,-4 ;Hop backward (x, y)
 jump.neu = 0,-4.2    ;Neutral jumping velocity (x, y)
-jump.back = -3, -3.2    ;Jump back Speed (x, y)
-jump.fwd = 3, -3.2       ;Jump forward Speed (x, y)
+jump.back = -2.5, -3.2    ;Jump back Speed (x, y)
+jump.fwd = 2.5, -3.2       ;Jump forward Speed (x, y)
 runjump.back = -3,-3.5 ;Running jump speeds (opt)
 runjump.fwd = 3,-3.5     ;.
 airjump.neu = 0,-3.5      ;.
@@ -135,14 +135,21 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 
 [Statedef -3]
 
-[State -3, Print]
-type = DisplayToClipboard
-trigger1 = 1 
-text = "%d"
-params = Vel X
-
 ;This controller plays a sound everytime Ayla lands from a jump, or
 ;from his back-dash.
+
+[State -3, Meter]
+type = Helper
+trigger1 = !NumHelper(7200)
+name = "Fuel Meter"
+ID = 7200
+stateno = 7200
+pos = 10,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+ownpal = 1
+
+
 
 [State -3, Landing Sound]
 type = PlaySnd
@@ -154,7 +161,7 @@ value = S8,0
 [State -3, Fuel]
 type = VarAdd
 trigger1 = Statetype != A
-trigger1 = var(21) < 90 && (GameTime % 3 > 0)
+trigger1 = var(21) < 100 && (GameTime % 3 > 0)
 var(21) = 1
 
 [State -3, Landing Sound]

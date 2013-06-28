@@ -1,4 +1,4 @@
-﻿; The CMD file.
+; The CMD file.
 ;
 ; Two parts: 1. Command definition and  2. State entry
 ; (state entry is after the commands def section)
@@ -548,7 +548,7 @@ trigger3 = (StateNo = [400, 499]) && movecontact
 [State -1, Rocket Punch (Air)]
 type = ChangeState
 value = 1005
-triggerall = Var(21) > 20
+triggerall = Var(21) > 30
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 triggerall = Roundstate = 2 && !NumHelper(1000)
 trigger1 = Ctrl && Statetype = A 
@@ -560,7 +560,7 @@ value = 1020
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (StateNo = [200,299]) && movecontact
+trigger2 = (StateNo = [200, 299]) && movecontact
 trigger3 = (stateno = [400, 499]) && movecontact
 
 ;===========================================================================
@@ -648,7 +648,7 @@ triggerall = command = "c"
 triggerall = command = "holddown"
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (stateno = 400) || (stateno = 410) || (stateno = 200) || (stateno = 210)
+trigger2 = (stateno = 400) || (stateno = 210) || (stateno = 200)
 trigger2 = movecontact
 
 ;---------------------------------------------------------------------------
@@ -667,6 +667,7 @@ trigger2 = stateno = 1350 ;Air blocking
 type = ChangeState
 value = 610
 triggerall = command = "b"
+triggerall = var(21) > 0
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = 600
@@ -679,6 +680,7 @@ trigger3 = stateno = 1350 ;Air blocking
 type = ChangeState
 value = 620
 triggerall = command = "c"
+triggerall = var(21) > 0
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = (stateno = 600) || (stateno = 610)
@@ -693,4 +695,4 @@ value = 7950
 trigger1 = Command = "holdup" || Command = "holdfwd" || Command = "holdback"
 trigger1 = ctrl
 trigger1 = stateno = 7950 || (stateno = 50 && Time > 15)
-trigger1 = var(21) > 0
+trigger1 = var(21) > 20

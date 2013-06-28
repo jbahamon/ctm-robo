@@ -122,7 +122,7 @@ ground.velocity = -2
 air.velocity = -2,-.5
 ground.cornerpush.veloff = 0;
 air.cornerpush.veloff = 0;
-getpower = ifelse(p2movetype = H, 48, 108), 32
+getpower = ifelse(p2movetype = H, 44, 101), 32
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
@@ -196,7 +196,7 @@ ground.slidetime = 14
 ground.hittime  = 17
 ground.velocity = -5
 air.velocity = -5,-2
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = ifelse(p2movetype = H, 62, 134), 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
@@ -381,7 +381,7 @@ ctrl = 1
 type    = C
 movetype= A
 physics = C
-juggle  = 5
+juggle  = 8
 poweradd= 18
 velset = 0,0
 ctrl = 0
@@ -451,6 +451,7 @@ physics=N
 movetype=A
 anim=7050
 ctrl=0
+juggle = 8
 velset=0,0
 sprpriority=4
 
@@ -488,7 +489,7 @@ guardsound = 6,0
 ground.type = Low
 ground.slidetime = 6
 ground.hittime  = 10
-ground.velocity = -1.5,-2
+ground.velocity = -2,-2.3
 air.velocity = -1.2,-3
 down.velocity = -5,0
 down.hittime = 22
@@ -602,7 +603,7 @@ palfx.time = 8
 type    = A
 movetype= A
 physics = A
-juggle  = 2
+juggle  = 3
 poweradd= 0
 ctrl = 0
 anim = 610
@@ -680,7 +681,7 @@ ground.slidetime = 12
 ground.hittime  = 14
 ground.velocity = -5
 air.velocity = -5,-4
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = ifelse(p2movetype = H, 92, 154), 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
@@ -775,7 +776,7 @@ ground.hittime  = 10
 ground.velocity = -4
 air.velocity = -2,-3
 air.hittime = 14
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = ifelse(p2movetype = H, 92, 154), 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256

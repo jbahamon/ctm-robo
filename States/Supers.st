@@ -142,6 +142,7 @@ palfx.time = 20
 palfx.add = 24, 100, 118
 palfx.invertall = 1
 ignorehitpause = 1
+numhits = IfElse(Time > 0, 0, 1)
 
 [State 2000, Bomb]
 type = Helper
@@ -743,13 +744,13 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = 1
 ignorehitpause = 1
-fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 25 + Vel Y
+fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 20 + Vel Y
 
 
 [State 2022, Scale]
 type = AngleDraw
 trigger1 = 1
-scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/120, .4
+scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/110, .4
 value = IfElse(Facing > 0, -ATan(fvar(1)/fvar(0))*180.0/Pi, ATan(fvar(1)/fvar(0))*180.0/Pi)
 ignorehitpause = 1
 
@@ -833,7 +834,7 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = 1
 ignorehitpause = 1
-fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 25 + Vel Y
+fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 20 + Vel Y
 
 [State 2022, Scale]
 type = AngleDraw

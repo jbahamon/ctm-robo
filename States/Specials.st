@@ -274,7 +274,7 @@ ctrl = 0
 type    = S
 movetype= A
 physics = S
-juggle  = 3
+juggle  = 4
 poweradd= 72
 ctrl = 0
 anim = 1000
@@ -426,7 +426,7 @@ yaccel = 0.5
 airguard.ctrltime = 16
 airguard.velocity = -8, -1.5
 forcestand = 1
-getpower = ifelse(p2movetype = H, 72, 144), 36
+getpower = ifelse(p2movetype = H, 72, 144) + 20 * Var(0), 36
 givepower = 36, 36
 palfx.add= 128, 100, 7
 palfx.mul=256,256,256
@@ -518,7 +518,7 @@ velset = 0,0
 [State 1005, Fuel]
 type = VarAdd
 trigger1 = !Time
-var(21) = -20
+var(21) = -30
 
 [State 1005,2]
 type = Explod
@@ -640,7 +640,7 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 16
+juggle  = 8
 ctrl = 0
 sprpriority = 1
 poweradd = 72
@@ -686,7 +686,7 @@ value = 1013
 
 [State 1100, nothitby]
 type = nothitby
-trigger1 = animelemtime(3) < 0
+trigger1 = Anim = 1011
 value = SCA
 time = 1
 ignorehitpause = 1
@@ -707,15 +707,15 @@ persistent = 0
 [State 1010, Jump]
 type = VelSet
 trigger1 = Anim = 1013
-x = ifelse(var(0) = 2, 5, ifelse(var(0) = 1, 3.5, 2.5))
-y = ifelse(var(0) = 2, -5, ifelse(var(0) = 1, -3.5, -2.5))
+x = ifelse(var(0) = 2, 4.2, ifelse(var(0) = 1, 3.5, 2.5))
+y = ifelse(var(0) = 2, -4.2, ifelse(var(0) = 1, -3.5, -2.5))
 persistent = 0
 
 [State 1010, HitDef]
 type = HitDef
 trigger1 = !Time
 attr = A, SA
-damage = ifelse(var(0) = 2, 128, ifelse(var(0) = 1, 110, 101)),15
+damage = ifelse(var(0) = 2, 128, ifelse(var(0) = 1, 101, 85)),15
 animtype = Back
 air.type = Low
 guardflag = M
@@ -846,12 +846,20 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-juggle  = 3
+juggle  = 8
 ctrl = 0
 anim = 1020
 sprpriority = 1
 poweradd = 72
 facep2 = 1
+
+[State 1010, Anim]
+type = ChangeAnim
+trigger1 = PrevStateNo = [200, 299]
+trigger2 = PrevStateNo = [400, 499]
+value = 1020
+elem = 3
+persistent = 0
 
 [State 1010, Explod]
 type = Explod
@@ -899,11 +907,12 @@ hitsound = S2,1
 guardsound = 5,0
 ground.type = Low
 ground.velocity = ifelse(var(0) = 2, -2.5, ifelse(var(0) = 1, -3, -3.5)), ifelse(var(0) = 2, -7.4, ifelse(var(0) = 1, -6.2, -5.7));-4
+guard.velocity = -2
 ground.hittime = 16
 ground.slidetime = 16
 guard.velocity = -10
 air.velocity = -3,-10
-airguard.velocity = -1, -3
+airguard.velocity = -2, -3
 air.hittime = 16
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
@@ -913,7 +922,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 120
 fall.animtype = Medium
-getpower = ifelse(p2movetype = H, 72, 144), 36 
+getpower = ifelse(p2movetype = H, 62, 134), 36 
 givepower = 36, 36
 envshake.time = 8
 envshake.freq = 120

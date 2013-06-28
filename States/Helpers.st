@@ -38,3 +38,104 @@ type = DestroySelf
 trigger1 = Time >= 45
 
 
+;Fuel Meter
+[Statedef 7200]
+type = S
+physics = N
+movetype = I
+anim = 7201
+sprpriority = 4
+
+[State 7200, Amount]
+type = Helper
+trigger1 = !NumHelper(7201)
+name = "Fuel Amount"
+ID = 7201
+stateno = 7201
+pos = -16,0
+postype = p1    ;p2,front,back,left,right
+facing = 1
+ownpal = 1
+;
+;[State 7200, TransVar]
+;type = VarSet
+;trigger1 = !Time
+;var(0) = 0
+;
+;[State 7200, FromTrans]
+;type = VarAdd
+;trigger1 = Root, StateType = A
+;trigger1 = Var(0) < 16
+;var(0) = 1
+;
+;[State 7200, FromTrans]
+;type = VarAdd
+;trigger1 = Root, StateType != A
+;trigger1 = Var(0) > 0
+;var(0) = -1
+;
+;[State 7200, Trans]
+;type = Trans
+;trigger1 = 1
+;trans = addalpha
+;alpha = var(0) * 16, 256 - var(0) * 16
+;ignorehitpause = 1
+
+[State 7200, scale]
+type = AngleDraw
+trigger1 = 1
+scale = 0.5, 0.5
+ignorehitpause = 1
+
+[State 7200, Pos]
+type = PosSet
+trigger1 = 1
+X = Parent, Pos X 
+Y = Parent, Pos Y + 5
+ignorehitpause = 1
+
+[Statedef 7201]
+type = S
+physics = N
+movetype = I
+anim = 7202
+sprpriority = 5
+
+[State 7201, Pos]
+type = PosSet
+trigger1 = 1
+X = Parent, Pos X - 8
+Y = Parent, Pos Y
+ignorehitpause = 1
+
+[State 7201, scale]
+type = AngleDraw
+trigger1 = 1
+scale = (Root, Var(21) / 100.0)*0.5, 0.5
+ignorehitpause = 1
+
+;[State 7201, TransVar]
+;type = VarSet
+;trigger1 = !Time
+;var(0) = 0
+;
+;[State 7201, FromTrans]
+;type = VarAdd
+;trigger1 = Root, StateType = A
+;trigger1 = Var(0) < 16
+;var(0) = 1
+;
+;[State 7201, FromTrans]
+;type = VarAdd
+;trigger1 = Root, StateType != A
+;trigger1 = Var(0) > 0
+;var(0) = -1
+;
+;[State 7201, Trans]
+;type = Trans
+;trigger1 = 1
+;trans = addalpha
+;alpha = var(0) * 16, 256 - var(0) * 16
+;ignorehitpause = 1
+
+
