@@ -203,8 +203,8 @@ y = const(velocity.airjump.y)
 
 [State 45, 7]
 type = ChangeState
-trigger1 = Time = 2 && var(21) > 10
-value = 7950
+trigger1 = Time = 2 
+value = IfElse(var(21) > 20, 7950, 50)
 ctrl = 1
 
 ;---------------------------------------------------------------------------
@@ -219,7 +219,7 @@ physics = A
 type = PlaySnd
 trigger1 = !Time
 trigger1 = PrevStateNo !=7950
-trigger1 = var(21) > 10
+trigger1 = var(21) > 20
 value = S1,0
 channel = 0
 volumescale = 30
@@ -252,13 +252,13 @@ value = 43
 type = VelSet
 trigger1 = Time = 0
 trigger1 = PrevStateNo != 7950
-trigger1 = var(21) > 10
+trigger1 = var(21) > 20
 x = 0
 y = 0
 
 [State 7950, Hold]
 type = VelAdd
-triggerall = var(21) > 10
+triggerall = var(21) > 20
 trigger1 = Vel Y > Const(velocity.airjump.y)
 trigger1 = Command = "holdup"
 y = -.6
@@ -266,7 +266,7 @@ y = -.6
 
 [State 7950, Hold]
 type = VelAdd
-triggerall = var(21) > 10
+triggerall = var(21) > 20
 triggerall = Command != "holdup"
 trigger1 = Anim = 43 && Command = "holdback"
 trigger2 = Anim = 42 && Command = "holdfwd"
@@ -274,21 +274,21 @@ y = IfElse(Abs(Vel Y) < .6, -Vel Y, IfElse(Vel Y > 0, -.6, .6))
 
 [State 7950, Hold]
 type = VelAdd
-triggerall = var(21) > 10
+triggerall = var(21) > 20
 trigger1 = Vel X < Const(velocity.airjump.fwd.x)*1.5
 trigger1 = Anim = 42 && Command = "holdfwd"
 x = .7
 
 [State 7950, Hold]
 type = VelAdd
-triggerall = var(21) > 10
+triggerall = var(21) > 20
 trigger1 = Vel X > Const(velocity.airjump.back.x)*1.5
 trigger1 = Anim = 43 && Command = "holdback"
 x = -.7
 
 [State 7950,2]
 type = Explod
-triggerall = var(21) > 10
+triggerall = var(21) > 20
 triggerall = !NumExplod(7950)
 trigger1 = Anim = 43 && Command = "holdback"
 trigger2 = Anim = 42 && Command = "holdfwd"
@@ -313,7 +313,7 @@ removeongethit = 1
 
 [State 7950,2]
 type = Explod
-trigger1 = var(21) > 10
+trigger1 = var(21) > 20
 trigger1 = !NumExplod(7951)
 trigger1 = Anim = 43 && Command = "holdback"
 anim = 7040

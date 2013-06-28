@@ -280,15 +280,21 @@ ctrl = 0
 anim = 1000
 sprpriority = 1
 facep2 = 1
-velset = 0,0
+velset = -1.5,0
 
 [State 1000, Change]
 type = ChangeAnim
+triggerall = AnimElemTime(2) = -7
 trigger1 = prevstateno = [200, 299]
 trigger2 = prevstateno = [400, 499]
 value = 1000
 elem = 2
 persistent = 0
+
+[State 1000, Vel]
+trigger1 = AnimElem = 2
+type = VelSet
+X = 0
 
 [State 1000, Strength]
 type = VarSet
@@ -297,7 +303,7 @@ var(0) = ifelse(command = "qcfc", 2, ifelse(command = "qcfb", 1, 0))
 
 [State 1000, Pawnch]
 type = Helper
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 2
 name = "Rocket Punch"
 ID = 1000
 stateno = 1001
@@ -500,7 +506,7 @@ trigger1 = Time = 10
 [Statedef 1005]
 type    = A
 movetype= A
-physics = A
+physics = N
 juggle  = 3
 poweradd= 72
 ctrl = 0
@@ -516,7 +522,7 @@ var(21) = -20
 
 [State 1005,2]
 type = Explod
-trigger1 = !NumExplod(1005) && AnimElemTime(3) < 7
+trigger1 = !NumExplod(1005) && AnimElemTime(2) < 7
 anim = 7043
 ID = 1005
 pos = 0, -5
@@ -538,18 +544,19 @@ removeongethit = 1
 
 [State 1005, Vel]
 type = VelSet
-trigger1 = AnimElemTime(3) < 7
+trigger1 = AnimElemTime(2) < 7
 Y = -.2
 
 [State 1005, Vel]
 type = VelSet
-trigger1 = AnimElemTime(3) = 7
-X = -1
-Y = -3
+trigger1 = AnimElemTime(2) = 7
+X = -2
+Y = -2
 
 [State 1005, Change]
 type = ChangeAnim
 trigger1 = PrevStateNo = [600, 699]
+trigger1 = AnimElemTime(1) < 7
 value = 1005
 elem = 2
 persistent = 0
@@ -559,16 +566,20 @@ type = VarSet
 trigger1 = !Time
 var(0) = ifelse(command = "qcfc", 2, ifelse(command = "qcfb", 1, 0))
 
+[State 1006, Gravity]
+type = VelAdd
+trigger1 = AnimElemTime(2) > 7
+Y = 0.1
 
 [State 1000, Pawnch]
 type = PlaySnd
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 2
 value = S2,0
 channel = 0
 
 [State 1005, Pawnch]
 type = Helper
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 2
 name = "Rocket Punch"
 ID = 1000
 stateno = 1001
@@ -581,7 +592,46 @@ ownpal = 1
 [State 1005, ChangeState]
 type = ChangeState
 trigger1 = !AnimTime
-value = 50
+value = 1006
+ctrl = 0
+
+;Falling
+[Statedef 1006]
+type = A
+movetype = I
+physics = N
+anim = 1006
+ctrl = 0
+
+[State 1006, Gravity]
+type = VelAdd
+trigger1 = 1
+Y = 0.47
+
+[State 1006, Land]
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y > - Vel Y
+value = 1007
+ctrl = 0
+
+;Landing
+[Statedef 1007]
+type = S
+movetype = I
+physics = N
+anim = 47
+ctrl = 0
+velset = 0,0
+
+[State 1007, Pos]
+type = PosSet
+trigger1 = 1
+Y = 0
+[State 1007, End]
+trigger1 = Time > 10
+type = ChangeState
+value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-﻿; Player information
+; Player information
 [Info]
 name = "Robo"        ;Name of character
 displayname = "Robo" ;Name of character to display

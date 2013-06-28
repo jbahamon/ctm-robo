@@ -1,4 +1,4 @@
-﻿; Robo's constants and state file.
+; Robo's constants and state file.
 ; There are comments scattered through this file, so you may like to
 ; take a look if would like to learn more about the cns.
 
@@ -50,16 +50,16 @@ shadowoffset = 0     ;Number of pixels to vertically offset the shadow
 draw.offset = 0,0    ;Player drawing offset in pixels (x, y). Recommended 0,0
 
 [Velocity]
-walk.fwd  = 1.57      ;Walk forward
-walk.back = -1.57     ;Walk backward
-run.fwd  = 2.7, 0    ;Run forward (x, y)
-run.back = -2.7,-4 ;Hop backward (x, y)
-jump.neu = 0,-4.5    ;Neutral jumping velocity (x, y)
-jump.back = -3, -4.5    ;Jump back Speed (x, y)
-jump.fwd = 3, -4.5       ;Jump forward Speed (x, y)
-runjump.back = -3,-4.5 ;Running jump speeds (opt)
-runjump.fwd = 3,-4.5     ;.
-airjump.neu = 0,-4.5      ;.
+walk.fwd  = 1.5      ;Walk forward
+walk.back = -1.5     ;Walk backward
+run.fwd  = 2.5, 0    ;Run forward (x, y)
+run.back = -2.5,-4 ;Hop backward (x, y)
+jump.neu = 0,-4.2    ;Neutral jumping velocity (x, y)
+jump.back = -3, -3.2    ;Jump back Speed (x, y)
+jump.fwd = 3, -3.2       ;Jump forward Speed (x, y)
+runjump.back = -3,-3.5 ;Running jump speeds (opt)
+runjump.fwd = 3,-3.5     ;.
+airjump.neu = 0,-3.5      ;.
 airjump.back = -3      ;Air jump speeds (opt)
 airjump.fwd = 3         ;.
 air.gethit.groundrecover = -.15,-3.5  ;Velocity for ground recovery state (x, y) **MUGEN 1.0**
@@ -72,7 +72,7 @@ air.gethit.airrecover.down = 1.5      ;Extra y-velocity for holding down during 
 
 [Movement]
 airjump.num = 1       ;Number of air jumps allowed (opt)
-airjump.height = 35   ;Minimum distance from ground before you can air jump (opt)
+airjump.height = 20   ;Minimum distance from ground before you can air jump (opt)
 yaccel = .4          ;Vertical acceleration
 stand.friction = .85	  ;Friction coefficient when standing
 crouch.friction = .82 ;Friction coefficient when crouching
@@ -135,6 +135,12 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 
 [Statedef -3]
 
+[State -3, Print]
+type = DisplayToClipboard
+trigger1 = 1 
+text = "%d"
+params = Vel X
+
 ;This controller plays a sound everytime Ayla lands from a jump, or
 ;from his back-dash.
 
@@ -148,7 +154,7 @@ value = S8,0
 [State -3, Fuel]
 type = VarAdd
 trigger1 = Statetype != A
-trigger1 = var(21) < 90
+trigger1 = var(21) < 90 && (GameTime % 3 > 0)
 var(21) = 1
 
 [State -3, Landing Sound]

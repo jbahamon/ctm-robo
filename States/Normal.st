@@ -10,7 +10,7 @@ movetype= A                      ;Move-type: A-attack, I-idle, H-gethit
 physics = S                      ;Physics: S-stand, C-crouch, A-air
 juggle  = 4                      ;Number of air juggle points move takes
 ;Commonly-used controllers:
-velset = 0,0                     ;Set velocity (x,y) (Def: no change)
+velset = 0.5,0                     ;Set velocity (x,y) (Def: no change)
 ctrl = 0                         ;Set ctrl (Def: no change)
 anim = 200                       ;Change animation (Def: no change)
 poweradd = 0                     ;Power to add (Def: 0)
@@ -143,9 +143,13 @@ physics = S
 juggle  = 8
 poweradd= 18
 ctrl = 0
-velset = 0,0
 anim = 220
 sprpriority = 1
+
+[State 220, Push]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 2
 
 [State 220, 1]
 type = PlaySnd
@@ -478,7 +482,7 @@ hitflag = MAF
 guardflag = L
 pausetime = 0,20
 sparkno = -1
-hitsound   = -1,0
+hitsound   = -1
 fall = 1
 guardsound = 6,0
 ground.type = Low

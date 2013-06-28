@@ -26,7 +26,6 @@ ignorehitpause = 1
 [State 2000, Super Pause FX]
 type = helper
 trigger1 = time = 1
-helpertype = normal
 stateno = 7000
 ID = 7000
 name = "Super Charge"
@@ -268,7 +267,6 @@ value = SCA
 [State 2010, Super Pause FX]
 type = helper
 trigger1 = time = 1
-helpertype = normal
 stateno = 7000
 ID = 7000
 name = "Super Charge"
@@ -577,7 +575,6 @@ numhits = 0
 [State 2020, Super Pause FX]
 type = helper
 trigger1 = time = 1
-helpertype = normal
 stateno = 7000
 ID = 7000
 name = "Super Charge"
