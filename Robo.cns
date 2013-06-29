@@ -149,7 +149,28 @@ postype = p1    ;p2,front,back,left,right
 facing = 1
 ownpal = 1
 
+[State -3, Electrocute]
+type = VarSet
+trigger1 = Var(22) > 0 && !Power && StateNo != 2100
+trigger1 = !(var(21) := 0)
+var(22) = 0
 
+[State -3, Electrocute]
+type = PowerAdd
+trigger1 = Var(22) > 0 && StateNo != 2100
+value = -8
+ignorehitpause = 1
+
+[State -3: VarSet]
+type = VarSet
+trigger1 = (Roundstate = 3)
+v = 22
+value = 0
+
+[State -3, Berserker]
+type = VarSet
+trigger1 = Var(22) > 0 
+var(21) = 100
 
 [State -3, Landing Sound]
 type = PlaySnd

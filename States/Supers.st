@@ -12,7 +12,7 @@ juggle  = 3
 ctrl = 0
 anim = 2000
 sprpriority = 1
-poweradd = 72
+poweradd = 0
 facep2 = 1
 
 [State 2000, NHB]
@@ -132,7 +132,7 @@ fall = 1
 fall.recover = 0
 fall.recovertime = 120
 fall.animtype = Medium
-getpower = 0, 36 
+getpower = 0, 0
 givepower = 36, 36
 envshake.time = 16
 envshake.freq = 120
@@ -883,4 +883,135 @@ var(0) = -1
 type = ChangeState
 trigger1 = Time >= floor(gethitvar(hittime) * 0.5)
 value = 2022
+
+; Electrocute
+[Statedef 2100]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+poweradd= 72
+ctrl = 0
+anim = 2020
+sprpriority = 1
+facep2 = 1
+velset = 0,0
+
+[State 2020, NHB]
+type = NotHitBy
+trigger1 = Anim = 2020
+trigger2 = Anim = 2020 && AnimElemNo(0) < 2
+time = 1
+value = SCA
+
+[State 2020, Super Pause FX]
+type = Explod
+trigger1 = time = 1
+ID = 7200
+supermovetime = 9999
+anim = 7100
+pos = 0,-10
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 2
+ownpal = 1
+removeongethit = 1
+
+[State 2020, Super Pause FX]
+type = helper
+trigger1 = time = 1
+stateno = 7000
+ID = 7000
+name = "Super Charge"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 2110, VarSet]
+type = VarSet
+trigger1 = (!AnimTime)
+v = 22
+value = 1
+
+[State 2020, Super Pause]
+type = SuperPause
+trigger1 = time = 1
+time = 45
+movetime = 45
+anim = -1
+sound = S7,1
+p2defmul = 1
+darken = 0
+
+[State 2020, Super Pause FX]
+type = helper
+trigger1 = time > 1 && Var(22) > 0 
+stateno = 7100
+ID = 2100
+name = "Electrocute Spark"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+[State 2110, End]
+type = ChangeState
+trigger1 = Time > 1 && !NumHelper(7000) && NumHelper(2100) && Var(22) > 0
+value = 0
+ctrl = 1
+
+[Statedef 2200]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+ctrl = 0
+anim = 2000
+sprpriority = 1
+poweradd = 72
+facep2 = 1
+
+[State 2020, Super Pause FX]
+type = helper
+trigger1 = !Time
+stateno = 2201 
+ID = 2100
+name = "Proton Cannon"
+postype = p1
+pos = 0,-30
+ownpal = 1
+persistent = 0
+supermovetime = 9999
+
+
+[Statedef 2201]
+type    = S
+movetype= A
+physics = S
+juggle  = 3
+ctrl = 0
+anim = 7300
+sprpriority = 1
+poweradd = 72
+facep2 = 1
+
+[State 2201, Scale]
+type = AngleDraw
+trigger1 = 0;1
+scale = 0.5, 0.5
+ignorehitpause = 1
+
+[State 2201, End]
+type = DestroySelf
+trigger1 = Time > 200
+
 

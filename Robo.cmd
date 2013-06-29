@@ -350,6 +350,11 @@ command = a+b
 time = 1
 
 [Command]
+name = "2p";Required (do not remove)
+command = a+b
+time = 1
+
+[Command]
 name = "2p"
 command = b+c
 time = 1
@@ -484,21 +489,20 @@ trigger1 = ctrl
 ;===========================================================================
 ; Super Moves
 ;===========================================================================
-[State -1, Gatling Kick]
-type = null;ChangeState
-value = 2100
-triggerall = Command = "x"
-;triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
-;triggerall = Power >= 1000
-trigger1 = statetype = S
-trigger1 = ctrl
 
+[State -1, Omega Laser]
+type = ChangeState
+value = 2200
+triggerall = Command = "x"
+trigger1 = statetype != A
+trigger1 = ctrl
+;---------------------------------------------------------------------------
 [State -1, Omega Laser]
 type = ChangeState
 value = 2020
 triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Power >= 1000
-trigger1 = statetype = S
+trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = ( StateNo = [200,299] ) && MoveContact
 trigger3 = ( StateNo = [400,499] ) && MoveContact
@@ -508,7 +512,7 @@ type = ChangeState
 value = 2010
 triggerall = Command = "2qcfa" || Command = "2qcfb" || Command = "2qcfc" 
 triggerall = Power >= 1000
-trigger1 = statetype = S
+trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = ( StateNo = [200,299] ) && MoveContact
 trigger3 = ( StateNo = [400,499] ) && MoveContact
@@ -518,7 +522,7 @@ type = ChangeState
 value = 2000
 triggerall = Command = "2qcba" || Command = "2qcbb" || Command = "2qcbc" 
 triggerall = Power >= 1000
-trigger1 = statetype = S
+trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = ( StateNo = [200,299] ) && MoveContact
 trigger3 = ( StateNo = [400,499] ) && MoveContact
@@ -572,6 +576,20 @@ type = ChangeState
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
 value = 800
+
+
+;===========================================================================
+; Electrocute Activation
+;===========================================================================
+
+[State -1, Berserker]
+type = ChangeState
+value = 2100
+triggerall = Command = "2p" && !(command = "holdfwd" || command = "holdback")
+triggerall = Power >= 3000
+trigger1 = StateType != A
+trigger1 = ctrl 
+
 
 ;===========================================================================
 ; Normal Moves
