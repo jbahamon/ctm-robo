@@ -147,6 +147,32 @@ command.buffer.time = 1
 
 
 ;-| Super Motions |--------------------------------------------------------
+[Command]
+name = "qcfhcba"
+command = ~D, F, D, B, a
+time = 40
+[Command]
+name = "qcfhcbb"
+command = ~D, F, D, B, b
+time = 40
+[Command]
+name = "qcfhcbc"
+command = ~D, F, D, B, c
+time = 40
+[Command]
+name = "qcfhcba"
+command = ~D, F, D, B, ~a
+time = 40
+[Command]
+name = "qcfhcbb"
+command = ~D, F, D, B, ~b
+time = 40
+[Command]
+name = "qcfhcbc"
+command = ~D, F, D, B, ~c
+time = 40
+
+
 
 [Command]
 name = "qcbhcfa"
@@ -490,11 +516,12 @@ trigger1 = ctrl
 ; Super Moves
 ;===========================================================================
 
-[State -1, Omega Laser]
+[State -1, Prometheus Cannon]
 type = ChangeState
 value = 2200
-triggerall = Command = "x"
-trigger1 = ctrl
+triggerall = Command = "qcfhcba" || Command = "qcfhcbb" || Command = "qcfhcbc"
+triggerall = Var(22) > 0
+trigger1 = ctrl || ((stateno = [200, 299]) && time <= 10)
 ;---------------------------------------------------------------------------
 [State -1, Omega Laser]
 type = ChangeState

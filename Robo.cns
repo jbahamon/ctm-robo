@@ -151,7 +151,7 @@ ownpal = 1
 
 [State -3, Electrocute]
 type = VarSet
-trigger1 = Var(22) > 0 && !Power && StateNo != 2100
+trigger1 = Var(22) > 0 && !Power && StateNo != 2100 && StateNo != 2200
 trigger1 = !(var(21) := 0)
 var(22) = 0
 

@@ -255,7 +255,7 @@ juggle  = 3
 ctrl = 0
 anim = 2010
 sprpriority = 1
-poweradd = 72
+poweradd = 0
 facep2 = 1
 
 [State 2010, NHB]
@@ -526,7 +526,7 @@ type    = S
 movetype= A
 physics = S
 juggle  = 3
-poweradd= 72
+poweradd= 0
 ctrl = 0
 anim = 2020
 sprpriority = 2
@@ -648,7 +648,6 @@ anim = 7120
 sprpriority = 0
 facep2 = 1
 velset = 0,0
-
 
 [State 801, Priority]
 type = PlaySnd
@@ -773,7 +772,7 @@ trigger1 = !Time;Time % 10 = 0
 trigger1 = var(0) > 0
 trigger1 = var(0) := var(0) - 1
 attr = S, HA
-damage = 170,3
+damage = 187,23
 animtype = Hard
 air.type = Low
 guardflag = M
@@ -978,7 +977,7 @@ juggle  = 3
 ctrl = 0
 anim = 2020
 sprpriority = 1
-poweradd = 72
+poweradd = 0
 facep2 = 1
 velset = 0,0
 
@@ -1009,7 +1008,7 @@ movetime = 45
 anim = -1
 sound = S1,1;S a7,2
 p2defmul = 1
-poweradd = -1000
+poweradd = -3000
 darken = 0
 
 [State 2000, End]
@@ -1128,10 +1127,71 @@ sprpriority = 3
 poweradd = 0
 velset = 0, 0
 
+[State 3055, Hit]
+type = hitdef
+triggerall = animelemno(0) != var(4)
+trigger1 = animelem = 1 || animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9 || animelem = 11
+trigger2 = animelem = 13 || animelem = 15 || animelem = 17 || animelem = 19
+attr = S, HP
+damage = 44, 7
+animtype = Hard
+fall.animtype = Hard
+hitflag = MAFD
+priority = 4, Hit
+pausetime = 0, 2
+guard.dist = 320
+sparkno = -1
+guard.sparkno = -1
+guardsound = s2, 0
+ground.type = Low
+ground.slidetime = 16
+ground.hittime = 16
+ground.velocity = -20, 0
+ground.cornerpush.veloff = 0
+guard.velocity = -10.52
+air.velocity = -20, -.5
+down.velocity = -20, -.5
+getpower = 0
+givepower = 36, 36
+fall = 1
+fall.recover = 0
+yaccel = 0.5
+forcestand = 1
+
+[State 3055, Hit]
+type = hitdef
+trigger1 = animelemno(0) != var(4)
+trigger1 = animelem = 20
+attr = S, HP 
+damage = 44, 7
+animtype = Diagup
+fall.animtype = Diagup
+hitflag = MAFD
+priority = 4, Hit 
+pausetime = 0, 2
+guard.dist = 320
+sparkno = -1
+guard.sparkno = -1
+guardsound = s2, 0
+ground.type = Low
+ground.slidetime = 16
+ground.hittime = 16
+ground.velocity = -20, 0
+ground.cornerpush.veloff = 0
+guard.velocity = -10.52
+air.velocity = -20, -9
+down.velocity = -20, -9
+getpower = 0
+givepower = 36, 36
+fall = 1
+fall.recover = 0
+yaccel = 0.5
+forcestand = 1
+
 [State 2201, Vel]
 type = PosSet
 trigger1 = 1
-X = Parent, Pos X + 30
+X = Parent, Pos X + 30 * Facing
 Y = Parent, Pos Y
 ignorehitpause = 1
 
@@ -1228,7 +1288,7 @@ type = ModifyExplod
 trigger1 = 1
 ID = 2203
 postype = p1
-scale = (Abs(ParentDist X - Vel X))/16.0, 1 
+scale = Abs(ParentDist X - Vel X)/16.0, 1 
 pos = floor((ParentDist X - Vel X)/2.0) , 0
 bindtime = 1
 ignorehitpause = 1
