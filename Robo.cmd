@@ -494,7 +494,6 @@ trigger1 = ctrl
 type = ChangeState
 value = 2200
 triggerall = Command = "x"
-trigger1 = statetype != A
 trigger1 = ctrl
 ;---------------------------------------------------------------------------
 [State -1, Omega Laser]

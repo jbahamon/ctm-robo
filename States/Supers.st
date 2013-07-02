@@ -969,49 +969,316 @@ trigger1 = Time > 1 && !NumHelper(7000) && NumHelper(2100) && Var(22) > 0
 value = 0
 ctrl = 1
 
+;Prometheus Cannon
 [Statedef 2200]
 type    = S
 movetype= A
-physics = S
+physics = N
 juggle  = 3
 ctrl = 0
-anim = 2000
+anim = 2020
 sprpriority = 1
 poweradd = 72
 facep2 = 1
+velset = 0,0
 
-[State 2020, Super Pause FX]
+[State 2200, NHB]
+type = NotHitBy
+trigger1 = Anim = 2200
+time = 1
+value = SCA
+ignorehitpause = 1
+
+[State 2200, Super Pause FX]
 type = helper
-trigger1 = !Time
-stateno = 2201 
-ID = 2100
-name = "Proton Cannon"
+trigger1 = time = 1
+stateno = 7000
+ID = 7000
+name = "Super Charge"
 postype = p1
-pos = 0,-30
+pos = 0,0
 ownpal = 1
 persistent = 0
 supermovetime = 9999
 
+[State 2200, Super Pause]
+type = SuperPause
+trigger1 = time = 1
+time = 45
+movetime = 45
+anim = -1
+sound = S1,1;S a7,2
+p2defmul = 1
+poweradd = -1000
+darken = 0
 
+[State 2000, End]
+type = ChangeAnim
+trigger1 = Time > 1 && !NumHelper(7000)
+value = 2200
+persistent = 0
+
+[State 2020, Super Pause FX]
+type = Helper
+trigger1 = Anim = 2200 && AnimElem = 2
+stateno = 2201 
+ID = 2201
+name = "Prometheus Cannon"
+postype = p1
+pos = 0,-40
+ownpal = 1
+persistent = 0
+;supermovetime = 9999
+
+[State 2202, Shake]
+type = EnvShake
+trigger1 = Anim = 2200 && AnimElem = 3
+time = 80
+freq = 120
+ampl = 2
+persistent = 0
+
+[State 2202, go back]
+type = VelSet
+trigger1 = NumHelper(2201) && NumHelper(2202)
+X = -0.3
+
+
+[State 2202, Stop]
+type = VelSet
+trigger1 = NumHelper(2201) && !NumHelper(2202)
+X = 0
+
+[State 2200, End]
+type = ChangeState
+trigger1 = Anim = 2200 && AnimElemNo(0) = 3 && !NumHelper(2201)
+value = IfElse(Pos Y < 0, 2204, 0)
+ctrl = 1
+
+; The Cannon
 [Statedef 2201]
 type    = S
 movetype= A
-physics = S
-juggle  = 3
+physics = N
 ctrl = 0
 anim = 7300
-sprpriority = 1
-poweradd = 72
-facep2 = 1
+sprpriority = -1
+poweradd = 0
+velset = 0, 10/16.0
 
-[State 2201, Scale]
-type = AngleDraw
-trigger1 = 0;1
-scale = 0.5, 0.5
+[State 2201, Trans]
+type = trans
+trigger1 = Time = [0, 16]
+trans = addalpha
+alpha = 16 * Time, 256 - 16 * Time
+ignorehitpause = 1
+
+[State 2201, Vel]
+type = VelSet
+trigger1 = Parent, ScreenPos Y - ScreenPos Y < 30
+Y = 0
+ignorehitpause = 1
+
+[State 2201, Vel]
+type = PosSet
+trigger1 = Time > 16
+X = Parent, Pos X
+Y = Parent, Pos Y - 30
+ignorehitpause = 1
+
+[State 2201, Fire]
+type = ChangeAnim
+trigger1 = Parent, StateNo = 2200
+trigger1 = Parent, Anim = 2200
+trigger1 = Parent, AnimElemTime(3) = 0
+value = 7301
+
+[State 2201, Fire]
+type = Helper
+trigger1 = Anim = 7301
+stateno = 2202
+ID = 2202
+name = "Prometheus Beam Base"
+postype = p1
+pos = 30,0
+ownpal = 1
+persistent = 0
+;supermovetime = 9999
+
+[State 2201, Trans]
+type = trans
+trigger1 = AnimElemNo(0) = 4
+trans = addalpha
+alpha = 256 - 16 * AnimElemTime(4), 16 * AnimElemTime(4)
 ignorehitpause = 1
 
 [State 2201, End]
 type = DestroySelf
-trigger1 = Time > 200
+trigger1 =  (Anim = 7301 && !AnimTime) || Parent, StateNo != 2200
+ignorehitpause = 1
 
+;Prometheus Beam
+[Statedef 2202]
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 7302
+sprpriority = 3
+poweradd = 0
+velset = 0, 0
+
+[State 2201, Vel]
+type = PosSet
+trigger1 = 1
+X = Parent, Pos X + 30
+Y = Parent, Pos Y
+ignorehitpause = 1
+
+[State 2202, !Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 2203, Start]
+trigger1 = !Time
+type = varset
+var(0) = Parent, ID
+
+[State 2202, Beam Head]
+type = helper
+trigger1 = AnimElem = 4
+stateno = 2203
+ID = 2203
+name = "Prometheus Beam Head"
+postype = p1
+pos = 0,0
+ownpal = 1
+persistent = 0
+
+[State 2203, RemoveExplod]
+type = DestroySelf
+trigger1 =  !AnimTime || !PlayerIDExist(var(0)) || Parent, StateNo != 2201
+
+;Beam Head
+[Statedef 2203]
+type    = A
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 7304
+sprpriority = 3
+poweradd = 0
+velset = 0, 0
+
+[State 2202, !Shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
+
+[State 2203, Start]
+trigger1 = !Time
+type = varset
+var(0) = Parent, ID
+
+[State 2203, Beam Velocity]
+trigger1 = !Time
+type = varset
+var(1) = 16
+
+[State 2203, Beam Velocity]
+trigger1 = Time > 60
+type = varset
+var(1) = 0
+
+[State 2203, Explod]
+type = Explod
+trigger1 = !Time
+anim = 7303
+ID = 2203
+pos = 0,0
+postype = p1;p2,front,back,left,right
+facing = 1
+bindtime = 0
+vfacing = 1
+vel = 0,0;Facing * Var(1)/2,0
+accel = 0,0
+random = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+
+[State 2203, Vel]
+type = VelSet
+trigger1 = 1
+ignorehitpause = 1
+X = IfElse(AnimElemTime(1) <= 20, Var(1), 0)
+
+[State 2203, ExplodScale]
+type = ModifyExplod
+trigger1 = 1
+ID = 2203
+postype = p1
+scale = (Abs(ParentDist X - Vel X))/16.0, 1 
+pos = floor((ParentDist X - Vel X)/2.0) , 0
+bindtime = 1
+ignorehitpause = 1
+
+[State 2203, RemoveExplod]
+type = RemoveExplod
+trigger1 = !PlayerIDExist(var(0)) || Parent, StateNo != 2202 || !AnimTime
+ID = 2203
+
+[State 2203, RemoveExplod]
+type = DestroySelf
+trigger1 = !PlayerIDExist(var(0)) || Parent, StateNo != 2202 || !AnimTime
+
+;Falling
+[Statedef 2204]
+type = A
+movetype = I
+physics = N
+anim = 1006
+ctrl = 0
+
+[State 2204, Gravity]
+type = VelAdd
+trigger1 = 1
+Y = 0.45
+
+[State 2204, Land]
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y > - Vel Y
+value = 2205
+ctrl =0
+
+;Landing
+[Statedef 2205]
+type = S
+movetype = I
+physics = N
+anim = 47
+ctrl = 0
+velset = 0,0
+
+[State 2204, Pos]
+type = PosSet
+trigger1 = 1
+Y = 0
+
+[State 1007, End]
+trigger1 = Time > 22
+type = ChangeState
+value = 0
+ctrl = 1
 
