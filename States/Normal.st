@@ -184,7 +184,7 @@ type = HitDef
 trigger1 = Animelem = 2
 attr = S, NA
 animtype  = Hard
-damage    = 62
+damage    = 72
 guardflag = MAF
 pausetime = 16,16
 sparkno = S7002
