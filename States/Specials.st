@@ -370,19 +370,19 @@ type = VarSet
 trigger1 = !Time
 var(0) = parent, var(0)
 
-[State 1001, HitOverride]
+[State 1021, HitOverride]
 type = HitOverride
 trigger1 = 1
 time = -1
-attr = SCA, AA, AP, AT
+attr = , AA, AP
 stateno = 1002
 ignorehitpause = 1
 
-[State 1001, HB]
-type = HitBy
+[State 1021, HB]
+type = NotHitBy
 trigger1 = 1
 time = -1
-value = SCA, NP, SP, HP
+value = , AT
 ignorehitpause = 1
 
 [State 1001, PosSet]
