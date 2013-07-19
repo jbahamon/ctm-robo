@@ -386,7 +386,7 @@ command = b+c
 time = 1
 
 [Command]
-name = "2p"
+name = "a+c"
 command = a+c
 time = 1
 
@@ -611,7 +611,7 @@ value = 800
 [State -1, Electrocute]
 type = ChangeState
 value = 2100
-triggerall = Command = "2p" && !(command = "holdfwd" || command = "holdback")
+triggerall = Command = "a+c" && !(command = "holdfwd" || command = "holdback")
 triggerall = Var(22) = 0
 triggerall = Power >= 3000
 trigger1 = StateType != A

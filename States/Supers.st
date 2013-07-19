@@ -458,15 +458,15 @@ ignorehitpause = 1
 type = HitOverride
 trigger1 = 1
 time = -1
-attr = SCA, AA, AP, AT
+attr = SCA, AA, AP
 stateno = 1002
 ignorehitpause = 1
 
 [State 2012, HB]
-type = HitBy
+type = NotHitBy
 trigger1 = 1
 time = -1
-value = SCA, NP, SP, HP
+value = , AT
 ignorehitpause = 1
 
 [State 2012, PosSet]
@@ -736,7 +736,7 @@ ignorehitpause = 1
 [State 2022, Move]
 type = VarSet
 trigger1 = 1
-fvar(0) = ScreenPos X - Parent, ScreenPos X + 10
+fvar(0) = ScreenPos X - Parent, ScreenPos X + 5 * Facing
 ignorehitpause = 1
 
 [State 2022, Move]
@@ -1133,7 +1133,7 @@ triggerall = animelemno(0) != var(4)
 trigger1 = animelem = 1 || animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9 || animelem = 11
 trigger2 = animelem = 13 || animelem = 15 || animelem = 17 || animelem = 19
 attr = S, HP
-damage = 44, 7
+damage = 31, 7
 animtype = Hard
 fall.animtype = Hard
 hitflag = MAFD
@@ -1163,7 +1163,7 @@ type = hitdef
 trigger1 = animelemno(0) != var(4)
 trigger1 = animelem = 20
 attr = S, HP 
-damage = 44, 7
+damage = 24, 7
 animtype = Diagup
 fall.animtype = Diagup
 hitflag = MAFD

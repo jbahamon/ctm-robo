@@ -374,7 +374,7 @@ var(0) = parent, var(0)
 type = HitOverride
 trigger1 = 1
 time = -1
-attr = , AA, AP
+attr = SCA, AA, AP
 stateno = 1002
 ignorehitpause = 1
 
