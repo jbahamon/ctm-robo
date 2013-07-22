@@ -1,6 +1,6 @@
---------------------------------
+
 Robo (Beta) by SilentProtagonist 
---------------------------------
+================================
 
 Release Date: December 11th, 2012.
 
@@ -13,13 +13,18 @@ What's Missing:
 - More intros and/or winposes.
 
 
-==============
+
 Robo's Moveset
 ==============
 
-Before starting, let me explain one thing about Robo. His second jump
-works sort of like R.O.B.'s third jump in Super Smash Bros. Brawl (called
-Robo Burner). Quoting SmashWiki: 
+Robo is a slow character. He hits hard but can't combo very well. 
+His supers have a medium range, but it can be hard to combo into them if your 
+opponent runs away.
+
+That changes when he activates his thrusters.
+
+His second jump works sort of like R.O.B.'s third jump in Super Smash Bros. 
+Brawl (called Robo Burner). Quoting SmashWiki: 
 
 "Although it deals no damage, it can be used, then deactivated for an attack,
 then reactivated (...) Robo Burner relies on fuel, which automatically
@@ -28,61 +33,83 @@ to fully charge."
 
 Robo's propulsors do not require any special command to use: just hold down
 Up, Left or Right while jumping and Robo will fly in that direction. You can
-also fly up and forwards opr up and backwards.
+also fly diagonally up.
 
-In addition Robo's medium punch, hard punch and Air Rocket Punch require and use up
-some of your fuel.
+In addition, Robo's medium punch, hard punch and Air Rocket Punch require and use up
+some of your fuel. Robo's air attacks are faster and more comboable. 
 
---------------
+This means Robo's fighting style switches between waiting for your fuel to recharge 
+and rushing your opponent with air attacks. Keep your distance, find an opening and 
+strike!
+
+
 Throws
 --------------
 
-*Beast Toss
-	Command: F/B + [a+b/b+c/a+c] (Standing)
-	A standard throw. The direction you press determines the
-	direction your opponent will be thrown.
+**Beast Toss**: F/B + [a+b/b+c/a+c] (Standing)
 
---------
+A standard throw. The direction you press determines the
+direction your opponent will be thrown.
+
 Specials
 --------
 
-*Robo Tackle
-	Command: F, D, DF + a/b/c (Standing)
-	Robo does a diagonal tackle into the air. The button used determines the
-	attack's angle and damage.
+**Robo Tackle**: F, D, DF + a/b/c (Standing)
 
-*Area Bomb
-	Command: D, DB, B + a/b/c (Standing)
-	Robo stops and creates a small explosion around him.
+Robo does a diagonal tackle into the air. The button used determines the
+attack's angle and damage.
 
-*Rocket Punch
-	Command: D, DF, F + a/b/c (Standing/Air)
-	Robo sends his fist flying towards the opponent. The button used
-	determines the fist's speed. The air version uses up some fuel and
-	can't be used if you don't have enough.
+**Area Bomb**: D, DB, B + a/b/c (Standing)
+
+Robo stops and creates a small explosion around him. Use this as 
+a combo finisher to create distance between you and your opponent.
 
 
-------
+**Rocket Punch**: D, DF, F + a/b/c (Standing/Air)
+
+Robo sends his fist flying towards the opponent. The button used
+determines the fist's speed. The air version uses up some fuel and
+can't be used if you don't have enough.
+
+
 Supers
 ------
 
-*Shock
-	Command: D, DB, B, D, DB, B + a/b/c (Standing)
-	Requires 1000 Power.
-	Similar to Area Bomb. Robo opens up and electrocutes anyone who comes too close.
+**Shock**: D, DB, B, D, DB, B + a/b/c (Standing). Requires 1000 Power.
 
-*Uzzi Punch
-	Command: D, DF, F, D, DF, F, a/b/c (Standing)
-	Requires 1000 Power.
-	Robo throws a multi-punch in front of him. The attack ends with a small explosion.
+Similar to Area Bomb. Robo opens up and electrocutes anyone who comes too close.
 
-*Omega Laser
-	Command: ~D, B, D, F + a/b/c
-	Requires 1000 Power.
-	Robo shoots a short-range laser towards the enemy.
+**Uzzi Punch**: D, DF, F, D, DF, F, a/b/c (Standing). Requires 1000 Power.
+
+Robo throws a multi-punch in front of him. The attack ends with a small explosion. 
+You can actually combo into this super move.
+
+**Omega Laser**: ~D, B, D, F + a/b/c (Standing). Requires 1000 Power.
+
+Robo shoots a short-range laser towards the enemy.
 
 
-----------------------------
+Special Mode
+------------
+
+**Electrocute**: a + c (Standing). Requires 3000 Power.
+
+Robo overloads and an electric arc appears around him. The arc hits your opponent for very
+small damage, but it allows you to perform better combos. You'll also get full fuel as long 
+as Electrocute is active. Your Power will automatically decrease: when you run out of Power, 
+the mode ends. Go on the offensive!
+
+Final Move
+----------
+
+**Prometheus Cannon**: D, B, D, F + a/b/c (Standing or Air, must have Berserker activated). Uses all of your Power.
+
+Robo pulls a big cannon out of nowhere, and shoots a huge beam 
+of energy. Note that you'll achieve maximum damage with this move if you 
+shoot at point-blank. Even better if your opponent is against the end 
+of the stage. To quote War Machine, "Here's my Sunday best!"
+
+
 Credits and Acknowledgements
 ----------------------------
 
