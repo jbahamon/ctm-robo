@@ -58,7 +58,7 @@ Y = Parent, Pos Y - 10
 ignorehitpause = 1
 
 [State 7100, 1]
-type = HitDef
+type = null;HitDef
 trigger1 = Time % 9 = 0
 attr = S, SA
 damage = 4, 0

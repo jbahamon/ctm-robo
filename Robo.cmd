@@ -647,9 +647,6 @@ triggerall = command = "c"
 triggerall = command != "holddown"
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (stateno = 200) || (stateno = 210)
-trigger2 = movecontact
-
 
 ;---------------------------------------------------------------------------
 ;Taunt
@@ -669,8 +666,6 @@ triggerall = command = "a"
 triggerall = command = "holddown"
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (stateno = 200)
-trigger2 = movecontact
 
 ;---------------------------------------------------------------------------
 ;Crouching Mid
@@ -681,7 +676,7 @@ triggerall = command = "b"
 triggerall = command = "holddown"
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (stateno = 200) || (stateno = 210) || (stateno = 400) 
+trigger2 = (stateno = 400) 
 trigger2 = movecontact
 
 ;---------------------------------------------------------------------------
@@ -693,8 +688,6 @@ triggerall = command = "c"
 triggerall = command = "holddown"
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (stateno = 400) || (stateno = 210) || (stateno = 200)
-trigger2 = movecontact
 
 ;---------------------------------------------------------------------------
 ;Jump Light

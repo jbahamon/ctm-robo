@@ -550,6 +550,7 @@ Y = -.2
 [State 1005, Vel]
 type = VelSet
 trigger1 = AnimElemTime(2) = 7
+trigger1 =  Var(22) = 0
 X = -2
 Y = -2
 
@@ -592,8 +593,16 @@ ownpal = 1
 [State 1005, ChangeState]
 type = ChangeState
 trigger1 = !AnimTime
+trigger1 = !Var(22)
 value = 1006
 ctrl = 0
+
+[State 630, 2]
+type = ChangeState
+trigger1 = !AnimTime
+trigger1 = Var(22)
+value = 7950
+ctrl = 1
 
 ;Falling
 [Statedef 1006]

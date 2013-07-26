@@ -214,7 +214,6 @@ ctrl = 1
 type    = A
 physics = A
 
-
 [State 45, 1]
 type = PlaySnd
 trigger1 = !Time
@@ -247,7 +246,6 @@ trigger1 = Time = 0
 trigger1 = Command = "holdback" && Command != "holdfwd"
 value = 43
 
-
 [State 7950, Zwoom]
 type = VelSet
 trigger1 = Time = 0
@@ -260,13 +258,13 @@ y = 0
 type = VelSet
 triggerall = var(21) > 20
 triggerall = !Time
-trigger1 = Vel Y > -Const(velocity.airjump.y)
+trigger1 = Vel Y > -Const(velocity.airjump.y)*0.7
 y = -Const(velocity.airjump.y)
 
 [State 7950, Hold]
 type = VelAdd
 triggerall = var(21) > 20
-trigger1 = Vel Y > Const(velocity.airjump.y)
+trigger1 = Vel Y > Const(velocity.airjump.y)*0.7
 trigger1 = Command = "holdup"
 y = -.6
 
@@ -300,7 +298,7 @@ type = VelAdd
 triggerall = var(21) > 20
 trigger1 = Vel X < Const(velocity.airjump.fwd.x)*1.5
 trigger1 = Anim = 42 && Command = "holdfwd"
-x = .7
+x = .7 
 
 [State 7950, Hold]
 type = VelAdd

@@ -92,7 +92,7 @@ vfacing = 1
 bindtime = -1
 vel = 0,0
 accel = 0,0
-removetime = 19
+removetime = 14
 scale = 1,1
 sprpriority = 2
 ontop = 0
@@ -194,13 +194,14 @@ guardsound = 6,0
 ground.type = High
 ground.slidetime = 14
 ground.hittime  = 17
-ground.velocity = -5
-air.velocity = -5,-2
+ground.velocity = -5, -4
+air.velocity = -5,-4
 getpower = ifelse(p2movetype = H, 62, 134), 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 16
+fall = 1
 ground.cornerpush.veloff = -3;
 air.cornerpush.veloff = -3;
 
@@ -687,10 +688,32 @@ palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
 
-[State 600, 3]
-type = CtrlSet
-trigger1 = Time = 20
+[State 630, 2]
+type = VarSet
+trigger1 = !Time
+V = 0
+value = 0
+persistent = 0
+
+[State 630, 2]
+type = VarSet
+trigger1 = MoveContact
+V = 0
 value = 1
+persistent = 0
+
+[State 630, 2]
+type = VarAdd
+trigger1 = Var(0) > 0
+trigger1 = MoveContact
+V = 0
+value = 1
+
+[State 630, 2]
+type = ChangeState
+trigger1 = Var(0) > 15
+value = 7950
+ctrl = 1
 
 
 ;---------------------------------------------------------------------------
@@ -750,11 +773,17 @@ removeongethit = 1
 ignorehitpause = 1
 
 [State 610, 1]
+type = VarSet
+trigger1 = !Time
+V = 0
+value = 0
+
+[State 610, 1]
 type = VarAdd
 trigger1 = Time = 5
 trigger1 = var(21) > 15
+trigger1 = var(0) := 1
 var(21) = -15
-
 
 [State 630, 2]
 type = HitDef
@@ -769,7 +798,7 @@ sparkno = S7001
 sparkxy = -13,0
 hitsound   = S0,3
 guardsound = 6,0
-fall = 1
+fall = Var(22) = 0
 ground.type = High
 ground.slidetime = 6
 ground.hittime  = 10
@@ -782,3 +811,22 @@ palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
 
+[State 630, 2]
+type = VarSet
+trigger1 = MoveContact
+V = 0
+value = 2
+persistent = 0
+
+[State 630, 2]
+type = VarAdd
+trigger1 = Var(0) > 1
+trigger1 = MoveContact
+V = 0
+value = 1
+
+[State 630, 2]
+type = ChangeState
+trigger1 = Var(0) > 15
+value = 7950
+ctrl = 1
