@@ -162,6 +162,34 @@ ctrl = 1
 ;---------------------------------------------------------------------------
 ; Override common states (use same number to override) :
 ;---------------------------------------------------------------------------
+;Stand
+[Statedef 0]
+type = S
+physics = S
+sprpriority = 0
+     
+[State 0, 1]
+type = ChangeAnim
+trigger1 = Anim != 0 && Anim != 5
+trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
+value = 0
+     
+[State 0, 2]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+     
+[State 0, 3] ;Stop moving if low velocity or 4 ticks pass
+type = VelSet
+trigger1 = abs(vel x) < 2
+trigger2 = Time = 4
+x = 0
+
+[State 0: ChangeState]
+type = ChangeState
+trigger1 = (Var(22) > 0)
+value = 45
+ctrl = 1
 
 ; AirJump Start
 [Statedef 45]
@@ -196,10 +224,17 @@ trigger1 = command = "holdback"
 sysvar(1) = -1
 
 [State 45, 6]
-type = VelSet
+type = null;VelSet
 trigger1 = Time = 2
+trigger1 = Var(22) = 0
 x = ifelse(sysvar(1)=0, const(velocity.airjump.neu.x), ifelse(sysvar(1)=1, const(velocity.airjump.fwd.x), const(velocity.airjump.back.x)))
 y = const(velocity.airjump.y)
+
+[State 45, 6]
+type = VelSet
+trigger1 = Time = 2
+trigger1 = Var(22) > 0
+y = 0
 
 [State 45, 7]
 type = ChangeState
@@ -213,11 +248,24 @@ ctrl = 1
 [Statedef 7950]
 type    = A
 physics = A
+facep2 = 1
+
+[State 45, 1]
+type = VelSet
+trigger1 = !Time
+trigger1 = Var(22) = 0
+Y = 0
+X = 0
+
+[State 45, 1]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Var(22) > 0
+physics = N
 
 [State 45, 1]
 type = PlaySnd
 trigger1 = !Time
-trigger1 = PrevStateNo !=7950
 trigger1 = var(21) > 20
 value = S1,0
 channel = 0
@@ -230,82 +278,88 @@ sysvar(1) = 0
 
 [State 7950, 2]
 type = ChangeAnim
-trigger1 = Time = 0
+trigger1 = Anim != 41
 trigger1 = Command != "holdfwd" && Command != "holdback"
 value = 41
 
 [State 7950, 2]
 type = ChangeAnim
 trigger1 = Time = 0
+trigger1 = Anim != 42
 trigger1 = Command = "holdfwd" && Command != "holdback"
 value = 42
 
 [State 7950, 2]
 type = ChangeAnim
 trigger1 = Time = 0
+trigger1 = Anim != 43
 trigger1 = Command = "holdback" && Command != "holdfwd"
 value = 43
 
-[State 7950, Zwoom]
+[State 7950, Hold]
 type = VelSet
-trigger1 = Time = 0
-trigger1 = PrevStateNo != 7950
-trigger1 = var(21) > 20
-x = 0
+triggerall = Var(22) = 0
+triggerall = var(21) > 20
+triggerall = !Time
+trigger1 = Vel Y > -Const(velocity.airjump.y)
+y = -Const(velocity.airjump.y)
+
+
+[State 7950, Hold]
+type = VelSet
+triggerall = Var(22) > 0
+trigger1 = Command = "holdup"
+y = -3.6
+
+[State 7950, Hold]
+type = VelSet
+triggerall = Var(22) > 0
+trigger1 = Command = "holddown"
+y = 3.6
+
+[State 7950, Hold]
+type = VelSet
+triggerall = Var(22) > 0
+trigger1 = Command != "holdup"
+trigger1 = Command != "holddown"
 y = 0
 
 [State 7950, Hold]
-type = VelSet
-triggerall = var(21) > 20
-triggerall = !Time
-trigger1 = Vel Y > -Const(velocity.airjump.y)*0.7
-y = -Const(velocity.airjump.y)
-
-[State 7950, Hold]
 type = VelAdd
+triggerall = Var(22) = 0
 triggerall = var(21) > 20
 trigger1 = Vel Y > Const(velocity.airjump.y)*0.7
 trigger1 = Command = "holdup"
 y = -.6
 
-
 [State 7950, Hold]
 type = VelAdd
 triggerall = var(21) > 20
+triggerall = Var(22) = 0
 triggerall = Command != "holdup"
 trigger1 = Anim = 43 && Command = "holdback"
 trigger2 = Anim = 42 && Command = "holdfwd"
-y = IfElse(Abs(Vel Y) < .6, -Vel Y, IfElse(Vel Y > 0, -.6, .6))
-
-[State 7950, Hold]
-type = VelSet
-triggerall = var(21) > 20
-triggerall = !Time
-trigger1 = Vel X < 0
-trigger1 = Anim = 42 && Command = "holdfwd" && !(Command = "holdback")
-X = 0
-
-[State 7950, Hold]
-type = VelSet
-triggerall = var(21) > 20
-triggerall = !Time
-trigger1 = Vel X > 0
-trigger1 = Anim = 42 && Command = "holdback" && !(Command = "holdfwd")
-X = 0
+Y = IfElse(Abs(Vel Y) < .6, -Vel Y, IfElse(Vel Y > 0, -.6, .6))
 
 [State 7950, Hold]
 type = VelAdd
 triggerall = var(21) > 20
-trigger1 = Vel X < Const(velocity.airjump.fwd.x)*1.5
+trigger1 = Vel X < Const(velocity.airjump.fwd.x) * 1.5
 trigger1 = Anim = 42 && Command = "holdfwd"
 x = .7 
 
 [State 7950, Hold]
 type = VelAdd
 triggerall = var(21) > 20
-trigger1 = Vel X > Const(velocity.airjump.back.x)*1.5
+trigger1 = Vel X > Const(velocity.airjump.back.x) * 1.5
 trigger1 = Anim = 43 && Command = "holdback"
 x = -.7
+
+[State 7950, Hold]
+type = VelSet
+triggerall = Var(22) > 0
+trigger1 = Command != "holdfwd" && Command != "holdback"
+X = 0
 
 [State 7950,2]
 type = Explod
@@ -314,9 +368,10 @@ triggerall = !NumExplod(7950)
 trigger1 = Anim = 43 && Command = "holdback"
 trigger2 = Anim = 42 && Command = "holdfwd"
 trigger3 = Command = "holdup"
+trigger4 = Var(22) > 0 && Command != "holdback" && Command != "holdfwd" && Command != "holdback"
 anim = IfElse(Anim = 41, 7040, IfElse(Anim = 42, 7041, 7042))
 ID = 7950
-pos = IfElse(Anim = 41, 5, IfElse(Anim = 42, -7, 5)), IfElse(Anim = 41, 0, IfElse(Anim = 42, -10, -7))
+pos = IfElse(Anim = 41, 5, IfElse(Anim = 42, -7, 5)), IfElse(Anim = 41, -4, IfElse(Anim = 42, -17, -7))
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
@@ -334,9 +389,11 @@ removeongethit = 1
 
 [State 7950,2]
 type = Explod
-trigger1 = var(21) > 20
-trigger1 = !NumExplod(7951)
-trigger1 = Anim = 43 && Command = "holdback"
+triggerall = var(21) > 20
+triggerall = !NumExplod(7951)
+triggerall = Anim = 43 
+trigger1 = Command = "holdback"
+trigger2 = Var(22) > 0
 anim = 7040
 ID = 7951
 pos = 0, -5
@@ -363,10 +420,9 @@ trigger2 = Anim = 42 && Command = "holdfwd"
 trigger3 = Command = "holdup"
 var(21) = -2
 
-[State 7950, 3]
-type = ChangeAnim
-trigger1 = Vel y > Const720p(-8)
-trigger1 = SelfAnimExist(anim + 3)
-trigger1 = anim >= 41 && anim <= 43
-persistent = 0
-value = Anim + 3
+[State 600, 2]
+type = PosSet
+trigger1 = Var(22) > 0
+trigger1 = Pos Y > -Vel Y && Vel Y > 0
+Y = 0
+ignorehitpause = 1

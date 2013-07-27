@@ -125,6 +125,7 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 ;---------------------------------------------------------------------------
 
 
+
 ;---------------------------------------------------------------------------
 ; States that are always executed (use statedef -2)
 ;---------------------------------------------------------------------------
@@ -158,7 +159,7 @@ var(22) = 0
 [State -3, Electrocute]
 type = PowerAdd
 trigger1 = Var(22) > 0 && StateNo != 2100
-value = -8
+value = 0;-8
 ignorehitpause = 1
 
 [State -3: VarSet]
@@ -169,7 +170,7 @@ value = 0
 
 [State -3, Berserker]
 type = VarSet
-trigger1 = Var(22) > 0 
+trigger1 = 1;Var(22) > 0 
 var(21) = 100
 
 [State -3, Landing Sound]

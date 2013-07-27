@@ -528,6 +528,7 @@ type = ChangeState
 value = 2020
 triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Power >= 1000
+triggerall = Var(22) = 0
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = ( StateNo = [200,299] ) && MoveContact
@@ -538,6 +539,7 @@ type = ChangeState
 value = 2010
 triggerall = Command = "2qcfa" || Command = "2qcfb" || Command = "2qcfc" 
 triggerall = Power >= 1000
+triggerall = Var(22) = 0
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = ( StateNo = [200,299] ) && MoveContact
@@ -548,6 +550,7 @@ type = ChangeState
 value = 2000
 triggerall = Command = "2qcba" || Command = "2qcbb" || Command = "2qcbc" 
 triggerall = Power >= 1000
+triggerall = Var(22) = 0
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = ( StateNo = [200,299] ) && MoveContact
@@ -571,6 +574,7 @@ type = ChangeState
 value = 1000
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 triggerall = RoundState = 2 && StateType != A && !NumHelper(1000)
+triggerall = Var(22) = 0
 trigger1 = Ctrl
 trigger2 = (StateNo = [200, 299]) && movecontact
 trigger3 = (StateNo = [400, 499]) && movecontact
@@ -580,7 +584,7 @@ type = ChangeState
 value = 1005
 triggerall = Var(21) > 30
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
-triggerall = Roundstate = 2 && !NumHelper(1000)
+triggerall = Roundstate = 2 && (!NumHelper(1000) || Var(22))
 trigger1 = Ctrl && Statetype = A 
 trigger2 = (StateNo = [600, 699]) && MoveContact
 ;---------------------------------------------------------------------------
@@ -597,7 +601,7 @@ trigger3 = (stateno = [400, 499]) && movecontact
 ; Throws, Rolls, Etc
 ;===========================================================================
 
-[State -1, Boulder Toss]
+[State -1, Beast Toss]
 type = ChangeState
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
@@ -624,6 +628,7 @@ trigger1 = ctrl
 [State -1, Stand Light]
 type = ChangeState
 value = 200
+triggerall = Var(22) = 0
 triggerall = command = "a"
 triggerall = command != "holddown"
 trigger1 = statetype != A
@@ -632,6 +637,7 @@ trigger1 = ctrl
 [State -1, Stand Mid]
 type = ChangeState
 value = 210
+triggerall = Var(22) = 0
 triggerall = command = "b"
 triggerall = command != "holddown"
 trigger1 = statetype != A
@@ -643,6 +649,7 @@ trigger2 = movecontact
 [State -1, Stand Strong]
 type = ChangeState
 value = 220
+triggerall = Var(22) = 0
 triggerall = command = "c"
 triggerall = command != "holddown"
 trigger1 = statetype != A
@@ -662,6 +669,7 @@ trigger1 = ctrl
 [State -1, Crouching Light]
 type = ChangeState
 value = 400
+triggerall = Var(22) = 0
 triggerall = command = "a"
 triggerall = command = "holddown"
 trigger1 = statetype != A
@@ -672,6 +680,7 @@ trigger1 = ctrl
 [State -1, Crouching Mid]
 type = ChangeState
 value = 410
+triggerall = Var(22) = 0
 triggerall = command = "b"
 triggerall = command = "holddown"
 trigger1 = statetype != A
@@ -684,6 +693,7 @@ trigger2 = movecontact
 [State -1, Crouching Strong]
 type = ChangeState
 value = 420
+triggerall = Var(22) = 0
 triggerall = command = "c"
 triggerall = command = "holddown"
 trigger1 = statetype != A
@@ -730,7 +740,10 @@ trigger3 = stateno = 1350 ;Air blocking
 [State -1, AirJump :D]
 type = ChangeState
 value = 7950
-trigger1 = Command = "holdup" || Command = "holdfwd" || Command = "holdback"
-trigger1 = ctrl
-trigger1 = stateno = 7950 || (stateno = 50 && Time > 15)
-trigger1 = var(21) > 20
+triggerall = Command = "holdup" || Command = "holdfwd" || Command = "holdback"
+triggerall = ctrl
+triggerall = var(21) > 20
+trigger1 = (stateno = 50 && Time > 15)
+trigger2 = StateNo = 7950 && Anim = 41 && (Command = "holdfwd" || Command = "holdback")
+trigger3 = StateNo = 7950 && Anim = 42 && Command != "holdfwd" && (Command = "holdup" || Command = "holdback")
+trigger4 = StateNo = 7950 && Anim = 43 && Command != "holdback" && (Command = "holdup" || Command = "holdfwd")

@@ -85,40 +85,22 @@ Clsn2Default:1
 ; Jumping up
 [Begin Action 41]
 Clsn2:1
-  Clsn2[0] = -10, -31, 10, -1
-41,0, 0,0, 5
-Clsn2:1
   Clsn2[0] = -10, -35, 10, -5
-41,0, 0,-4, 5
-Clsn2:1
-  Clsn2[0] = -10, -39, 10, -9
-41,0, 0,-8, -1
+41,0, 0,-4, -1
 
 
 ; Jumping forwards
 [Begin Action 42]
 Clsn2:1
-  Clsn2[0] = -8, -26, 11, 0
-5010,0, 0,0, 5
-Clsn2:1
-  Clsn2[0] = -8, -30, 11, -4
-5010,0, 0,-4, 5
-Clsn2:1
-  Clsn2[0] = -8, -34, 11, -8
-5010,0, 0,-8, -1
+  Clsn2[0] = -8, -33, 11, -7
+5010,0, 0,-7, -1
 
 
 ; Jumping backwards
 [Begin Action 43]
 Clsn2:1
   Clsn2[0] = -8, -31, 11, -5
-43,0, 0,0, 5
-Clsn2:1
-  Clsn2[0] = -8, -35, 11, -9
-43,0, 0,-4, 5
-Clsn2:1
-  Clsn2[0] = -8, -39, 11, -13
-43,0, 0,-8, -1
+43,0, 0,-1, -1
 
 
 ; Jump land animation
@@ -163,8 +145,8 @@ Clsn2Default:1
 ; GUARDSTART (air)
 [Begin Action 122]
 Clsn2:1
-  Clsn2[0] = -8, -40, 10, -10
-41,0, 0,-9, 1
+  Clsn2[0] = -8, -35, 10, -5
+41,0, 0,-4, 1
 
 
 ; GUARD (stand)
@@ -184,8 +166,8 @@ Clsn2:1
 ; GUARD (air)
 [Begin Action 132]
 Clsn2:1
-  Clsn2[0] = -10, -44, 10, -17
-43,0, 0,-13, -1
+  Clsn2[0] = -10, -35, 10, -8
+43,0, 0,-4, -1
 
 
 ; GUARDEND (stand)
@@ -205,8 +187,8 @@ Clsn2:1
 ; GUARDEND (air)
 [Begin Action 142]
 Clsn2:1
-  Clsn2[0] = -12, -38, 12, -10
-41,0, 0,-8, 1
+  Clsn2[0] = -12, -35, 12, -7
+41,0, 0,-4, 1
 
 
 ; Hit back while guarding (stand)
@@ -226,8 +208,8 @@ Clsn2:1
 ; Hit back while guarding (air)
 [Begin Action 152]
 Clsn2:1
-  Clsn2[0] = -10, -44, 10, -17
-43,0, 0,-13, -1
+  Clsn2[0] = -10, -36, 10, -9
+43,0, 0,-4, -1
 
 
 ; Lose
@@ -374,7 +356,7 @@ Clsn2:2
 Clsn2:2
   Clsn2[0] = -4, -28, 16, 0
   Clsn2[1] = 12, -32, 24, -9
-200,1, 5,0, -1
+200,1, 5,0, 4
 
 
 ; Air Medium Hit

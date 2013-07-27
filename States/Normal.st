@@ -568,6 +568,19 @@ anim = 600
 sprpriority = 1
 
 [State 600, 2]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Var(22) > 0
+physics = N
+
+[State 600, 2]
+type = ChangeState
+trigger1 = !AnimTime
+value = 7950
+ctrl = 1
+ignorehitpause = 1
+
+[State 600, 2]
 type = PlaySnd
 trigger1 = Time = 2
 value = S3, 2
@@ -597,6 +610,13 @@ palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
 
+[State 600, 2]
+type = PosSet
+trigger1 = Var(22) > 0
+trigger1 = Pos Y > -Vel Y && Vel Y > 0
+Y = 0
+ignorehitpause = 1
+
 
 ;---------------------------------------------------------------------------
 ;Jump Mid
@@ -609,6 +629,12 @@ poweradd= 0
 ctrl = 0
 anim = 610
 sprpriority = 1
+
+[State 600, 2]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Var(22) > 0
+physics = N
 
 [State 610, 1]
 type = VelSet
@@ -709,9 +735,17 @@ trigger1 = MoveContact
 V = 0
 value = 1
 
+[State 600, 2]
+type = PosSet
+trigger1 = Var(22) > 0
+trigger1 = Pos Y > -Vel Y && Vel Y > 0
+Y = 0
+ignorehitpause = 1
+
 [State 630, 2]
 type = ChangeState
 trigger1 = Var(0) > 15
+trigger2 = Time > 25 && Var(22) > 0
 value = 7950
 ctrl = 1
 
@@ -729,6 +763,13 @@ ctrl = 0
 anim = 620
 sprpriority = 1
 
+[State 600, 2]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = Var(22) > 0
+physics = N
+
+
 [State 630, Freeze]
 type = VelSet
 trigger1 = AnimElemNo(0) = 1
@@ -741,7 +782,7 @@ type = VelSet
 trigger1 = AnimElem = 2
 trigger1 = var(21) > 15
 x = 2
-y = -3
+y = IfElse(Var(22), 0, -3)
 
 [State 620, 1]
 type = PlaySnd
