@@ -267,6 +267,21 @@ time = 30
 ;-| Special Motions |------------------------------------------------------
 
 [Command]
+name = "hcba"
+command = ~F, D, B, ~a
+time=20
+
+[Command]
+name = "hcbb"
+command = ~F, D, B, ~b
+time=20
+
+[Command]
+name = "hcbc"
+command = ~F, D, B, ~c
+time=20
+
+[Command]
 name = "qcba"
 command =  ~D, DB, B, a
 time=15
@@ -601,6 +616,17 @@ trigger3 = (stateno = [400, 499]) && movecontact
 ; Throws, Rolls, Etc
 ;===========================================================================
 
+
+[State -1, Area Bomb]
+type = ChangeState
+value = 1030
+triggerall = Command = "hcba" || Command = "hcbb" || Command = "hcbc" 
+triggerall = Var(21) >= 50
+triggerall = Power >= 500
+trigger1 = statetype = A
+trigger1 = ctrl
+trigger2 = (StateNo = [600, 699]) && MoveContact
+;---------------------------------------------------------------------------
 [State -1, Beast Toss]
 type = ChangeState
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")

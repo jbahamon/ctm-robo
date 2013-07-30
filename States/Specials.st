@@ -12,7 +12,7 @@ juggle  = 3
 ctrl = 0
 anim = 800
 sprpriority = 2
-poweradd = 18
+poweradd= IfElse(Var(22) > 0, 0, 18)
 facep2 = 1
 velset = 0,0
 
@@ -69,7 +69,7 @@ juggle  = 3
 ctrl = 0
 anim = 801
 sprpriority = 1
-poweradd = 72
+poweradd= IfElse(Var(22) > 0, 0, 72)
 velset = 0,0
 
 [State 801, Var]
@@ -140,12 +140,6 @@ value = 1
 type = TargetFacing
 trigger1 = AnimElemTime(4) = 0
 value = -1
-
-[State 801, !Turn]
-type = AssertSpecial
-trigger1 = 1
-flag = noautoturn
-ignorehitpause = 1
 
 [State 801, !Turn]
 type = AssertSpecial
@@ -275,7 +269,7 @@ type    = S
 movetype= A
 physics = S
 juggle  = 4
-poweradd= 72
+poweradd= IfElse(Var(22) > 0, 0, 72)
 ctrl = 0
 anim = 1000
 sprpriority = 1
@@ -337,11 +331,6 @@ ctrl = 0
 anim = 7054
 sprpriority = 3
 
-[State 1001, Air?]
-type = VarSet
-trigger1 = !Time
-var(0) = (Parent, Statetype = A)
-
 [State 1001, Explod]
 type = Explod
 trigger1 = !NumExplod(1001)
@@ -393,8 +382,8 @@ x = 0
 [State 1001, PosSet]
 type = VelAdd
 trigger1 = Time > 5
-trigger1 = Vel X < IfElse(var(0) = 0, 4, IfElse(var(0) = 1, 5.5, 7))
-x = IfElse(var(0) = 0, .3, IfElse(var(0) = 1, .45, .6))
+trigger1 = Vel X < IfElse(var(0) = 0, 4, IfElse(var(0) = 1, 5.5, 7)) + (Parent, Var(22))*2
+x = IfElse(var(0) = 0, .3, IfElse(var(0) = 1, .45, .6)) + (Parent, Var(22))* 0.2
 
 [State 1001, HitDef]
 type = HitDef
@@ -426,7 +415,7 @@ yaccel = 0.5
 airguard.ctrltime = 16
 airguard.velocity = -8, -1.5
 forcestand = 1
-getpower = ifelse(p2movetype = H, 72, 144) + 20 * Var(0), 36
+getpower = IfElse(Parent, Var(22) > 0, 0, ifelse(p2movetype = H, 72, 144) + 20 * Var(0)), IfElse(Parent, Var(22) > 0, 0, 36)
 givepower = 36, 36
 palfx.add= 128, 100, 7
 palfx.mul=256,256,256
@@ -508,7 +497,7 @@ type    = A
 movetype= A
 physics = N
 juggle  = 3
-poweradd= 72
+poweradd= IfElse(Var(22) > 0, 0, 72)
 ctrl = 0
 anim = 1005
 sprpriority = 1
@@ -652,7 +641,7 @@ physics = S
 juggle  = 8
 ctrl = 0
 sprpriority = 1
-poweradd = 72
+poweradd= IfElse(Var(22) > 0, 0, 72)
 facep2 = 1
 
 [State 1010, Strength]
@@ -752,7 +741,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 120
 fall.animtype = Medium
-getpower = ifelse(p2movetype = H, 72, 144), 36 
+getpower = IfElse(Var(22) > 0, 0, ifelse(p2movetype = H, 72, 144)), IfElse(Var(22) > 0, 0, 36)
 givepower = 36, 36
 envshake.time = 8
 envshake.freq = 120
@@ -859,7 +848,7 @@ juggle  = 8
 ctrl = 0
 anim = 1020
 sprpriority = 1
-poweradd = 72
+poweradd= IfElse(Var(22) > 0, 0, 72)
 facep2 = 1
 
 [State 1010, Anim]
@@ -931,7 +920,7 @@ fall = 1
 fall.recover = 1
 fall.recovertime = 120
 fall.animtype = Medium
-getpower = ifelse(p2movetype = H, 62, 134), 36 
+getpower = IfElse(Var(22) > 0, 0, ifelse(p2movetype = H, 62, 134)), IfElse(Var(22) > 0, 0, 36)
 givepower = 36, 36
 envshake.time = 8
 envshake.freq = 120
@@ -1008,3 +997,312 @@ trigger1 = Time >= 36
 
 
 
+;---------------------------------------------------------------------------
+;Robo Launcher
+[Statedef 1030]
+type    = A
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 1030
+sprpriority = 2
+poweradd = -500
+facep2 = 1
+velset = 0,0
+
+[State 7950,2]
+type = Explod
+trigger1 = AnimElemNo(0) = [1,2]
+trigger1 = !NumExplod(7950)
+anim = 7041
+ID = 7950
+pos = -7, -17
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+
+[State 1030, Do not guard]
+type = attackdist
+trigger1 = 1
+value = 0
+
+[State 1030, Idle]
+type = statetypeset
+trigger1 = animelemtime(3) >= 0
+movetype = I
+physics = A
+
+
+[State 1030, Sound]
+type = VelSet
+trigger1 = AnimElem = 2
+X = 4.8
+
+[State 1030, Sound]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S1,0
+channel = 0
+
+[State 1030, Hit]
+type = hitdef
+trigger1 = !time
+attr = S, ST 
+hitflag = MA-
+priority = 1, Miss
+sparkno = -1
+hitsound = s7000, 0
+p1facing = 1
+p1stateno = 1031
+p2stateno = 1032
+guard.dist = 0
+fall = 1
+fall.recover = 1
+fall.recovertime = 120
+
+;---------------------------------------------------------------------------
+;Robo Launcher - Throw
+[Statedef 1031]
+type    = A
+movetype= A
+physics = N
+juggle  = 3
+ctrl = 0
+anim = 1031
+sprpriority = 2
+poweradd = 0
+velset = 0,0
+
+[State 1030, Var]
+type = PosAdd
+trigger1 = !Time
+trigger1 = Var(22)
+Y = -5
+
+[State 1030, Var]
+type = VarAdd
+trigger1 = !Time
+var(21) = -50
+
+[State 1030, Sound]
+type = PlaySnd
+trigger1 = !Time
+value = S1,0
+channel = 0
+
+[State 1030, Var]
+type = VarSet
+trigger1 = !Time
+var(0) = 0
+
+[State 1030, Var]
+type = VelSet
+trigger1 = Time = 10
+X = 0.7
+Y = - 7
+
+[State 1030, Var]
+type = VelAdd
+trigger1 = Time > 10
+Y = 0.2
+
+[State 1031, Bind]
+type = TargetBind
+trigger1 = !Var(0)
+pos = Target, Const(size.ground.front), -15
+
+[State 1031, Throw Enemy]
+type = PosSet
+trigger1 = Pos Y > - Vel Y && Vel Y > 0
+Y = 0
+
+[State 1031, Throw Enemy]
+type = VelSet
+trigger1 = Pos Y > - Vel Y && Vel Y > 0
+Y = 0
+X = 0
+
+[State 1031, Throw Enemy]
+type = TargetState
+trigger1 = Pos Y >= 0
+value = 1033 + Var(22)
+persistent = 0
+
+[State 1030, Var]
+type = ChangeAnim
+trigger1 = Pos Y >= 0
+value = 1033
+persistent = 0
+
+[State 1030, Var]
+type = VarAdd
+trigger1 = Pos Y >= 0
+V = 0
+value = 1
+
+[State 1031, Anim]
+type = ChangeState
+trigger1 = Anim = 1033
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+persistent = 0
+
+[State 7950,2]
+type = Explod
+trigger1 = Anim = 1031
+trigger1 = !NumExplod(7950)
+anim = 7040
+ID = 7950
+pos = 0, 0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+
+
+;---------------------------------------------------------------------------
+;Robo Launcher - Gethit
+[Statedef 1032]
+type = S
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+
+[State 1032, Anim]
+type = Screenbound
+trigger1 = 1
+value = 0
+
+[State 1032, Anim]
+type = ChangeAnim2
+trigger1 = !Time
+value = 1032
+
+[State 1032, Exit]
+type = SelfState
+trigger1 = !gethitvar(isbound)
+value = 5050
+
+;---------------------------------------------------------------------------
+;Robo Launcher - End
+[Statedef 1033]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+
+[State 1033, Vel]
+type = VelSet
+trigger1 = !Time
+y = -2
+x = -1
+
+[State 1033, Vel]
+type = VelAdd
+trigger1 = 1
+y = .56
+
+[State 1033, Life]
+type = LifeAdd
+trigger1 = !Time
+value = -175
+
+[State 1033, Pal]
+type = PalFX
+trigger1 = !Time
+add = 200, 200, 200
+mul = 256, 256, 256
+time = 8
+
+[State 1033, Life]
+type = EnvShake
+trigger1 = !Time
+time = 14
+freq = 120
+ampl = 4
+
+[State 1033, Life]
+type = PosSet
+trigger1 = !Time
+y = 0
+
+[State 1033, Hit Ground]
+type = SelfState
+trigger1 = !Time
+value = 5100
+ctrl = 0
+
+;---------------------------------------------------------------------------
+;Robo Launcher - End
+[Statedef 1034]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+sprpriority = 0
+
+[State 1033, Vel]
+type = VelSet
+trigger1 = !Time
+y = -4
+x = 0
+
+[State 1033, Vel]
+type = VelAdd
+trigger1 = 1
+y = .56
+
+[State 1033, Life]
+type = LifeAdd
+trigger1 = !Time
+value = -105
+
+[State 1033, Pal]
+type = PalFX
+trigger1 = !Time
+add = 200, 200, 200
+mul = 256, 256, 256
+time = 8
+
+[State 1033, Life]
+type = EnvShake
+trigger1 = !Time
+time = 14
+freq = 120
+ampl = 4
+
+[State 1033, Life]
+type = PosSet
+trigger1 = !Time
+y = 0
+
+[State 1033, Hit Ground]
+type = SelfState
+trigger1 = !Time
+value = 5100
+ctrl = 0

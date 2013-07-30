@@ -156,10 +156,16 @@ trigger1 = Var(22) > 0 && !Power && StateNo != 2100 && StateNo != 2200
 trigger1 = !(var(21) := 0)
 var(22) = 0
 
+[State -3, Dampener]
+Type = AttackMulSet
+Trigger1 = 1
+value = IfElse(Var(22) > 0, 0.6, 1)
+ignorehitpause = 1
+
 [State -3, Electrocute]
 type = PowerAdd
 trigger1 = Var(22) > 0 && StateNo != 2100
-value = 0;-8
+value = -7
 ignorehitpause = 1
 
 [State -3: VarSet]
@@ -170,7 +176,7 @@ value = 0
 
 [State -3, Berserker]
 type = VarSet
-trigger1 = 1;Var(22) > 0 
+trigger1 = Var(22) > 0 
 var(21) = 100
 
 [State -3, Landing Sound]
