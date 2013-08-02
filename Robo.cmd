@@ -620,7 +620,7 @@ trigger3 = (stateno = [400, 499]) && movecontact
 [State -1, Area Bomb]
 type = ChangeState
 value = 1030
-triggerall = Command = "hcba" || Command = "hcbb" || Command = "hcbc" 
+triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
 triggerall = Var(21) >= 50
 triggerall = Power >= 500
 trigger1 = statetype = A
