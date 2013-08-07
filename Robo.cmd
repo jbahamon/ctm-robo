@@ -609,7 +609,7 @@ value = 1020
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
 trigger1 = statetype != A
 trigger1 = ctrl
-trigger2 = (StateNo = [200, 299]) && movecontact
+trigger2 = (StateNo = [200, 210]) && movecontact && AnimTime < 10
 trigger3 = (stateno = [400, 499]) && movecontact
 
 ;===========================================================================

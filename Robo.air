@@ -1272,8 +1272,6 @@ Clsn2Default:1
 
 ; Thrust
 [Begin Action 7040]
-Clsn1:1
-  Clsn1[0] = -14, -1, -13, 0
 7005,0, 0,-3, 2, V
 7005,1, 0,-2, 2, V
 
