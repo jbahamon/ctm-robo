@@ -136,8 +136,14 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 
 [Statedef -3]
 
-;This controller plays a sound everytime Ayla lands from a jump, or
-;from his back-dash.
+[State -3, Prevent Undergound Juggles]
+type= targetbind
+trigger1= movehit=1
+trigger1= numtarget=1 && numenemy
+trigger1= (target,time<=1) && (target,ID=enemynear,ID); this is just to prevent Simul issues as usual
+trigger1= !(target,hitshakeover) && (target, hitfall) && (target, pos y>0)
+pos= ceil(p2dist x), ceil(-pos y); keeps P2 at the same horizontal distance, but resets his Y position
+ignorehitpause= 1
 
 [State -3, Meter]
 type = Helper
