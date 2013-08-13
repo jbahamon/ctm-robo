@@ -276,14 +276,6 @@ sprpriority = 1
 facep2 = 1
 velset = -1.5,0
 
-[State 1000, Change]
-type = ChangeAnim
-triggerall = AnimElemTime(2) = -7
-trigger1 = prevstateno = [200, 299]
-trigger2 = prevstateno = [400, 499]
-value = 1000
-elem = 2
-persistent = 0
 
 [State 1000, Vel]
 trigger1 = AnimElem = 2
@@ -546,7 +538,8 @@ Y = -2
 [State 1005, Change]
 type = ChangeAnim
 trigger1 = PrevStateNo = [600, 699]
-trigger1 = AnimElemTime(1) < 7
+trigger1 = Var(21) > 0
+trigger1 = AnimElemTime(2) > -7
 value = 1005
 elem = 2
 persistent = 0
@@ -1011,6 +1004,12 @@ poweradd = -500
 facep2 = 1
 velset = 0,0
 
+[State 1030, Var]
+type = VarSet
+trigger1 = !Time
+trigger1 = !Var(22) 
+var(21) = 0
+
 [State 7950,2]
 type = Explod
 trigger1 = AnimElemNo(0) = [1,2]
@@ -1043,7 +1042,6 @@ type = statetypeset
 trigger1 = animelemtime(3) >= 0
 movetype = I
 physics = A
-
 
 [State 1030, Sound]
 type = VelSet
@@ -1091,10 +1089,6 @@ trigger1 = !Time
 trigger1 = Var(22)
 Y = -5
 
-[State 1030, Var]
-type = VarAdd
-trigger1 = !Time
-var(21) = -50
 
 [State 1030, Sound]
 type = PlaySnd
@@ -1280,7 +1274,7 @@ y = .56
 [State 1033, Life]
 type = LifeAdd
 trigger1 = !Time
-value = -105
+value = -165
 
 [State 1033, Pal]
 type = PalFX
