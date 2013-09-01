@@ -426,3 +426,59 @@ trigger1 = Var(22) > 0
 trigger1 = Pos Y > -Vel Y && Vel Y > 0
 Y = 0
 ignorehitpause = 1
+
+;Super Armor State
+[Statedef 7960]
+velset = 0,0
+Movetype = H
+
+[State 999, PosFreeze]
+type = PosFreeze
+trigger1 = 1
+value = 1
+
+[State 999, 0]
+type = AssertSpecial
+ignorehitpause=1
+trigger1 = 1
+flag = NoStandGuard
+flag2 = NoCrouchGuard
+flag3 = NoAirGuard
+
+[State 899, NotHitBy]
+type = NotHitBy 
+trigger1 = !time
+value = SCA, AA, AP
+time = 100
+ignorehitpause=1
+
+[State 999, HitOver]
+type = NotHitBy
+trigger1= 1
+time = 1
+value= , AT
+ignorehitpause=1
+
+[State 999, HitOver]
+type = HitOverride
+trigger1= 1
+time = -1
+attr = SCA, AA, AP
+stateno = 7960
+
+[State 999, LifeAdd]
+type = LifeAdd
+trigger1 = Time = 0
+value = - floor(gethitvar(damage))
+
+[State 999, ChangeAnim]
+type = ChangeAnim
+trigger1 = Time < floor(gethitvar(hittime) * 0.35)
+value = Anim
+elem = AnimElemNo(0)
+
+[State 999, End]
+type = ChangeState
+trigger1 = Time >= floor(gethitvar(hittime) * 0.35)
+value = Var(23)
+

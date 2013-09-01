@@ -617,7 +617,7 @@ trigger3 = (stateno = [400, 499]) && movecontact
 ;===========================================================================
 
 
-[State -1, Area Bomb]
+[State -1, Robo Launcher]
 type = ChangeState
 value = 1030
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 

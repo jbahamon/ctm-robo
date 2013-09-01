@@ -20,7 +20,7 @@ sprpriority = 1                  ;Set p1's sprite layering priority to 2 (in fro
 type = HitDef
 trigger1 = !Time
 attr = S, NA                     ;Attribute: Standing, Normal Attack
-damage = 27, 0                   ;Damage that move inflicts, guard damage
+damage = 29, 0                   ;Damage that move inflicts, guard damage
 animtype = Light                 ;Animation type: Light, Medium, Heavy, Back (def: Light)
 guardflag = M                    ;Flags on how move is to be guarded against
 hitflag = MAF                    ;Flags of conditions that move can hit
@@ -107,7 +107,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 62
+damage    = 64
 guardflag = M
 hitflag = MAF
 pausetime = 16,16
@@ -141,25 +141,50 @@ type    = S
 movetype= A
 physics = S
 juggle  = 8
-poweradd= IfElse(Var(22) > 0, 0, 18)
+poweradd= IfElse(Var(22) > 0 && PrevStateNo != 7960, 0, 18)
 ctrl = 0
-anim = 220
 sprpriority = 1
+
+[State 220, Anim]
+type = VarSet
+trigger1 = !Time
+V = 23
+value = 220
+
+[State 220, Anim]
+type = ChangeAnim
+trigger1 = !Time && PrevStateNo != 7960
+value = 220
+
+[State 220, Push]
+type = HitOverride
+trigger1 = AnimElemNo(0) = [2, 3]
+stateno = 7960
+attr = SCA, AA, AP
+time = 1
+ignorehitpause = 1
+
+[State 220, Push]
+type = NotHitBy
+trigger1 = AnimElemNo(0) = [2, 3]
+value = , AT
+time = 1
+ignorehitpause = 1
 
 [State 220, Push]
 type = VelSet
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 4
 X = 2
 
 [State 220, 1]
 type = PlaySnd
-trigger1 = AnimElem= 2
+trigger1 = AnimElem= 4
 value = S3, 0
 channel = 0
 
 [State 220, Explod]
 type = Explod
-trigger1 = AnimElem = 2
+trigger1 = AnimElem = 4
 anim = 7022
 ID = 220
 pos = 25, 0
@@ -181,7 +206,7 @@ ignorehitpause = 1
 
 [State 220, 2]
 type = HitDef
-trigger1 = Animelem = 2
+trigger1 = Animelem = 4
 attr = S, NA
 animtype  = Hard
 damage    = 92

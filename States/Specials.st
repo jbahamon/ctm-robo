@@ -321,7 +321,7 @@ physics = N
 juggle  = 3
 ctrl = 0
 anim = 7054
-sprpriority = 3
+sprpriority = 2
 
 [State 1001, Explod]
 type = Explod
@@ -374,8 +374,8 @@ x = 0
 [State 1001, PosSet]
 type = VelAdd
 trigger1 = Time > 5
-trigger1 = Vel X < IfElse(var(0) = 0, 4, IfElse(var(0) = 1, 5.5, 7)) + (Parent, Var(22))*2
-x = IfElse(var(0) = 0, .3, IfElse(var(0) = 1, .45, .6)) + (Parent, Var(22))* 0.2
+trigger1 = Vel X < IfElse(var(0) = 0, 3, IfElse(var(0) = 1, 4.5, 6)) + (Parent, Var(22))*2
+x = IfElse(var(0) = 0, .3, IfElse(var(0) = 1, .35, .4)) + (Parent, Var(22))* 0.2
 
 [State 1001, HitDef]
 type = HitDef
@@ -449,15 +449,41 @@ palfx.add= 128, 100, 7
 palfx.mul=256,256,256
 palfx.time = 8
 
+
+[State 1001, HitDef]
+type = Explod
+trigger1 = Time > 60 && !MoveContact
+anim = 7051
+ID = 1001
+pos = 7,0
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 3
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+
 [State 1001, ChangeState]
 type = ChangeState
 trigger1 = HitCount > 0
+trigger2 = Time > 60 
 value = 1002
 ctrl = 0
 
 [State 1001, End]
 type = DestroySelf
 trigger1 = Pos x != [-200, 200]
+
 
 ;---------------------------------------------------------------------------
 ;Destroyed Punch
@@ -468,7 +494,7 @@ physics = S
 juggle  = 3
 ctrl = 0
 anim = 7054
-sprpriority = 3
+sprpriority = 2
 
 [State 1002, NHB]
 type = NotHitBy
@@ -644,8 +670,31 @@ var(0) = ifelse(command = "dfc", 2, ifelse(command = "dfb", 1, 0))
 
 [State 1010, Anim]
 type = ChangeAnim
-trigger1 = !Time
+trigger1 = !Time && PrevStateNo != 7960
 value = 1010 + Var(0)
+
+[State 220, Anim]
+type = VarSet
+trigger1 = !Time
+V = 23
+value = 1010
+
+[State 220, Push]
+type = HitOverride
+trigger1 = Anim = [1010, 1012]
+trigger1 = AnimElemNo(0) < 6
+stateno = 7960
+attr = SCA, AA, AP
+time = 1
+ignorehitpause = 1
+
+[State 220, Push]
+type = NotHitBy
+trigger1 = Anim = [1010, 1012]
+trigger1 = AnimElemNo(0) < 6
+value = , AT
+time = 1
+ignorehitpause = 1
 
 [State 1010, Explod]
 type = Explod
@@ -839,22 +888,39 @@ movetype= A
 physics = S
 juggle  = 8
 ctrl = 0
-anim = 1020
 sprpriority = 1
 poweradd= IfElse(Var(22) > 0, 0, 72)
 facep2 = 1
 
 [State 1010, Anim]
 type = ChangeAnim
-trigger1 = PrevStateNo = [200, 299]
-trigger2 = PrevStateNo = [400, 499]
+trigger1 = !Time && PrevStateNo != 7960
 value = 1020
-elem = 3
-persistent = 0
+
+[State 220, Anim]
+type = VarSet
+trigger1 = !Time
+V = 23
+value = 1020
+
+[State 220, Push]
+type = HitOverride
+trigger1 = AnimElemNo(0) < 4
+stateno = 7960
+attr = SCA, AA, AP
+time = 1
+ignorehitpause = 1
+
+[State 220, Push]
+type = NotHitBy
+trigger1 = AnimElemNo(0) < 4
+value = , AT
+time = 1
+ignorehitpause = 1
 
 [State 1010, Explod]
 type = Explod
-trigger1 = AnimElemNo(0) = [3,6]
+trigger1 = AnimElemNo(0) = [5,8]
 trigger1 = NumExplod(1020) < 3
 trigger1 = time % 3
 anim = 7055
@@ -924,7 +990,7 @@ palfx.time = 8
 
 [State 1020, Bomb]
 type = Helper
-trigger1 = AnimElemTime(3) = 5
+trigger1 = AnimElemTime(5) = 5
 name = "Explosion"
 ID = 1020
 stateno = 1021

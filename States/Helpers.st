@@ -57,47 +57,6 @@ X = Parent, Pos X
 Y = Parent, Pos Y - 10
 ignorehitpause = 1
 
-[State 7100, 1]
-type = null;HitDef
-trigger1 = Time % 9 = 0
-attr = S, SA
-damage = 4, 0
-animtype = Light
-air.type = Low
-guardflag = M
-hitflag = MAF
-priority = 4, Hit
-pausetime = 0,6
-sparkno = -1
-hitsound = S7020,5
-guardsound = 5,0
-ground.type = Low
-ground.velocity = 0, 0
-ground.hittime = 3
-ground.slidetime = 3
-guard.velocity = 0
-air.velocity = 0,0
-airguard.velocity = 0, 0
-air.hittime = 3
-ground.cornerpush.veloff = 0
-air.cornerpush.veloff = 0
-airguard.cornerpush.veloff = 0
-yaccel = 0.4
-air.fall = 0
-fall = 0
-fall.recover = 0
-fall.recovertime = 120
-fall.animtype = Medium
-getpower = 0, 0
-givepower = 36, 36
-palfx.color = 0
-palfx.time = 3
-palfx.add = 24, 100, 118
-palfx.invertall = 1
-ignorehitpause = 1
-numhits = 0
-p1sprpriority = 6
-
 [State 7100, End]
 type = DestroySelf
 trigger1 = !Parent, Var(22) 

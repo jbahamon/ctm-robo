@@ -122,6 +122,8 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 
 ; Variables 0-20 are temporary and should be reset before use.
 ; Var 21 = Fuel
+; Var 22 = Electrocute
+; Var 23 = Super Armor
 ;---------------------------------------------------------------------------
 
 
