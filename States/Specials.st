@@ -482,7 +482,8 @@ ctrl = 0
 
 [State 1001, End]
 type = DestroySelf
-trigger1 = Pos x != [-200, 200]
+trigger1 = FrontEdgeBodyDist < -20
+trigger2 = BackEdgeBodyDist < -20
 
 
 ;---------------------------------------------------------------------------
