@@ -132,6 +132,19 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 ; States that are always executed (use statedef -2)
 ;---------------------------------------------------------------------------
 
+[Statedef -2]
+
+[State -2, Dampener]
+Type=VarSet
+Trigger1=Roundstate<2
+Trigger2=P2Stateno=[120,160]
+Trigger3=enemynear,ctrl
+Trigger4=P2StateType!=A
+Trigger4=P2MoveType!=H
+fvar(39)=1
+ignorehitpause=1
+
+
 ;---------------------------------------------------------------------------
 ; States that are executed when in self's state file (use statedef -3)
 ;---------------------------------------------------------------------------
@@ -167,7 +180,7 @@ var(22) = 0
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1
-value = IfElse(Var(22) > 0, 0.6, 1)
+value = IfElse(Var(22) > 0, 0.6, fvar(39))
 ignorehitpause = 1
 
 [State -3, Electrocute]

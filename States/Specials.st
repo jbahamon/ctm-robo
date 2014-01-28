@@ -323,6 +323,19 @@ ctrl = 0
 anim = 7054
 sprpriority = 2
 
+[State 1001, PosSet]
+type = VarSet
+trigger1 = !Time
+var(1) = Parent, StateNo = 1000
+
+[State 1001, StateType]
+type = StateTypeSet
+trigger1 = !Time
+trigger1 = !Var(1)
+statetype = A
+physics = N
+movetype = A
+
 [State 1001, Explod]
 type = Explod
 trigger1 = !NumExplod(1001)
@@ -380,14 +393,14 @@ x = IfElse(var(0) = 0, .3, IfElse(var(0) = 1, .35, .4)) + (Parent, Var(22))* 0.2
 [State 1001, HitDef]
 type = HitDef
 trigger1 = Time = 4
-trigger1 = !var(0)
-attr = S, SP
+trigger1 = !var(1)
+attr = A, SP
 hitflag = MAF        ;HLAFD+-
 guardflag = MA         ;HLA
 animtype = Hard
 priority = 4, Hit
 sparkno = S7051
-damage = 82,7
+damage = Floor(82* IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),7
 sparkxy = -15,0
 hitsound = S2,1
 ground.type = Low
@@ -416,14 +429,14 @@ palfx.time = 8
 [State 1001, HitDef]
 type = HitDef
 trigger1 = Time = 4
-trigger1 = var(0)
-attr = A, SP
+trigger1 = var(1)
+attr = S, SP
 hitflag = MAF        ;HLAFD+-
 guardflag = MA         ;HLA
 animtype = Hard
 priority = 4, Hit
 sparkno = S7051
-damage = 82,7
+damage = Floor(82* IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),7
 sparkxy = -15,0
 hitsound = S2,1
 ground.type = Low
@@ -480,6 +493,13 @@ trigger2 = Time > 60
 value = 1002
 ctrl = 0
 
+[State 1001, Dampen]
+Type = ParentVarset
+Trigger1 = MoveHit
+fvar(39) = parent, Fvar(39)*0.86
+persistent = 0
+ignorehitpause = 1
+
 [State 1001, End]
 type = DestroySelf
 trigger1 = FrontEdgeBodyDist < -20
@@ -527,6 +547,13 @@ velset = 0,0
 type = VarAdd
 trigger1 = !Time
 var(21) = -30
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 1005,2]
 type = Explod
@@ -989,6 +1016,13 @@ palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
 
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
+
 [State 1020, Bomb]
 type = Helper
 trigger1 = AnimElemTime(5) = 5
@@ -1124,7 +1158,7 @@ channel = 0
 [State 1030, Hit]
 type = hitdef
 trigger1 = !time
-attr = S, ST 
+attr = A, ST 
 hitflag = MA-
 priority = 1, Miss
 sparkno = -1
@@ -1247,7 +1281,7 @@ removeongethit = 1
 ;---------------------------------------------------------------------------
 ;Robo Launcher - Gethit
 [Statedef 1032]
-type = S
+type = A
 movetype = H
 physics = N
 ctrl = 0

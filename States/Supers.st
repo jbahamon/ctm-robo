@@ -104,7 +104,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = Time % 20 = 0
 attr = S, HA
-damage = 31,3
+damage = 28,3
 animtype = Hard
 air.type = Low
 guardflag = M
@@ -143,6 +143,13 @@ palfx.add = 24, 100, 118
 palfx.invertall = 1
 ignorehitpause = 1
 numhits = IfElse(Time > 0, 0, 1)
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 2000, Bomb]
 type = Helper
@@ -365,6 +372,12 @@ envshake.ampl = 3
 air.fall = 0
 numhits = 0
 
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 2021, Hit]
 type = HitDef
@@ -477,14 +490,14 @@ x = 0
 [State 2012, HitDef]
 type = HitDef
 trigger1 = !Time
-trigger1 = Parent, Time % 3 = 0
+trigger1 = Parent, Time % 4 = 0
 attr = S, HP
 hitflag = MAF        ;HLAFD+-
 guardflag = MA         ;HLA
 animtype = Hard
 priority = 4, Hit
 sparkno = -1
-damage = 12,2
+damage = Floor(12 * IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),2
 sparkxy = -15,0
 hitsound = S220,1
 ground.type = Low
@@ -572,6 +585,13 @@ envshake.freq = 120
 envshake.ampl = 3
 air.fall = 0
 numhits = 0
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 2020, Super Pause FX]
 type = helper
@@ -703,6 +723,7 @@ removeongethit = 0
 [State 2022, Max Hits]
 type = varset
 trigger1 = !Time
+trigger1 = PrevStateNo != 2023
 var(1) = 0
 
 [State 2022, Max Hits]
@@ -720,12 +741,13 @@ ignorehitpause = 1
 type = VelSet
 trigger1 = var(1) = [0,30]
 X = .2 * (30 - var(1))
-
+ignorehitpause = 1
 
 [State 2022, Move]
-type = VelAdd;PosSet
+type = VelAdd
 trigger1 = Vel Y = [-4,4]
 Y = IfElse(((EnemyNear(0), Pos Y) + EnemyNear(0), Const(size.mid.pos.y)) > Pos Y, .1, -.1)  ;FVar(2) - (30 + (Cos(Pi + Pi * (Time)/20.0) * 30))
+ignorehitpause = 1
 
 [State 2022, Move]
 type = PosSet;PosSet
@@ -772,7 +794,7 @@ trigger1 = !Time;Time % 10 = 0
 trigger1 = var(0) > 0
 trigger1 = var(0) := var(0) - 1
 attr = S, HA
-damage = 187,23
+damage = Floor(169* IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),23
 animtype = Hard
 air.type = Low
 guardflag = M
@@ -791,7 +813,6 @@ guard.velocity = -2
 air.velocity = -3,-5
 airguard.velocity = 0, 0
 air.hittime = 5
-;ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
 airguard.cornerpush.veloff = 0
 yaccel = 0.4
@@ -811,11 +832,18 @@ palfx.add = 150, 118, 160
 palfx.invertall = 1
 ignorehitpause = 1
 
+[State 200, Dampen]
+Type=ParentVarset
+Trigger1 = MoveHit
+fvar(39) = Parent, fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 2022, DestroySelf]
 type = DestroySelf
 trigger1 = Parent, StateNo != 2020
 trigger2 = Time > 100
+trigger3 = !Var(0)
 ignorehitpause = 1
 
 ;HitOverride
@@ -823,10 +851,39 @@ ignorehitpause = 1
 VelSet = 0,0
 MoveType = H
 
+[State 2022, Max Hits]
+type = varadd
+trigger1 = 1
+var(1) = 1
+
+[State 2022, Move]
+type = VarSet
+trigger1 = !Time
+fvar(2) = Pos Y
+ignorehitpause = 1
+
+[State 2022, Move]
+type = VelSet
+trigger1 = var(1) = [0,30]
+X = .2 * (30 - var(1))
+ignorehitpause = 1
+
+[State 2022, Move]
+type = VelAdd
+trigger1 = Vel Y = [-4,4]
+Y = IfElse(((EnemyNear(0), Pos Y) + EnemyNear(0), Const(size.mid.pos.y)) > Pos Y, .1, -.1)  ;FVar(2) - (30 + (Cos(Pi + Pi * (Time)/20.0) * 30))
+ignorehitpause = 1
+
+[State 2022, Move]
+type = PosSet;PosSet
+trigger1 = Abs(Parent, Pos Y - Pos Y) > 100
+Y = IfElse(Pos Y > Parent, Pos Y, Parent, Pos Y + 100, Parent, Pos Y - 100)
+ignorehitpause = 1
+
 [State 2022, Move]
 type = VarSet
 trigger1 = 1
-fvar(0) = ScreenPos X - Parent, ScreenPos X + 10
+fvar(0) = ScreenPos X - Parent, ScreenPos X + 5 * Facing
 ignorehitpause = 1
 
 [State 2022, Move]
@@ -838,20 +895,22 @@ fvar(1) = ScreenPos Y - Parent, ScreenPos Y + 20 + Vel Y
 [State 2022, Scale]
 type = AngleDraw
 trigger1 = 1
-scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/120, .5
+scale = exp(0.5*ln((fvar(0)*fvar(0) + fvar(1)*fvar(1))))/110, .4
 value = IfElse(Facing > 0, -ATan(fvar(1)/fvar(0))*180.0/Pi, ATan(fvar(1)/fvar(0))*180.0/Pi)
 ignorehitpause = 1
 
-[State 499, 0]
+[State 2022, AssertSpecial]
 type = AssertSpecial
 trigger1 = 1
-ignorehitpause=1
-flag = NoShadow
+flag = noshadow
+ignorehitpause = 1
 
-[State 499, PosFreeze]
-type = PosFreeze
+[State 2022, Trans]
+type = Trans
 trigger1 = 1
-value = 1
+trans = addalpha
+alpha = 256, 128
+ignorehitpause = 1
 
 [State 499, NotHitBy]
 type = NotHitBy 
@@ -882,6 +941,11 @@ var(0) = -1
 type = ChangeState
 trigger1 = Time >= floor(gethitvar(hittime) * 0.5)
 value = 2022
+
+[State 2022, DestroySelf]
+type = DestroySelf
+trigger1 = !Var(0)
+ignorehitpause = 1
 
 ; Electrocute
 [Statedef 2100]
@@ -1056,7 +1120,7 @@ ctrl = 1
 
 ; The Cannon
 [Statedef 2201]
-type    = S
+type    = A
 movetype= A
 physics = N
 ctrl = 0
@@ -1133,7 +1197,7 @@ triggerall = animelemno(0) != var(4)
 trigger1 = animelem = 1 || animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9 || animelem = 11
 trigger2 = animelem = 13 || animelem = 15 || animelem = 17 || animelem = 19
 attr = S, HP
-damage = 31, 7
+damage = 30, 7
 animtype = Hard
 fall.animtype = Hard
 hitflag = MAFD
@@ -1157,6 +1221,13 @@ fall = 1
 fall.recover = 0
 yaccel = 0.5
 forcestand = 1
+
+[State 200, Dampen]
+Type=ParentVarset
+Trigger1 = MoveHit
+fvar(39) = Parent, fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 3055, Hit]
 type = hitdef
@@ -1201,6 +1272,12 @@ trigger1 = 1
 flag = noshadow
 ignorehitpause = 1
 
+[State 2202, Trans]
+type = Trans
+trigger1 = 1
+trans = add
+ignorehitpause = 1
+
 [State 2203, Start]
 trigger1 = !Time
 type = varset
@@ -1223,7 +1300,7 @@ trigger1 =  !AnimTime || !PlayerIDExist(var(0)) || Parent, StateNo != 2201
 
 ;Beam Head
 [Statedef 2203]
-type    = A
+type    = S
 movetype= A
 physics = N
 juggle  = 3
@@ -1271,6 +1348,7 @@ removetime = -2
 scale = 1,1
 sprpriority = 3
 ontop = 0
+trans = add
 shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
@@ -1288,9 +1366,16 @@ type = ModifyExplod
 trigger1 = 1
 ID = 2203
 postype = p1
-scale = Abs(ParentDist X - Vel X)/16.0, 1 
-pos = floor((ParentDist X - Vel X)/2.0) , 0
+scale = 0.1 + Abs(ParentDist X - Vel X)/16.0, 1 
+pos = Floor((ParentDist X - Vel X)/2.0) , 0
 bindtime = 1
+ignorehitpause = 1
+
+
+[State 2202, Trans]
+type = Trans
+trigger1 = 1
+trans = add
 ignorehitpause = 1
 
 [State 2203, RemoveExplod]

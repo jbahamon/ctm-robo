@@ -49,6 +49,14 @@ givepower = 36, 36
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
 
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.95
+persistent = 0
+ignorehitpause = 1
+
+
 [State 200, 2]
 type = PlaySnd
 trigger1 = AnimElem = 2
@@ -73,6 +81,13 @@ ctrl = 0
 velset = 0,0
 anim = 210
 sprpriority = 2
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 210, 1]
 type = PlaySnd
@@ -210,7 +225,8 @@ trigger1 = Animelem = 4
 attr = S, NA
 animtype  = Hard
 damage    = 92
-guardflag = MAF
+hitflag = MAF
+guardflag = HA
 pausetime = 16,16
 sparkno = S7002
 sparkxy = -10, 4
@@ -252,6 +268,13 @@ ctrl = 0
 velset = 0,0
 anim = 400
 sprpriority = 2
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.95
+persistent = 0
+ignorehitpause = 1
 
 [State 400, 1]
 type = PlaySnd
@@ -332,6 +355,13 @@ velset = 0,0
 ctrl = 0
 anim = 410
 sprpriority = 1
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 410, 1]
 type = PlaySnd
@@ -503,10 +533,10 @@ Y = .5
 type = HitDef
 trigger1 = Time = 5
 attr = C, NP
-damage    = 53
+damage    = Floor(53 * IfElse(Var(22) > 0, 0.6, Parent, FVar(39)))
 animtype  = Hard
 hitflag = MAF
-guardflag = L
+guardflag = M
 pausetime = 0,20
 sparkno = -1
 hitsound   = -1
@@ -592,6 +622,13 @@ ctrl = 0
 anim = 600
 sprpriority = 1
 
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.95
+persistent = 0
+ignorehitpause = 1
+
 [State 600, 2]
 type = StateTypeSet
 trigger1 = !Time
@@ -617,6 +654,7 @@ trigger1 = Time = 0
 attr = A, NA
 damage    = 20
 guardflag = HA
+hitflag = MAF
 priority = 3
 pausetime = 7,8
 sparkno = S7000
@@ -654,6 +692,13 @@ poweradd= IfElse(Var(22) > 0, 0, 18)
 ctrl = 0
 anim = 610
 sprpriority = 1
+
+[State 200, Dampen]
+Type=Varset
+Trigger1 = MoveHit
+fvar(39) = fvar(39)*0.85
+persistent = 0
+ignorehitpause = 1
 
 [State 600, 2]
 type = StateTypeSet
@@ -721,6 +766,7 @@ trigger1 = Time = 0
 attr = A, NA
 damage = 40
 guardflag = HA
+hitflag = MAF
 priority = 4
 pausetime = 12,12
 sparkno = S7006
@@ -858,6 +904,7 @@ trigger1 = var(21) > 15
 attr = A, NA
 damage = 60
 guardflag = HA
+hitflag = MAF
 priority = 3
 pausetime = 8,8
 sparkno = S7001
