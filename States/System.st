@@ -269,7 +269,7 @@ trigger1 = !Time
 trigger1 = var(21) > 20
 value = S1,0
 channel = 0
-volumescale = 30
+volumescale = 10
 
 [State 7950, 1]
 type = VarSet

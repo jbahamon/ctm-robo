@@ -287,6 +287,13 @@ type = VarSet
 trigger1 = !Time
 var(0) = ifelse(command = "qcfc", 2, ifelse(command = "qcfb", 1, 0))
 
+[State 1000, PawnchSound]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S2,0
+persistent = 0
+ignorehitpause = 1
+
 [State 1000, Pawnch]
 type = Helper
 trigger1 = AnimElem = 2
@@ -400,7 +407,7 @@ guardflag = MA         ;HLA
 animtype = Hard
 priority = 4, Hit
 sparkno = S7051
-damage = Floor(82* IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),7
+damage = Floor(82* IfElse(Parent, Var(22) > 0, 0.5, Parent, FVar(39))),7
 sparkxy = -15,0
 hitsound = S2,1
 ground.type = Low
@@ -764,6 +771,13 @@ type = StateTypeSet
 trigger1 = Anim = 1013
 statetype = A
 physics = N
+
+[State 1010, Jump]
+type = PlaySnd
+trigger1 = !Time
+value = S7,0
+channel = 0
+persistent = 0
 
 [State 1010, Jump]
 type = PlaySnd
@@ -1162,7 +1176,7 @@ attr = A, ST
 hitflag = MA-
 priority = 1, Miss
 sparkno = -1
-hitsound = s7000, 0
+hitsound = -1
 p1facing = 1
 p1stateno = 1031
 p2stateno = 1032
@@ -1190,11 +1204,10 @@ trigger1 = !Time
 trigger1 = Var(22)
 Y = -5
 
-
 [State 1030, Sound]
 type = PlaySnd
 trigger1 = !Time
-value = S1,0
+value = S1,2
 channel = 0
 
 [State 1030, Var]
@@ -1246,6 +1259,13 @@ type = VarAdd
 trigger1 = Pos Y >= 0
 V = 0
 value = 1
+
+[State 1030, Sound]
+type = PlaySnd
+trigger1 = Anim = 1033
+value = S2,1
+channel = 0
+persistent = 0
 
 [State 1031, Anim]
 type = ChangeState

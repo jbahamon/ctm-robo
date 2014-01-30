@@ -497,7 +497,7 @@ guardflag = MA         ;HLA
 animtype = Hard
 priority = 4, Hit
 sparkno = -1
-damage = Floor(12 * IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),2
+damage = Floor(12 * IfElse(Parent, Var(22) > 0, 0.5, Parent, FVar(39))),2
 sparkxy = -15,0
 hitsound = S220,1
 ground.type = Low
@@ -794,7 +794,7 @@ trigger1 = !Time;Time % 10 = 0
 trigger1 = var(0) > 0
 trigger1 = var(0) := var(0) - 1
 attr = S, HA
-damage = Floor(169* IfElse(Parent, Var(22) > 0, 0.6, Parent, FVar(39))),23
+damage = Floor(169* IfElse(Parent, Var(22) > 0, 0.5, Parent, FVar(39))),23
 animtype = Hard
 air.type = Low
 guardflag = M
@@ -1191,6 +1191,12 @@ sprpriority = 3
 poweradd = 0
 velset = 0, 0
 
+[State 801, Priority]
+type = PlaySnd
+trigger1 = !Time
+value = S6,0
+channel = 0
+
 [State 3055, Hit]
 type = hitdef
 triggerall = animelemno(0) != var(4)
@@ -1199,6 +1205,7 @@ trigger2 = animelem = 13 || animelem = 15 || animelem = 17 || animelem = 19
 attr = S, HP
 damage = 30, 7
 animtype = Hard
+hitsound = S2,2
 fall.animtype = Hard
 hitflag = MAFD
 priority = 4, Hit

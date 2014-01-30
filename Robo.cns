@@ -180,7 +180,7 @@ var(22) = 0
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1
-value = IfElse(Var(22) > 0, 0.6, fvar(39))
+value = IfElse(Var(22) > 0, 0.5, fvar(39))
 ignorehitpause = 1
 
 [State -3, Electrocute]

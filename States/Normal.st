@@ -20,7 +20,7 @@ sprpriority = 1                  ;Set p1's sprite layering priority to 2 (in fro
 type = HitDef
 trigger1 = !Time
 attr = S, NA                     ;Attribute: Standing, Normal Attack
-damage = 29, 0                   ;Damage that move inflicts, guard damage
+damage = 25, 0                   ;Damage that move inflicts, guard damage
 animtype = Light                 ;Animation type: Light, Medium, Heavy, Back (def: Light)
 guardflag = M                    ;Flags on how move is to be guarded against
 hitflag = MAF                    ;Flags of conditions that move can hit
@@ -122,7 +122,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 64
+damage    = 54
 guardflag = M
 hitflag = MAF
 pausetime = 16,16
@@ -224,7 +224,7 @@ type = HitDef
 trigger1 = Animelem = 4
 attr = S, NA
 animtype  = Hard
-damage    = 92
+damage    = 82
 hitflag = MAF
 guardflag = HA
 pausetime = 16,16
@@ -402,7 +402,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = AnimElem = 2
 attr = C, NA
-damage    = 37
+damage    = 45
 animtype  = Medium
 hitflag = MAF
 guardflag = L
@@ -533,7 +533,7 @@ Y = .5
 type = HitDef
 trigger1 = Time = 5
 attr = C, NP
-damage    = Floor(53 * IfElse(Var(22) > 0, 0.6, Parent, FVar(39)))
+damage    = Floor(69 * IfElse(Var(22) > 0, 0.6, Parent, FVar(39)))
 animtype  = Hard
 hitflag = MAF
 guardflag = M
@@ -836,10 +836,14 @@ sprpriority = 1
 
 [State 600, 2]
 type = StateTypeSet
-trigger1 = !Time
 trigger1 = Var(22) > 0
 physics = N
 
+
+[State 600, 2]
+type = StateTypeSet
+trigger1 = Var(22) = 0
+physics = A
 
 [State 630, Freeze]
 type = VelSet
