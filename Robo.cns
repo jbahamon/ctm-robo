@@ -1,6 +1,4 @@
 ; Robo's constants and state file.
-; There are comments scattered through this file, so you may like to
-; take a look if would like to learn more about the cns.
 
 [Data]
 ;Amount of life to start with
