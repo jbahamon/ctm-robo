@@ -534,7 +534,7 @@ trigger1 = ctrl
 [State -1, Prometheus Cannon]
 type = ChangeState
 value = 2200
-triggerall = Command = "qcfhcba" || Command = "qcfhcbb" || Command = "qcfhcbc"
+triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Var(22) > 0
 trigger1 = ctrl || ((stateno = [200, 299]) && time <= 10)
 ;---------------------------------------------------------------------------
@@ -621,13 +621,13 @@ trigger3 = (stateno = [400, 499]) && movecontact
 type = ChangeState
 value = 1030
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
-triggerall = Var(21) >= 50
+triggerall = Var(21) >= 75
 triggerall = Power >= 500
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = (StateNo = [600, 699]) && MoveContact
 ;---------------------------------------------------------------------------
-[State -1, Beast Toss]
+[State -1, Robo Toss]
 type = ChangeState
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100

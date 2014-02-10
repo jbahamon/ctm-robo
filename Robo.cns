@@ -207,6 +207,7 @@ value = S8,0
 
 [State -3, Fuel]
 type = VarAdd
+trigger1 = RoundState = 2
 trigger1 = Statetype != A
 trigger1 = var(21) < 100 && (GameTime % 3 > 0)
 var(21) = 1

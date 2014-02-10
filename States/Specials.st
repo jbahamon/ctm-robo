@@ -3,7 +3,7 @@
 ;===========================================================================
 
 ;---------------------------------------------------------------------------
-;Beast Toss
+;Robo Toss
 [Statedef 800]
 type    = S
 movetype= A
@@ -20,6 +20,13 @@ velset = 0,0
 type = VarSet
 trigger1 = !Time
 var(1) = IfElse(command = "holdback", -1, 1)
+
+[State 803, Pal]
+type = PalFX
+trigger1 = 1
+add = Floor(32 * Sin(Time * Pi/16.0)) + 32, 32 + Floor(32 * Sin(Time * Pi/16.0)), 32 + Floor(32 * Sin(Time * Pi/16.0))
+mul = 256, 256, 256
+time = 1
 
 [State 800, Do not guard]
 type = attackdist
@@ -60,7 +67,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;Beast Toss - Throw
+;Robo Toss - Throw
 [Statedef 801]
 type    = S
 movetype= A
@@ -179,7 +186,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;Beast Toss - Gethit
+;Robo Toss - Gethit
 [Statedef 802]
 type = S
 movetype = H
@@ -203,7 +210,7 @@ trigger1 = !gethitvar(isbound)
 value = 5050
 
 ;---------------------------------------------------------------------------
-;Beast Toss - Air
+;Robo Toss - Air
 [Statedef 803]
 type = A
 movetype = H
@@ -1120,10 +1127,10 @@ facep2 = 1
 velset = 0,0
 
 [State 1030, Var]
-type = VarSet
+type = VarAdd
 trigger1 = !Time
 trigger1 = !Var(22) 
-var(21) = 0
+var(21) = -75
 
 [State 7950,2]
 type = Explod
