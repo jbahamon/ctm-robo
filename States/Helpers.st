@@ -33,6 +33,7 @@ time = 1
 mul = 50 + ceil(41.2 * (time - 40)), 50 + ceil(41.2 * (time - 40)), 100 +ceil(20.6 * (time - 40))
 color = floor(51.2 * (time - 40))
 
+
 [State 7000, End]
 type = DestroySelf
 trigger1 = Time >= 45
@@ -44,6 +45,12 @@ physics = N
 movetype = A
 anim = 7203
 sprpriority = 6
+
+[State 7100, face]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+ignorehitpause = 1
 
 [State 7100, face]
 type = Turn
@@ -152,26 +159,3 @@ trigger1 = 1
 scale = (Root, Var(21) / 100.0)*0.5, 0.5
 ignorehitpause = 1
 
-;[State 7201, TransVar]
-;type = VarSet
-;trigger1 = !Time
-;var(0) = 0
-;
-;[State 7201, FromTrans]
-;type = VarAdd
-;trigger1 = Root, StateType = A
-;trigger1 = Var(0) < 16
-;var(0) = 1
-;
-;[State 7201, FromTrans]
-;type = VarAdd
-;trigger1 = Root, StateType != A
-;trigger1 = Var(0) > 0
-;var(0) = -1
-;
-;[State 7201, Trans]
-;type = Trans
-;trigger1 = 1
-;trans = addalpha
-;alpha = var(0) * 16, 256 - var(0) * 16
-;ignorehitpause = 1
