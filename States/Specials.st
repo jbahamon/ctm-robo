@@ -714,6 +714,7 @@ var(0) = ifelse(command = "dfc", 2, ifelse(command = "dfb", 1, 0))
 type = ChangeAnim
 trigger1 = !Time && PrevStateNo != 7960
 value = 1010 + Var(0)
+ignorehitpause = 1
 
 [State 220, Anim]
 type = VarSet
@@ -951,6 +952,7 @@ type = VarSet
 trigger1 = !Time
 V = 23
 value = 1020
+ignorehitpause = 1
 
 [State 220, Push]
 type = HitOverride

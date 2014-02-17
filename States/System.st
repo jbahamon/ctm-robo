@@ -238,7 +238,7 @@ y = 0
 
 [State 45, 7]
 type = ChangeState
-trigger1 = Time = 2 
+trigger1 = Time >= 2 
 value = IfElse(var(21) > 20, 7950, 50)
 ctrl = 1
 

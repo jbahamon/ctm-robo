@@ -165,6 +165,7 @@ type = VarSet
 trigger1 = !Time
 V = 23
 value = 220
+ignorehitpause = 1
 
 [State 220, Anim]
 type = ChangeAnim
