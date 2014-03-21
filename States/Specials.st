@@ -1253,6 +1253,7 @@ X = 0
 
 [State 1031, Throw Enemy]
 type = TargetState
+triggerall = NumTarget
 trigger1 = Pos Y >= 0
 value = 1033 + Var(22)
 persistent = 0
@@ -1307,6 +1308,12 @@ ownpal = 1
 removeongethit = 1
 
 
+[State 1031, Safety]
+type = ChangeState
+trigger1 = !NumTarget
+value = 50
+ctrl = 0
+ignorehitpause = 0
 ;---------------------------------------------------------------------------
 ;Robo Launcher - Gethit
 [Statedef 1032]
