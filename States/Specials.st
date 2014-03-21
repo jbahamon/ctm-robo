@@ -1313,7 +1313,8 @@ type = ChangeState
 trigger1 = !NumTarget
 value = 50
 ctrl = 0
-ignorehitpause = 0
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 ;Robo Launcher - Gethit
 [Statedef 1032]
