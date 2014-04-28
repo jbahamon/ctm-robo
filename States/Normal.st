@@ -840,7 +840,6 @@ type = StateTypeSet
 trigger1 = Var(22) > 0
 physics = N
 
-
 [State 600, 2]
 type = StateTypeSet
 trigger1 = Var(22) = 0

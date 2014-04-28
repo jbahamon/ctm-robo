@@ -175,6 +175,14 @@ trigger1 = Var(22) > 0 && !Power && StateNo != 2100 && StateNo != 2200
 trigger1 = !(var(21) := 0)
 var(22) = 0
 
+
+[State -3, Dampener]
+Type = PosSet
+Trigger1 = Var(22) > 0
+Trigger1 = Pos Y > 0
+Y = 0
+ignorehitpause = 1
+
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1

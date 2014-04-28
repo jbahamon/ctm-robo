@@ -707,7 +707,7 @@ facep2 = 1
 
 [State 1010, Strength]
 type = VarSet
-trigger1 = !Time
+trigger1 = !Time && PrevStateNo != 7960
 var(0) = ifelse(command = "dfc", 2, ifelse(command = "dfb", 1, 0))
 
 [State 1010, Anim]
@@ -718,9 +718,10 @@ ignorehitpause = 1
 
 [State 220, Anim]
 type = VarSet
-trigger1 = !Time
+trigger1 = !Time && PrevStateNo != 7960
 V = 23
 value = 1010
+ignorehitpause = 1
 
 [State 220, Push]
 type = HitOverride
@@ -956,6 +957,7 @@ ignorehitpause = 1
 
 [State 220, Push]
 type = HitOverride
+trigger1 = Anim = 1020
 trigger1 = AnimElemNo(0) < 4
 stateno = 7960
 attr = SCA, AA, AP

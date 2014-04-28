@@ -264,6 +264,11 @@ trigger1 = Var(22) > 0
 physics = N
 
 [State 45, 1]
+type = StateTypeSet
+trigger1 = Var(22) = 0
+physics = A
+
+[State 45, 1]
 type = PlaySnd
 trigger1 = !Time
 trigger1 = var(21) > 20
@@ -436,6 +441,7 @@ Movetype = H
 type = PosFreeze
 trigger1 = 1
 value = 1
+ignorehitpause = 1
 
 [State 999, 0]
 type = AssertSpecial
@@ -462,23 +468,26 @@ ignorehitpause=1
 [State 999, HitOver]
 type = HitOverride
 trigger1= 1
-time = -1
+time = 1
 attr = SCA, AA, AP
 stateno = 7960
+ignorehitpause = 1
 
 [State 999, LifeAdd]
 type = LifeAdd
 trigger1 = Time = 0
 value = - floor(gethitvar(damage))
+ignorehitpause = 1
 
 [State 999, ChangeAnim]
 type = ChangeAnim
 trigger1 = Time < floor(gethitvar(hittime) * 0.35)
 value = Anim
 elem = AnimElemNo(0)
+ignorehitpause = 1
 
 [State 999, End]
 type = ChangeState
 trigger1 = Time >= floor(gethitvar(hittime) * 0.35)
 value = Var(23)
-
+ignorehitpause = 1
