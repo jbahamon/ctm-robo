@@ -13,6 +13,11 @@ Clsn2Default:1
 0,0, 0,0, 7
 
 
+; Head
+[Begin Action 14500]
+-1,0, 0,0, 10
+14500,0, 0,0, -1
+
 ; Turning
 [Begin Action 5]
 Clsn2Default:1
