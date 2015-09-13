@@ -311,6 +311,16 @@ name = "qcbc"
 command = ~D, DB, B, ~c
 time=15
 
+[Command]
+name = "qcbx"
+command = ~D, DB, B, ~x
+time=15
+
+[Command]
+name = "qcbx"
+command = ~D, DB, B, x
+time=15
+
 ;---
 
 [Command]
@@ -374,6 +384,37 @@ command = ~D, DF, F, c
 time = 15
 
 ;-| Double Tap |-----------------------------------------------------------
+
+[Command]
+name = "UFUF"
+command = UF, UF
+time = 10
+
+[Command]
+name = "DBDB"
+command = DB, DB
+time = 10
+
+[Command]
+name = "UBUB"
+command = UB, UB
+time = 10
+
+[Command]
+name = "DFDF"
+command = DF, DF
+time = 10
+
+[Command]
+name = "UU"
+command = U, U
+time = 10
+
+[Command]
+name = "DD"
+command = D, D
+time = 10
+
 [Command]
 name = "FF"     ;Required (do not remove)
 command = F, F
@@ -382,6 +423,11 @@ time = 10
 [Command]
 name = "BB"     ;Required (do not remove)
 command = B, B
+time = 10
+
+[Command]
+name = "highjump"
+command = D, $U
 time = 10
 
 ;-| 2/3 Button Combination |-----------------------------------------------
@@ -508,6 +554,18 @@ time = 1
 [Statedef -1]
 
 ;===========================================================================
+
+;Air Dash
+[State -1, Super Jump]
+type = ChangeState
+value = 7970
+triggerall = PalNo = 12 
+triggerall = Command = "highjump"
+trigger1 = statetype = A
+trigger1 = ctrl
+
+
+
 ;---------------------------------------------------------------------------
 ;Run Fwd
 [State -1, Run Fwd]
@@ -629,6 +687,7 @@ trigger2 = (StateNo = [600, 699]) && MoveContact
 ;---------------------------------------------------------------------------
 [State -1, Robo Toss]
 type = ChangeState
+triggerall = PalNo != 12 
 trigger1 = (command = "recovery" || command = "2p") && (command = "holdfwd" || command = "holdback")
 trigger1 = roundstate = 2 && ctrl && statetype = S && stateno != 100
 value = 800
@@ -641,11 +700,33 @@ value = 800
 [State -1, Electrocute]
 type = ChangeState
 value = 2100
+triggerall = PalNo != 12 
 triggerall = Command = "a+c" && !(command = "holdfwd" || command = "holdback")
 triggerall = Var(22) = 0
 triggerall = Power >= 3000
 trigger1 = StateType != A
 trigger1 = ctrl 
+
+
+;Dash
+[State -1, Dash]
+type = ChangeState
+value = 100
+triggerall = PalNo = 12 
+triggerall = Command = "2p" && Command != "holddown" && Command != "holdback"
+trigger1 = statetype != A
+trigger1 = StateNo != [100, 200]
+trigger1 = ctrl
+
+;Back Hop
+[State -1, Dash]
+type = ChangeState
+value = 105
+triggerall = PalNo = 12 
+triggerall = Command = "2p" && Command != "holddown" && Command = "holdback"
+trigger1 = statetype != A
+trigger1 = StateNo != [100, 200]
+trigger1 = ctrl
 
 
 ;===========================================================================
@@ -768,8 +849,27 @@ type = ChangeState
 value = 7950
 triggerall = Command = "holdup" || Command = "holdfwd" || Command = "holdback"
 triggerall = ctrl
-triggerall = var(21) > 20
-trigger1 = (stateno = 50 && Time > 15)
+triggerall = var(21) > 20 || (PalNo = 12 && Var(21) > 0)
+trigger1 = (stateno = 50 && (Time > 15 || PalNo = 12))
 trigger2 = StateNo = 7950 && Anim = 41 && (Command = "holdfwd" || Command = "holdback")
 trigger3 = StateNo = 7950 && Anim = 42 && Command != "holdfwd" && (Command = "holdup" || Command = "holdback")
 trigger4 = StateNo = 7950 && Anim = 43 && Command != "holdback" && (Command = "holdup" || Command = "holdfwd")
+
+;Super Jump
+[State -1, Super Jump]
+type = ChangeState
+value = 7970
+triggerall = PalNo = 12 
+triggerall = Command = "highjump"
+trigger1 = statetype = C
+trigger1 = ctrl
+
+
+;Flight
+[State -1, Flight]
+type = ChangeState
+value = 10050
+triggerall = PalNo = 12 
+triggerall = Command = "qcbx"
+triggerall = Var(21) >= 0
+trigger1 = ctrl

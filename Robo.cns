@@ -69,7 +69,7 @@ air.gethit.airrecover.up = -2         ;Extra y-velocity for holding up during ai
 air.gethit.airrecover.down = 1.5      ;Extra y-velocity for holding down during air recovery **MUGEN 1.0**
 
 [Movement]
-airjump.num = 1       ;Number of air jumps allowed (opt)
+airjump.num = 0       ;Number of air jumps allowed (opt)
 airjump.height = 20   ;Minimum distance from ground before you can air jump (opt)
 yaccel = .4          ;Vertical acceleration
 stand.friction = .85	  ;Friction coefficient when standing
@@ -119,9 +119,10 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 ; Variable usage:
 
 ; Variables 0-20 are temporary and should be reset before use.
-; Var 21 = Fuel
-; Var 22 = Electrocute
-; Var 23 = Super Armor
+; Var 21 = Fuel 
+; Var 22 = Electrocute | Special Counter for SuperJump
+; Var 23 = Super Armor | SuperJump
+; 
 ;---------------------------------------------------------------------------
 
 
@@ -142,12 +143,36 @@ Trigger4=P2MoveType!=H
 fvar(39)=1
 ignorehitpause=1
 
+[State -2, Super Jump Reset]
+type = VarSet
+trigger1 = PalNo = 12
+trigger1 = Var(23) > 0
+trigger1 = StateType != A || MoveType = H
+trigger1 = !(var(22) := 0)
+var(23) = 0
+
+
+[State -2, Flight Reset]
+type = VarSet
+trigger1 = PalNo = 12
+trigger1 = Var(21) != 0
+trigger1 = StateType != A
+var(21) = 0
+
 
 ;---------------------------------------------------------------------------
 ; States that are executed when in self's state file (use statedef -3)
 ;---------------------------------------------------------------------------
 
 [Statedef -3]
+
+[State -2, No Guard]
+type = AssertSpecial
+trigger1 = PalNo = 12
+trigger1 = Var(21) > 0
+flag = NoStandGuard
+flag2 = NoCrouchGuard
+flag3 = NoAirGuard
 
 [State -3, Prevent Undergound Juggles]
 type= targetbind
@@ -160,6 +185,7 @@ ignorehitpause= 1
 
 [State -3, Meter]
 type = Helper
+trigger1 = PalNo != 12
 trigger1 = !NumHelper(7200)
 name = "Fuel Meter"
 ID = 7200
@@ -171,6 +197,7 @@ ownpal = 1
 
 [State -3, Electrocute]
 type = VarSet
+trigger1 = PalNo != 12
 trigger1 = Var(22) > 0 && !Power && StateNo != 2100 && StateNo != 2200
 trigger1 = !(var(21) := 0)
 var(22) = 0
@@ -178,6 +205,7 @@ var(22) = 0
 
 [State -3, Dampener]
 Type = PosSet
+trigger1 = PalNo != 12
 Trigger1 = Var(22) > 0
 Trigger1 = Pos Y > 0
 Y = 0
@@ -186,23 +214,26 @@ ignorehitpause = 1
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1
-value = IfElse(Var(22) > 0, 0.5, fvar(39))
+value = IfElse(PalNo = Var(22) > 0, 0.5, fvar(39))
 ignorehitpause = 1
 
 [State -3, Electrocute]
 type = PowerAdd
+trigger1 = PalNo != 12
 trigger1 = Var(22) > 0 && StateNo != 2100
 value = -7
 ignorehitpause = 1
 
 [State -3: VarSet]
 type = VarSet
+trigger1 = PalNo != 12
 trigger1 = (Roundstate = 3)
 v = 22
 value = 0
 
 [State -3, Berserker]
 type = VarSet
+trigger1 = PalNo != 12
 trigger1 = Var(22) > 0 
 var(21) = 100
 
@@ -215,6 +246,7 @@ value = S8,0
 
 [State -3, Fuel]
 type = VarAdd
+trigger1 = PalNo != 12
 trigger1 = RoundState = 2
 trigger1 = Statetype != A
 trigger1 = var(21) < 100 && (GameTime % 3 > 0)
