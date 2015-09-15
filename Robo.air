@@ -1718,3 +1718,9 @@ Loopstart
 Clsn2: 1
   Clsn2[0] = -9, -29, 11, -3
 10100,0, 0,0, 30
+
+; Air Dash
+[Begin Action 10110]
+Clsn2: 1
+  Clsn2[0] = -9, -31, 10, -2
+41,0, 0,0, 30

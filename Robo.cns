@@ -143,6 +143,14 @@ Trigger4=P2MoveType!=H
 fvar(39)=1
 ignorehitpause=1
 
+
+[State -2, Air Dash Reset]
+type = VarSet
+trigger1 = PalNo = 12
+trigger1 = Var(24) != 0
+trigger1 = StateType != A
+var(24) = 0
+
 [State -2, Super Jump Reset]
 type = VarSet
 trigger1 = PalNo = 12
@@ -150,7 +158,6 @@ trigger1 = Var(23) > 0
 trigger1 = StateType != A || MoveType = H
 trigger1 = !(var(22) := 0)
 var(23) = 0
-
 
 [State -2, Flight Reset]
 type = VarSet

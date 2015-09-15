@@ -386,33 +386,161 @@ time = 15
 ;-| Double Tap |-----------------------------------------------------------
 
 [Command]
-name = "UFUF"
+name = "dashUFUF"
+command = /UF, a+b
+time = 10
+[Command]
+name = "dashUFUF"
+command = /UF, a+c
+time = 10
+[Command]
+name = "dashUFUF"
+command = /UF, b+c
+time = 10
+
+[Command]
+name = "dashDBDB"
+command = /DB, a+b
+time = 10
+
+[Command]
+name = "dashDBDB"
+command = /DB, a+c
+time = 10
+
+[Command]
+name = "dashDBDB"
+command = /DB, b+c
+time = 10
+
+[Command]
+name = "dashUBUB"
+command = /UB, a+b
+time = 10
+
+[Command]
+name = "dashUBUB"
+command = /UB, a+c
+time = 10
+
+[Command]
+name = "dashUBUB"
+command = /UB, b+c
+time = 10
+
+[Command]
+name = "dashDFDF"
+command = /DF, a+b
+time = 10
+
+[Command]
+name = "dashDFDF"
+command = /DF, a+c
+time = 10
+
+[Command]
+name = "dashDFDF"
+command = /DF, b+c
+time = 10
+
+[Command]
+name = "dashUU"
+command = /U, a+b
+time = 10
+
+[Command]
+name = "dashUU"
+command = /U, a+c
+time = 10
+
+[Command]
+name = "dashUU"
+command = /U, b+c
+time = 10
+
+[Command]
+name = "dashDD"
+command = /D, a+b
+time = 10
+
+[Command]
+name = "dashDD"
+command = /D, a+c
+time = 10
+
+[Command]
+name = "dashDD"
+command = /D, b+c
+time = 10
+
+[Command]
+name = "dashFF"
+command = /F, a+b
+time = 10
+
+[Command]
+name = "dashFF"
+command = /F, a+c
+time = 10
+
+[Command]
+name = "dashFF"
+command = /F, b+c
+time = 10
+
+[Command]
+name = "dashBB"
+command = /B, a+b
+time = 10
+
+[Command]
+name = "dashBB"
+command = /B, b+c
+time = 10
+
+[Command]
+name = "dashBB"
+command = /B, a+c
+time = 10
+
+[Command]
+name = "dashUFUF"
 command = UF, UF
 time = 10
 
 [Command]
-name = "DBDB"
+name = "dashDBDB"
 command = DB, DB
 time = 10
 
 [Command]
-name = "UBUB"
+name = "dashUBUB"
 command = UB, UB
 time = 10
 
 [Command]
-name = "DFDF"
+name = "dashDFDF"
 command = DF, DF
 time = 10
 
 [Command]
-name = "UU"
+name = "dashUU"
 command = U, U
 time = 10
 
 [Command]
-name = "DD"
+name = "dashDD"
 command = D, D
+time = 10
+
+[Command]
+name = "dashFF"
+command = F, F
+time = 10
+
+[Command]
+name = "dashBB"
+command = B, B
 time = 10
 
 [Command]
@@ -556,13 +684,22 @@ time = 1
 ;===========================================================================
 
 ;Air Dash
-[State -1, Super Jump]
+[State -1, Air Dash]
 type = ChangeState
-value = 7970
+value = 10100
 triggerall = PalNo = 12 
-triggerall = Command = "highjump"
-trigger1 = statetype = A
-trigger1 = ctrl
+triggerall = statetype = A
+triggerall = ctrl
+triggerall = !Var(24)
+trigger1 = command = "dashFF"
+trigger2 = command = "dashDD"
+trigger3 = command = "dashUU"
+trigger4 = command = "dashBB"
+trigger5 = command = "dashDBDB"
+trigger6 = command = "dashDFDF"
+trigger7 = command = "dashUFUF"
+trigger8 = command = "dashUBUB"
+
 
 
 
