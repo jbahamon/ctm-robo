@@ -471,33 +471,10 @@ x = -0.5
 y = 0
 ignorehitpause = 1
 
-[State 420, StateTypeSet]
-type = StateTypeSet
-trigger1 = Anim = 420
-trigger1 = AnimElem = 3
-statetype = A
-physics = N
-ignorehitpause = 1
-
-[State 420, ChangeAnim]
-type = ChangeAnim
-trigger1 = MoveHit || Time = 30
-trigger1 = Anim = 420
-elem = 1
-value = 11
-
-[State 420, StateTypeSet]
-type = StateTypeSet
-trigger1 = Anim = 11
-trigger1 = AnimElem = 1
-statetype = C
-physics = C
-ignorehitpause = 1
 
 [State 420, 3]
 type = ChangeState
-trigger1 = Anim = 11
-trigger1 = Time >= 50
+trigger1 = !AnimTime
 value = 11
 ctrl = 1
 

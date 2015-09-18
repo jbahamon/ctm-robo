@@ -122,7 +122,8 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 ; Var 21 = Fuel 
 ; Var 22 = Electrocute | Special Counter for SuperJump
 ; Var 23 = Super Armor | SuperJump
-; 
+; Var 24 = Enabled Flight
+; Var 25 = Enabled Air Dash
 ;---------------------------------------------------------------------------
 
 
@@ -135,6 +136,7 @@ victory11 = "Miss Ayla, please do not\n promote violence."
 
 [State -2, Dampener]
 Type=VarSet
+triggerall = MoveType != A 
 Trigger1=Roundstate<2
 Trigger2=P2Stateno=[120,160]
 Trigger3=enemynear,ctrl
@@ -143,13 +145,6 @@ Trigger4=P2MoveType!=H
 fvar(39)=1
 ignorehitpause=1
 
-
-[State -2, Air Dash Reset]
-type = VarSet
-trigger1 = PalNo = 12
-trigger1 = Var(24) != 0
-trigger1 = StateType != A
-var(24) = 0
 
 [State -2, Super Jump Reset]
 type = VarSet
@@ -162,9 +157,17 @@ var(23) = 0
 [State -2, Flight Reset]
 type = VarSet
 trigger1 = PalNo = 12
-trigger1 = Var(21) != 0
+trigger1 = Var(21) <= 0
 trigger1 = StateType != A
-var(21) = 0
+var(24) = 0
+
+
+[State -2, Flight Reset]
+type = VarSet
+trigger1 = PalNo = 12
+trigger1 = Var(25) > 0
+trigger1 = StateType != A
+var(25) = 0
 
 
 ;---------------------------------------------------------------------------
@@ -172,6 +175,13 @@ var(21) = 0
 ;---------------------------------------------------------------------------
 
 [Statedef -3]
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "damp = %f"
+params = fvar(39)
+ignorehitpause = 1
+;persistent = 
 
 [State -2, No Guard]
 type = AssertSpecial
@@ -221,7 +231,7 @@ ignorehitpause = 1
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1
-value = IfElse(PalNo = Var(22) > 0, 0.5, fvar(39))
+value = IfElse(PalNo != 12 && Var(22) > 0, 0.5, fvar(39))
 ignorehitpause = 1
 
 [State -3, Electrocute]
@@ -258,6 +268,13 @@ trigger1 = RoundState = 2
 trigger1 = Statetype != A
 trigger1 = var(21) < 100 && (GameTime % 3 > 0)
 var(21) = 1
+
+[State 7950, Fuel]
+type = VarAdd
+trigger1 = PalNo = 12
+trigger1 = var(21) >= 0
+var(21) = -1
+ignorehitpause = 1
 
 [State -3, Landing Sound]
 type = PlaySnd

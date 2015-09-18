@@ -1129,6 +1129,17 @@ sprpriority = -1
 poweradd = 0
 velset = 0, 10/16.0
 
+[State 2201, var]
+type = VarSet
+trigger1 = !Time
+fvar(39) = 1
+
+
+[State 2201, var]
+type = ParentVarSet
+trigger1 = 1
+fvar(39) = fvar(39)
+
 [State 2201, Trans]
 type = trans
 trigger1 = Time = [0, 16]
@@ -1197,15 +1208,29 @@ trigger1 = !Time
 value = S6,0
 channel = 0
 
+[State 801, Priority]
+type = PlaySnd
+trigger1 = MoveHit
+value = S2,2
+persistent = 0
+
+
+[State 200, Dampen]
+Type=ParentVarset
+Triggerall = MoveHit
+trigger1 = animelem = 1 || animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9 || animelem = 11
+trigger2 = animelem = 13 || animelem = 15 || animelem = 17 || animelem = 19
+fvar(39) = Parent, fvar(39)*0.95
+ignorehitpause = 1
+
 [State 3055, Hit]
 type = hitdef
-triggerall = animelemno(0) != var(4)
 trigger1 = animelem = 1 || animelem = 3 || animelem = 5 || animelem = 7 || animelem = 9 || animelem = 11
 trigger2 = animelem = 13 || animelem = 15 || animelem = 17 || animelem = 19
 attr = S, HP
-damage = 30, 7
+damage = Ceil(30*Root, Fvar(39)), 7
 animtype = Hard
-hitsound = S2,2
+hitsound = -1
 fall.animtype = Hard
 hitflag = MAFD
 priority = 4, Hit
@@ -1213,7 +1238,7 @@ pausetime = 0, 2
 guard.dist = 320
 sparkno = -1
 guard.sparkno = -1
-guardsound = s2, 0
+guardsound = -1
 ground.type = Low
 ground.slidetime = 16
 ground.hittime = 16
@@ -1229,19 +1254,11 @@ fall.recover = 0
 yaccel = 0.5
 forcestand = 1
 
-[State 200, Dampen]
-Type=ParentVarset
-Trigger1 = MoveHit
-fvar(39) = Parent, fvar(39)*0.85
-persistent = 0
-ignorehitpause = 1
-
 [State 3055, Hit]
 type = hitdef
-trigger1 = animelemno(0) != var(4)
 trigger1 = animelem = 20
 attr = S, HP 
-damage = 24, 7
+damage = Ceil(Root, FVar(39) * 24), 7
 animtype = Diagup
 fall.animtype = Diagup
 hitflag = MAFD

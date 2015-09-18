@@ -320,7 +320,7 @@ ctrl = 1
 [Statedef 50]
 type = A
 physics = A
-facep2 = 1
+facep2 = 0
 
 [State 50, 1]
 type = VarSet
@@ -331,12 +331,6 @@ var(0) = sysvar(1)
 type = VarSet
 trigger1 = Time = 0
 sysvar(1) = 0
-
-[State 50, Turn]
-type = Turn
-trigger1 = PalNo = 12 
-trigger1 = Var(23) = 0
-trigger1 = (ScreenPos X - EnemyNear(IfElse(EnemyNear(0), Alive, 0, 1)), ScreenPos X) * Facing > 0
 
 [State 50, VelAdd]
 type = VelAdd
@@ -436,7 +430,7 @@ value = 106
 [State 100, 4]
 type = CtrlSet
 trigger1 = PalNo = 12
-value = Time > 4
+value = Time > 11
 
 [State 100, 4]
 type = ChangeState
@@ -554,12 +548,13 @@ removeongethit = 1
 [Statedef 7950]
 type    = A
 physics = N
-facep2 = 1
+facep2 = Var(23) = 0
+ctrl = 1
 
 [State 45, 1]
 type = StateTypeSet
 triggerall = !Time
-trigger1 = Var(22) > 0
+trigger1 = Var(22) > 0 && PalNo != 12
 trigger2 = Var(21) > 0 && PalNo = 12
 physics = N
 
@@ -733,13 +728,6 @@ trigger2 = Anim = 42 && Command = "holdfwd"
 trigger3 = Command = "holdup"
 var(21) = -2
 
-
-[State 7950, Fuel]
-type = VarAdd
-trigger1 = PalNo = 12
-trigger1 = var(21) >= 0
-var(21) = -1
-
 [State 600, 2]
 type = PosSet
 trigger1 = Var(22) > 0 || PalNo = 12
@@ -893,15 +881,32 @@ X = 0.5
 [State 10050, Var]
 type = VarSet
 trigger1 = !Time
-trigger1 = Var(21) >= 0
 v = 21
-value = IfElse(Var(21) > 0, 0,  108)
+value = IfElse(Var(21) > 0, 0, 108)
 
+[State 10050, Var]
+type = VarSet
+trigger1 = !Time
+v = 24
+value = IfElse(Var(24) > 0, -1, 1)
 
 [State 10050, Var]
 type = ChangeState
 trigger1 = !AnimTime || !Var(21)
 value = 7950
+
+
+[State 1011, Pos]
+type = PosSet
+trigger1 = Pos Y > - Vel Y
+trigger1 = Vel Y > 0
+Y = 0
+
+[State 1011, Pos]
+type = VelSet
+trigger1 = Pos Y >= - Vel Y
+trigger1 = Vel Y > 0
+Y = 0
 
 
 ; Air Dash
@@ -915,7 +920,7 @@ sprpriority = 0
 [State 10100, var]
 type = VarSet
 trigger1 = !Time
-var(24) = 1
+var(25) = 1
 
 [State 7950, 2]
 type = ChangeAnim
@@ -1095,7 +1100,7 @@ value = 50
 
 [State 100, 4]
 type = CtrlSet
-trigger1 = Time > 4
+trigger1 = Time > 10
 value = 1
 
 
