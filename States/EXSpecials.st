@@ -14,7 +14,6 @@ trigger1 = !Time
 Y = 0.5
 X = 0.5
 
-
 [State 1000, Strength]
 type = VelSet
 trigger1 = AnimElem = 2
@@ -39,6 +38,18 @@ trigger1 = !Time
 trigger1 = StateType = A
 physics = N
 
+
+[State 1000, Strength]
+type = PosSet
+trigger1 = Pos Y >= -Vel Y
+trigger1 = Vel Y >= 0
+Y = 0
+
+[State 1000, Strength]
+type = VelSet
+trigger1 = Pos Y >= -Vel Y
+trigger1 = Vel Y >= 0
+Y = 0
 
 [State 1000, Strength]
 type = ChangeAnim
