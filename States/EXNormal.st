@@ -122,6 +122,7 @@ channel = 0
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10210
 trigger1 = AnimElemNo(0) > 1
 trigger1 = NumExplod(210) = 0
 anim = 7042
@@ -480,6 +481,7 @@ air.cornerpush.veloff = 0
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10400 
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 7
 trigger1 = NumExplod(400) = 0
@@ -588,6 +590,7 @@ air.cornerpush.veloff = 0
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10410
 trigger1 = AnimElemNo(0) > 1
 trigger1 = NumExplod(410) = 0
 trigger1 = AnimElemTime(3) < 7
@@ -857,6 +860,8 @@ palfx.time = 8
 
 [State 210, Explod]
 type = Explod
+triggerall = Time > 5
+triggerall = Anim = 10600
 trigger1 = AnimElemNo(0) > 1
 trigger1 = NumExplod(600) = 0
 anim = 7042
@@ -975,6 +980,7 @@ palfx.time = 8
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10610
 trigger1 = AnimElemNo(0) > 1
 trigger1 = NumExplod(610) = 0
 anim = 7042
@@ -1090,6 +1096,7 @@ palfx.time = 8
 
 [State 210, Explod]
 type = Helper
+triggerall = Anim = 10620
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 16
 stateno = 10621

@@ -134,6 +134,12 @@ guardsound = -1
 ground.hittime = IfElse(var(0) = 0, 15, IfElse(var(0) = 1, 19, 20))
 guard.hittime = IfElse(var(0) = 0, 0, IfElse(var(0) = 1, 4, 5))
 ground.type = Low
+palfx.add = 200, 200, 200
+palfx.mul = 256, 256, 256
+palfx.time = 12
+envshake.time = 12
+envshake.freq = 120
+envshake.ampl = 2
 ground.slidetime = 16
 ground.hittime = 16
 ground.velocity = -2, 0
@@ -178,7 +184,12 @@ down.velocity = -2, -.5
 getpower = 0
 givepower = 36, 36
 yaccel = 0.5
-
+palfx.add = 200, 200, 200
+palfx.mul = 256, 256, 256
+palfx.time = 12
+envshake.time = 12
+envshake.freq = 120
+envshake.ampl = 2
 
 [State 2201, Vel]
 type = PosSet
@@ -444,12 +455,18 @@ ground.slidetime = 16
 ground.hittime = 16
 ground.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2), -2
 ground.cornerpush.veloff = 0
-guard.velocity = -3
+air.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2)/3.0, -0.6
 air.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2), -2
 down.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2), -2
 getpower = 0
 givepower = 36, 36
 yaccel = 0.4
+palfx.add = 200, 200, 200
+palfx.mul = 256, 256, 256
+palfx.time = 12
+envshake.time = 4
+envshake.freq = 120
+envshake.ampl = 4
 
 [State 2201, Vel]
 type = PosSet
@@ -615,7 +632,8 @@ ignorehitpause = 1
 [State 2202, Trans]
 type = Trans
 trigger1 = 1
-trans = add
+trans = addalpha
+alpha = 256 * (GameTime % 3 > 0), 256 
 ignorehitpause = 1
 
 [State 2203, RemoveExplod]
@@ -648,7 +666,8 @@ ignorehitpause = 1
 [State 2203, Pos]
 type = Trans
 trigger1 = 1
-trans = add
+trans = addalpha
+alpha = 256 * (GameTime % 3 > 0), 256 
 ignorehitpause = 1
 
 [State 10621, End]
