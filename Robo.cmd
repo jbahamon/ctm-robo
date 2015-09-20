@@ -726,6 +726,7 @@ trigger1 = ctrl
 [State -1, Prometheus Cannon]
 type = ChangeState
 value = 2200
+triggerall = PalNo != 12 
 triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Var(22) > 0
 trigger1 = ctrl || ((stateno = [200, 299]) && time <= 10)
@@ -733,6 +734,7 @@ trigger1 = ctrl || ((stateno = [200, 299]) && time <= 10)
 [State -1, Omega Laser]
 type = ChangeState
 value = 2020
+triggerall = PalNo != 12 
 triggerall = Command = "qcbhcfa" || Command = "qcbhcfb" || Command = "qcbhcfc"
 triggerall = Power >= 1000
 triggerall = Var(22) = 0
@@ -744,6 +746,7 @@ trigger3 = ( StateNo = [400,499] ) && MoveContact
 [State -1, Uzzi Punch]
 type = ChangeState
 value = 2010
+triggerall = PalNo != 12 
 triggerall = Command = "2qcfa" || Command = "2qcfb" || Command = "2qcfc" 
 triggerall = Power >= 1000
 triggerall = Var(22) = 0
@@ -755,6 +758,7 @@ trigger3 = ( StateNo = [400,499] ) && MoveContact
 [State -1, Shock]
 type = ChangeState
 value = 2000
+triggerall = PalNo != 12 
 triggerall = Command = "2qcba" || Command = "2qcbb" || Command = "2qcbc" 
 triggerall = Power >= 1000
 triggerall = Var(22) = 0
@@ -766,6 +770,17 @@ trigger3 = ( StateNo = [400,499] ) && MoveContact
 ;===========================================================================
 ; EX Special Moves
 ;===========================================================================
+
+[State -1, Repulsor Blast]
+type = ChangeState
+value = 11100
+triggerall = PalNo = 12
+triggerall = Statetype != A
+triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc"
+triggerall = RoundState = 2 && !NumHelper(11100)
+trigger1 = Ctrl
+trigger2 = (StateNo = [10200, 10299]) 
+trigger3 = (StateNo = [10400, 10499]) 
 
 [State -1, Unibeam]
 type = ChangeState
@@ -784,6 +799,7 @@ trigger4 = (StateNo = [10600, 10699])
 [State -1, Robo Tackle]
 type = ChangeState
 value = 1010
+triggerall = PalNo != 12
 triggerall = Command = "dfa" || Command = "dfb" || Command = "dfc"
 triggerall = Roundstate = 2 && Statetype != A 
 trigger1 = Ctrl
@@ -804,6 +820,7 @@ trigger3 = (StateNo = [400, 499]) && movecontact
 [State -1, Rocket Punch (Air)]
 type = ChangeState
 value = 1005
+triggerall = PalNo != 12
 triggerall = Var(21) > 30
 triggerall = Command = "qcfa" || Command = "qcfb" || Command = "qcfc"
 triggerall = Roundstate = 2 && (!NumHelper(1000) || Var(22))
@@ -813,6 +830,7 @@ trigger2 = (StateNo = [600, 699]) && MoveContact
 [State -1, Area Bomb]
 type = ChangeState
 value = 1020
+triggerall = PalNo != 12
 triggerall = Command = "qcba" || Command = "qcbb" || Command = "qcbc" 
 trigger1 = statetype != A
 trigger1 = ctrl
