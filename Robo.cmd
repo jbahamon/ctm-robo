@@ -781,6 +781,7 @@ triggerall = RoundState = 2 && !NumHelper(11100)
 trigger1 = Ctrl
 trigger2 = (StateNo = [10200, 10299]) 
 trigger3 = (StateNo = [10400, 10499]) 
+ignorehitpause = 1
 
 [State -1, Unibeam]
 type = ChangeState
@@ -792,6 +793,7 @@ trigger1 = Ctrl
 trigger2 = (StateNo = [10200, 10299]) 
 trigger3 = (StateNo = [10400, 10499]) 
 trigger4 = (StateNo = [10600, 10699]) 
+ignorehitpause = 1
 
 ;===========================================================================
 ; Special Moves
@@ -869,6 +871,7 @@ triggerall = Var(24) >= 0
 trigger1 = ctrl
 trigger2 = (StateNo = [10200, 10499]) || (StateNo = [10600, 10699])
 trigger2 = StateNo != 10230
+ignorehitpause = 1
 
 
 ;===========================================================================
@@ -931,7 +934,7 @@ trigger2 = StateNo = 10400
 trigger2 = MoveContact
 trigger3 = StateNo = 10200
 trigger3 = MoveContact
-
+ignorehitpause = 1
 
 [State -1, Stand Heavy]
 type = ChangeState
@@ -945,7 +948,7 @@ trigger2 = StateNo = [10200, 10210]
 trigger2 = MoveContact
 trigger3 = StateNo = [10400, 10410] 
 trigger3 = MoveContact
-
+ignorehitpause = 1
 
 [State -1, Stand Launcher]
 type = ChangeState
@@ -957,6 +960,7 @@ trigger1 = ctrl
 trigger2 = StateNo = [10200, 10499]
 trigger2 = StateNo != 10230
 trigger2 = MoveContact
+ignorehitpause = 1
 
 [State -1, Crouch Light]
 type = ChangeState
@@ -968,6 +972,7 @@ triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = StateNo = 10400 && MoveContact && PrevStateNo != 10400
 trigger3 = StateNo = 10200 && MoveContact 
+ignorehitpause = 1
 
 [State -1, Crouch Mid]
 type = ChangeState
@@ -979,6 +984,7 @@ triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = (StateNo = [10200, 10210]) && MoveContact
 trigger3 = StateNo = 10400 && MoveContact
+ignorehitpause = 1
 
 [State -1, Crouch Heavy]
 type = ChangeState
@@ -990,6 +996,7 @@ triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = (StateNo = [10200, 10220]) && MoveContact
 trigger3 = (StateNo = [10400, 10410]) && MoveContact
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 ;Jump Light
@@ -1002,7 +1009,7 @@ trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = 1350 ;Air blocking
 trigger3 = StateNo = 10600 && MoveContact && PrevStateNo != 10600
-
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 ;Jump Mid
@@ -1017,6 +1024,8 @@ trigger2 = stateno = 10600
 trigger2 = movecontact
 trigger3 = stateno = 1350 ;Air blocking
 trigger4 = StateNo = 10610 && MoveContact && PrevStateNo != 10610
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 ;Jump Heavy
 [State -1, Jump Heavy]
@@ -1030,6 +1039,7 @@ trigger2 = stateno = [10600, 10610]
 trigger2 = movecontact
 trigger3 = stateno = 1350 ;Air blocking
 trigger4 = StateNo = 10610 && MoveContact
+ignorehitpause = 1
 
 [State -1, Air Knockdown]
 type = ChangeState
@@ -1041,6 +1051,8 @@ trigger1 = ctrl
 trigger2 = StateNo = [10600, 10699]
 trigger2 = StateNo != 10630
 trigger2 = MoveContact
+ignorehitpause = 1
+
 ;===========================================================================
 ; Normal Moves
 ;===========================================================================
@@ -1187,3 +1199,4 @@ trigger1 = ctrl
 trigger2 = Command = "holdup"
 trigger2 = StateNo = 10230
 trigger2 = MoveHit
+ignorehitpause = 1

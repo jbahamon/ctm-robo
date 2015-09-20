@@ -11,6 +11,11 @@ anim = 10200                       ;Change animation (Def: no change)
 poweradd = 0                     ;Power to add (Def: 0)
 sprpriority = 1                  ;Set p1's sprite layering priority to 2 (in front)
 
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
+
 [State 200, Dampen]
 Type=Varset
 Triggerall = !Time
@@ -86,6 +91,11 @@ ctrl = 0
 velset = 0,0
 anim = 10210
 sprpriority = 2
+
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
 
 [State 200, Dampen]
 Type=Varset
@@ -179,6 +189,11 @@ velset = 0,0
 anim = 10220
 sprpriority = 2
 
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
+
 [State 200, Dampen]
 Type=Varset
 Triggerall = !Time
@@ -204,6 +219,7 @@ channel = 0
 
 [State 210, Explod]
 type = Helper
+trigger1 = Anim = 10220
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 16
 stateno = 10221
@@ -268,7 +284,6 @@ type = AssertSpecial
 trigger1 = 1
 flag = noshadow
 
-
 [State 10621, End]
 type = PosSet
 trigger1 = 1
@@ -296,6 +311,11 @@ ctrl = 0
 velset = 0,0
 anim = 10230
 sprpriority = 2
+
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
 
 [State 200, Dampen]
 Type=Varset
@@ -400,6 +420,11 @@ anim = 10400                       ;Change animation (Def: no change)
 poweradd = 0                     ;Power to add (Def: 0)
 sprpriority = 1                  ;Set p1's sprite layering priority to 2 (in front)
 
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
+
 [State 200, Dampen]
 Type=Varset
 Triggerall = !Time
@@ -502,6 +527,11 @@ anim = 10410                       ;Change animation (Def: no change)
 poweradd = 0                     ;Power to add (Def: 0)
 sprpriority = 1                  ;Set p1's sprite layering priority to 2 (in front)
 
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
+
 [State 200, Dampen]
 Type=Varset
 Triggerall = !Time
@@ -602,6 +632,11 @@ velset = 0,0
 ctrl = 0
 anim = 10420
 sprpriority = 1
+
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
 
 [State 420, Bomb]
 type = Helper
@@ -751,6 +786,11 @@ ctrl = 0
 anim = 10600
 sprpriority = 1
 
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
+
 
 [State 600, 2]
 type = VelSet
@@ -872,6 +912,11 @@ ctrl = 0
 anim = 10610
 sprpriority = 1
 
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
+
 [State 600, 2]
 type = VelSet
 trigger1 = Var(21) <= 0
@@ -981,6 +1026,11 @@ poweradd= 0
 ctrl = 0
 anim = 10620
 sprpriority = 1
+
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
 
 [State 600, 2]
 type = VelSet
@@ -1127,6 +1177,11 @@ ctrl = 0
 velset = 0,0
 anim = 10630
 sprpriority = 0
+
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !Time
+ignorehitpause = 1
 
 [State 200, Dampen]
 Type=Varset

@@ -340,6 +340,11 @@ poweradd = 0
 velset = 0,0
 
 [State 1000, Strength]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 1000, Strength]
 type = VarSet
 trigger1 = !Time
 var(0) = ifelse(command = "qcbc", 2, ifelse(command = "qcbb", 1, 0))
@@ -416,14 +421,13 @@ persistent = 0
 
 [State 3055, Hit]
 type = hitdef
-trigger1 = animelem = 4 || animelem = 8
-trigger2 = animelem = 12 || (AnimElemTime(12) = 4) || (AnimElemTime(12) = 8)
-trigger3 = ((Animelem = 6) || (Animelem = 10) || (AnimElemTime(12) = 6)) && Var(0) > 0
-trigger4 = ((AnimElemTime(12) = 12) || (AnimElemTime(12) = 16)) && Var(0) = 2
+trigger1 = (Var(0) = [0, 1]) && ( AnimElem = 3 || AnimElem = 5 || AnimElem = 7  || AnimElem = 9 || AnimElem = 11 )
+trigger2 = (Var(0) = 2     ) && ( AnimElem = 5 || AnimElem = 8 || AnimElem = 11 || AnimElem = 14 || AnimElem = 17 )
 attr = S, SP
-damage = Ceil(IfElse(var(0) = 0, 16.34, IfElse(var(0) = 1, 14.2, 12.9))*Root, Fvar(39)), 7
+damage = Ceil(IfElse(var(0) = 0, 16.34, IfElse(var(0) = 1, 20.46, 24.52))*Root, Fvar(39)), 0
 animtype = Hard
 hitsound = -1
+fall = 1
 fall.animtype = Hard
 hitflag = MAF
 guardflag = MA
@@ -434,18 +438,18 @@ sparkno = -1
 guard.sparkno = -1
 guardsound = -1
 ground.hittime = IfElse(var(0) = 0, 15, IfElse(var(0) = 1, 19, 20))
-guard.hittime = IfElse(var(0) = 0, 0, IfElse(var(0) = 1, 4, 5))
+guard.hittime = 0
 ground.type = Low
 ground.slidetime = 16
 ground.hittime = 16
-ground.velocity = -2, 0
+ground.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2), -2
 ground.cornerpush.veloff = 0
 guard.velocity = -3
-air.velocity = -2, -.5
-down.velocity = -2, -.5
+air.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2), -2
+down.velocity = IfElse((Var(0) = 2 && AnimElemNo(0) > 11) || (Var(0) != 2 && AnimElemNo(0) > 8), -2, 2), -2
 getpower = 0
 givepower = 36, 36
-yaccel = 0.5
+yaccel = 0.4
 
 [State 2201, Vel]
 type = PosSet
@@ -513,6 +517,11 @@ sprpriority = 3
 poweradd = 0
 velset = 0, 0
 facep2 = 0
+
+[State 2203, Pos]
+type = Turn
+trigger1 = Facing != Root, Facing
+ignorehitpause = 1
 
 
 [State 2203, Total Time]
@@ -611,7 +620,7 @@ ignorehitpause = 1
 
 [State 2203, RemoveExplod]
 type = DestroySelf
-trigger1 = Root, StateNo != 11100 || Time > (2 * Fvar(3))
+trigger1 = Root, StateNo != 11100 || Time >= Floor(2 * Fvar(3))
 
 ; Repulsor Blast Head
 [Statedef 11116]
@@ -624,6 +633,11 @@ ctrl = 0
 velset = 0,0
 anim = 11113
 sprpriority = 2
+
+[State 2203, Pos]
+type = Turn
+trigger1 = Facing != Root, Facing
+ignorehitpause = 1
 
 [State 2203, Pos]
 type = AssertSpecial
@@ -658,4 +672,4 @@ ignorehitpause = 1
 
 [State 2203, RemoveExplod]
 type = DestroySelf
-trigger1 = Root, StateNo != 11100 || Parent, Time > (2 * Parent, Fvar(3))
+trigger1 = Root, StateNo != 11100 || Parent, Time >= (2 * Parent, Fvar(3))
