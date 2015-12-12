@@ -383,6 +383,35 @@ name = "qcfc"
 command = ~D, DF, F, c
 time = 15
 
+[Command]
+name = "qcf2"
+command = ~D, DF, F, a+b
+time = 15
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, a+c
+time = 15
+
+[Command]
+name = "qcf"
+command = ~D, DF, F, b+c
+time = 15
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, ~a+b
+time = 15
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, ~a+c
+time = 15
+
+[Command]
+name = "qcf"
+command = ~D, DF, F, ~b+c
+time = 15
 ;-| Double Tap |-----------------------------------------------------------
 
 [Command]
@@ -722,7 +751,19 @@ trigger1 = ctrl
 ;===========================================================================
 ; Super Moves
 ;===========================================================================
+[State -1, Proton Cannon]
+type = ChangeState
+value = 12100
+triggerall = PalNo = 12 
+triggerall = Command = "qcf2"
+triggerall = Power >= 1000
+trigger1 = statetype != A
+trigger1 = ctrl
+trigger2 = (StateNo = [10200, 10299]) 
+trigger3 = (StateNo = [10400, 10499]) 
+trigger4 = (StateNo = [11000, 11999]) 
 
+;---------------------------------------------------------------------------
 [State -1, Prometheus Cannon]
 type = ChangeState
 value = 2200
@@ -770,6 +811,18 @@ trigger3 = ( StateNo = [400,499] ) && MoveContact
 ;===========================================================================
 ; EX Special Moves
 ;===========================================================================
+
+[State -1, Smart Bomb]
+type = ChangeState
+value = 11200
+triggerall = PalNo = 12
+triggerall = Command = "dfa" || Command = "dfb" || Command = "dfc"
+triggerall = RoundState = 2 && !NumHelper(11200)
+trigger1 = Ctrl
+trigger2 = (StateNo = [10200, 10299]) 
+trigger3 = (StateNo = [10400, 10499]) 
+trigger4 = (StateNo = [10600, 10699]) 
+ignorehitpause = 1
 
 [State -1, Repulsor Blast]
 type = ChangeState

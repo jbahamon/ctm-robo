@@ -37,7 +37,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = !Time
 attr = S, NA                     ;Attribute: Standing, Normal Attack
-damage = 16, 0                   ;Damage that move inflicts, guard damage
+damage = 47, 0                   ;Damage that move inflicts, guard damage
 animtype = Light                 ;Animation type: Light, Medium, Heavy, Back (def: Light)
 guardflag = MA                    ;Flags on how move is to be guarded against
 hitflag = MAF                    ;Flags of conditions that move can hit
@@ -149,7 +149,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 24
+damage    = 70
 guardflag = MA
 hitflag = MAF
 pausetime = 16,16
@@ -239,7 +239,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = Medium
-damage    = 30
+damage    = 90
 guardflag = MA
 hitflag = MAF
 pausetime = 16,16
@@ -277,7 +277,7 @@ juggle  = 0
 poweradd= 0
 ctrl = 0
 velset = 0,0
-anim = 10621
+anim = 10625
 sprpriority = 2
 
 [State 10621, End]
@@ -350,6 +350,7 @@ channel = 0
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10230
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 12
 trigger1 = NumExplod(230) = 0
@@ -377,7 +378,7 @@ type = HitDef
 trigger1 = !Time
 attr = S, NA
 animtype  = DiagUp
-damage    = 27
+damage    = 80,0
 guardflag = MA
 hitflag = MAF
 pausetime = 12,16
@@ -447,7 +448,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = !Time
 attr = C, NA                     ;Attribute: Standing, Normal Attack
-damage = 15, 0                   ;Damage that move inflicts, guard damage
+damage = 45, 0                   ;Damage that move inflicts, guard damage
 animtype = Light                 ;Animation type: Light, Medium, Heavy, Back (def: Light)
 guardflag = LA                    ;Flags on how move is to be guarded against
 hitflag = MAF                    ;Flags of conditions that move can hit
@@ -555,7 +556,7 @@ ignorehitpause = 1
 type = HitDef
 trigger1 = !Time
 attr = C, NA                     ;Attribute: Standing, Normal Attack
-damage = 23, 0                   ;Damage that move inflicts, guard damage
+damage = 68, 0                   ;Damage that move inflicts, guard damage
 animtype = Light                 ;Animation type: Light, Medium, Heavy, Back (def: Light)
 guardflag = LA                    ;Flags on how move is to be guarded against
 hitflag = MAF                    ;Flags of conditions that move can hit
@@ -684,12 +685,22 @@ juggle = 0
 velset=0,0
 sprpriority=4
 
-[State 421, Hit]
-type = HitBy
-trigger1=1
-time=-1
-value=SCA,NP,SP,HP
-ignorehitpause=1
+
+[State 1001, Override]
+type = HitOverride
+trigger1 = 1
+attr = SCA, AA, AP
+stateno = 10422
+time = 1
+ignorehitpause = 1
+
+[State 1002, Immune]
+type = NotHitBy
+trigger1 = 1
+value = , AT
+time = 1
+ignorehitpause = 1
+
 
 [State 421, StartingVel]
 type = VelSet
@@ -706,7 +717,7 @@ Y = .5
 type = HitDef
 trigger1 = Time = 5
 attr = C, NP
-damage    = Floor(27 * Parent, FVar(39)), 5
+damage    = Floor(80 * Parent, FVar(39)), 5
 animtype  = Hard
 hitflag = MAF
 guardflag = MA
@@ -728,15 +739,6 @@ palfx.add = 245, 148, 88
 palfx.time = 20
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
-
-[State 421, HitOverride]
-type=hitoverride
-trigger1=1
-time=-1
-attr=SCA,NP,SP,HP
-stateno=422
-ignorehitpause=1
-
 
 [State 1010, burst]
 type = PlaySnd
@@ -796,10 +798,10 @@ ignorehitpause = 1
 
 
 [State 600, 2]
-type = VelSet
+type = VelMul
 trigger1 = Var(21) <= 0
 trigger1 = !Time
-Y = - 0.1
+Y = 0.7
 
 
 [State 200, Dampen]
@@ -835,7 +837,7 @@ channel = 0
 type = HitDef
 trigger1 = Time = 0
 attr = A, NA
-damage    = 20
+damage    = 50
 guardflag = HA
 hitflag = MAF
 priority = 3
@@ -849,8 +851,9 @@ ground.slidetime = 5
 ground.hittime  = 30
 guard.hittime  = 29
 ground.velocity = -2
-air.velocity = 0, -3
+air.velocity = 0, -0.5
 air.hittime = 14
+yaccel = 0.2
 getpower = 72, 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
@@ -894,7 +897,7 @@ ignorehitpause = 1
 type = VelAdd
 trigger1 = Var(21) <= 0
 trigger1 = Time > 10
-Y = 0.3
+Y = 0.2
 ignorehitpause = 1
 
 [State 1006, Land]
@@ -923,10 +926,10 @@ Trigger1 = !Time
 ignorehitpause = 1
 
 [State 600, 2]
-type = VelSet
+type = VelMul
 trigger1 = Var(21) <= 0
 trigger1 = !Time
-Y = - 0.1
+Y = 0.7
 
 [State 200, Dampen]
 Type=Varset
@@ -955,7 +958,7 @@ channel = 0
 type = HitDef
 trigger1 = Time = 0
 attr = A, NA
-damage    = 23
+damage    = 70
 guardflag = HA
 hitflag = MAF
 priority = 3
@@ -969,14 +972,14 @@ ground.slidetime = 5
 ground.hittime  = 40
 guard.hittime  = 39
 ground.velocity = -2
-air.velocity = 0,-3
+air.velocity = 0,-0.5
 air.hittime = 14
 getpower = 72, 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
-
+yaccel = 0.2
 
 [State 210, Explod]
 type = Explod
@@ -1012,7 +1015,7 @@ ignorehitpause = 1
 type = VelAdd
 trigger1 = Var(21) <= 0
 trigger1 = Time > 10
-Y = 0.3
+Y = 0.2
 ignorehitpause = 1
 
 [State 1006, Land]
@@ -1033,16 +1036,26 @@ ctrl = 0
 anim = 10620
 sprpriority = 1
 
+[State -3, Command]
+type = ChangeAnim
+triggerall = !Time
+trigger1 = Command = "holdup" && Command != "holddown"
+trigger2 = Command != "holdup" && Command = "holddown"
+value = IfElse(Command = "holdup" && Command != "holddown", 10622, 10621)
+ignorehitpause = 1
+
+
 [State -3, NoEffects]
 Type = RemoveExplod
 Trigger1 = !Time
 ignorehitpause = 1
 
 [State 600, 2]
-type = VelSet
+type = VelMul
 trigger1 = Var(21) <= 0
 trigger1 = !Time
-Y = -0.1
+X = 0.5
+Y = 0.5
 
 [State 200, Dampen]
 Type=Varset
@@ -1071,7 +1084,7 @@ channel = 0
 type = HitDef
 trigger1 = Time = 0
 attr = A, NA
-damage    = 27
+damage    = 80
 guardflag = HA
 hitflag = MAF
 priority = 3
@@ -1085,18 +1098,18 @@ ground.slidetime = 5
 ground.hittime  = 53
 guard.hittime  = 51
 ground.velocity = 0, -2
-air.velocity = 0, -3
+air.velocity = 0, -0.5
 air.hittime = 14
 getpower = 72, 36
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 8
-
+yaccel = 0.2
 
 [State 210, Explod]
 type = Helper
-triggerall = Anim = 10620
+triggerall = Anim = [10620, 10622]
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 16
 stateno = 10621
@@ -1147,7 +1160,7 @@ juggle  = 0
 poweradd= 0
 ctrl = 0
 velset = 0,0
-anim = 10621
+anim = 10625
 sprpriority = 2
 
 [State 10621, End]
@@ -1158,14 +1171,33 @@ flag = noshadow
 
 [State 10621, End]
 type = PosSet
-trigger1 = 1
+trigger1 = Root, Anim = 10620
 X = Root, Pos X  + 12*Facing
 Y = Root, Pos Y  - 16
+
+
+[State 10621, End]
+type = PosSet
+trigger1 = Root, Anim = 10621
+X = Root, Pos X  + 11*Facing
+Y = Root, Pos Y  - 4
+
+
+[State 10621, End]
+type = PosSet
+trigger1 = Root, Anim = 10622
+X = Root, Pos X  + 12*Facing
+Y = Root, Pos Y  - 26
+
+[State 10621, End]
+type = AngleSet
+trigger1 = !Time
+value = IfElse(Root, Anim = 10620, -90, IfElse(Root, Anim = 10621, -135, -45))
+
 
 [State 10621, End]
 type = AngleDraw
 trigger1 = 1
-value = -90
 
 [State 10621, End]
 type = DestroySelf
@@ -1227,6 +1259,7 @@ channel = 0
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10630
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 12
 trigger1 = NumExplod(630) = 0
@@ -1250,6 +1283,7 @@ ignorehitpause = 1
 
 [State 210, Explod]
 type = Explod
+triggerall = Anim = 10630
 trigger1 = AnimElemNo(0) > 1
 trigger1 = AnimElemTime(3) < 12
 trigger1 = NumExplod(631) = 0

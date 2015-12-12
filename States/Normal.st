@@ -489,11 +489,21 @@ juggle = 8
 velset=0,0
 sprpriority=4
 
-[State 421, Hit]
-type = HitBy
-trigger1=1
-time=-1
-value=SCA,NP,SP,HP
+[State 1001, Override]
+type = HitOverride
+trigger1 = 1
+attr = SCA, AA, AP
+stateno = 422
+time = 1
+ignorehitpause = 1
+
+[State 1002, Immune]
+type = NotHitBy
+trigger1 = 1
+value = , AT
+time = 1
+ignorehitpause = 1
+
 ignorehitpause=1
 
 [State 421, StartingVel]
@@ -535,15 +545,6 @@ palfx.add = 245, 148, 88
 palfx.time = 20
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
-
-[State 421, HitOverride]
-type=hitoverride
-trigger1=1
-time=-1
-attr=SCA,NP,SP,HP
-stateno=422
-ignorehitpause=1
-
 
 [State 1010, burst]
 type = PlaySnd
