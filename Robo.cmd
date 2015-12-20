@@ -264,6 +264,78 @@ command = ~D, DB, B, D, DB, B, ~c
 time = 30
 
 
+[Command]
+name = "dp2"
+command = ~F, D, DF, a+b
+time = 30
+
+[Command]
+name = "dp2"
+command = ~F, D, DF, a+c
+time = 30
+
+[Command]
+name = "dp2"
+command = ~F, D, DF, ~a+b
+time = 30
+
+[Command]
+name = "dp2"
+command = ~F, D, DF, ~a+c
+time = 30
+
+[Command]
+name = "dp2"
+command = ~F, D, DF, ~b+c
+time = 30
+
+[Command]
+name = "dp2"
+command = F, D, DF, b+c
+time = 30
+
+[Command]
+name = "dp2"
+command = F, D, DF, ~b+c
+time = 30
+
+
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, a+b
+time = 30
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, a+c
+time = 30
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, ~a+b
+time = 30
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, ~a+c
+time = 30
+
+[Command]
+name = "qcf2"
+command = ~D, DF, F, ~b+c
+time = 30
+
+[Command]
+name = "qcf2"
+command = D, DF, F, b+c
+time = 30
+
+[Command]
+name = "qcf2"
+command = D, DF, F, ~b+c
+time = 30
+
 ;-| Special Motions |------------------------------------------------------
 
 [Command]
@@ -383,35 +455,6 @@ name = "qcfc"
 command = ~D, DF, F, c
 time = 15
 
-[Command]
-name = "qcf2"
-command = ~D, DF, F, a+b
-time = 15
-
-[Command]
-name = "qcf2"
-command = ~D, DF, F, a+c
-time = 15
-
-[Command]
-name = "qcf"
-command = ~D, DF, F, b+c
-time = 15
-
-[Command]
-name = "qcf2"
-command = ~D, DF, F, ~a+b
-time = 15
-
-[Command]
-name = "qcf2"
-command = ~D, DF, F, ~a+c
-time = 15
-
-[Command]
-name = "qcf"
-command = ~D, DF, F, ~b+c
-time = 15
 ;-| Double Tap |-----------------------------------------------------------
 
 [Command]
@@ -712,23 +755,6 @@ time = 1
 
 ;===========================================================================
 
-;Air Dash
-[State -1, Air Dash]
-type = ChangeState
-value = 10100
-triggerall = PalNo = 12 
-triggerall = statetype = A
-triggerall = ctrl || StateNo = [10600, 10699]
-triggerall = !Var(25) || Var(21) > 0
-trigger1 = command = "dashFF"
-trigger2 = command = "dashDD"
-trigger3 = command = "dashUU"
-trigger4 = command = "dashBB"
-trigger5 = command = "dashDBDB"
-trigger6 = command = "dashDFDF"
-trigger7 = command = "dashUFUF"
-trigger8 = command = "dashUBUB"
-
 ;---------------------------------------------------------------------------
 ;Run Fwd
 [State -1, Run Fwd]
@@ -751,17 +777,32 @@ trigger1 = ctrl
 ;===========================================================================
 ; Super Moves
 ;===========================================================================
+
+[State -1, Angled Proton Cannon]
+type = ChangeState
+value = 12200
+triggerall = PalNo = 12 
+triggerall = Command = "dp2"
+triggerall = Power >= 1000
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = (StateNo = [10200, 10299]) 
+trigger3 = (StateNo = [10400, 10499]) 
+trigger4 = (StateNo = [11000, 11999]) 
+ignorehitpause = 1
+
 [State -1, Proton Cannon]
 type = ChangeState
 value = 12100
 triggerall = PalNo = 12 
 triggerall = Command = "qcf2"
 triggerall = Power >= 1000
-trigger1 = statetype != A
+triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = (StateNo = [10200, 10299]) 
 trigger3 = (StateNo = [10400, 10499]) 
 trigger4 = (StateNo = [11000, 11999]) 
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 [State -1, Prometheus Cannon]
@@ -930,6 +971,24 @@ ignorehitpause = 1
 ;===========================================================================
 ; Electrocute Activation
 ;===========================================================================
+
+
+;Air Dash
+[State -1, Air Dash]
+type = ChangeState
+value = 10100
+triggerall = PalNo = 12 
+triggerall = statetype = A
+triggerall = ctrl || StateNo = [10600, 10699]
+triggerall = !Var(25) || Var(21) > 0
+trigger1 = command = "dashFF"
+trigger2 = command = "dashDD"
+trigger3 = command = "dashUU"
+trigger4 = command = "dashBB"
+trigger5 = command = "dashDBDB"
+trigger6 = command = "dashDFDF"
+trigger7 = command = "dashUFUF"
+trigger8 = command = "dashUBUB"
 
 [State -1, Electrocute]
 type = ChangeState
@@ -1253,3 +1312,4 @@ trigger2 = Command = "holdup"
 trigger2 = StateNo = 10230
 trigger2 = MoveHit
 ignorehitpause = 1
+
