@@ -336,6 +336,45 @@ name = "qcf2"
 command = D, DF, F, ~b+c
 time = 30
 
+
+; --------
+
+
+[Command]
+name = "qcb2"
+command = ~D, DB, B, a+b
+time = 30
+
+[Command]
+name = "qcb2"
+command = ~D, DB, B, a+c
+time = 30
+
+[Command]
+name = "qcb2"
+command = ~D, DB, B, ~a+b
+time = 30
+
+[Command]
+name = "qcb2"
+command = ~D, DB, B, ~a+c
+time = 30
+
+[Command]
+name = "qcb2"
+command = ~D, DB, B, ~b+c
+time = 30
+
+[Command]
+name = "qcb2"
+command = D, DB, B, b+c
+time = 30
+
+[Command]
+name = "qcb2"
+command = D, DB, B, ~b+c
+time = 30
+
 ;-| Special Motions |------------------------------------------------------
 
 [Command]
@@ -777,6 +816,19 @@ trigger1 = ctrl
 ;===========================================================================
 ; Super Moves
 ;===========================================================================
+
+[State -1, Iron Avenger]
+type = ChangeState
+value = 12300
+triggerall = PalNo = 12 
+triggerall = Command = "qcb2"
+triggerall = Power >= 3000
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = (StateNo = [10200, 10299]) 
+trigger3 = (StateNo = [10400, 10499]) 
+trigger4 = (StateNo = [11000, 11999]) 
+ignorehitpause = 1
 
 [State -1, Angled Proton Cannon]
 type = ChangeState

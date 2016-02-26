@@ -679,12 +679,11 @@ ctrl = 1
 type=A
 physics=N
 movetype=A
-anim=7050
+anim=10421
 ctrl=0
 juggle = 0
 velset=0,0
 sprpriority=4
-
 
 [State 1001, Override]
 type = HitOverride
@@ -701,17 +700,38 @@ value = , AT
 time = 1
 ignorehitpause = 1
 
-
 [State 421, StartingVel]
 type = VelSet
 trigger1 = !Time
-X = 2
 Y = -3
+
+[State 421, StartingVel]
+type = VelAdd
+trigger1 = Vel Y >= -1
+trigger1 = Vel X < 6
+X = 0.3
 
 [State 421, Gravity]
 type = VelAdd
-trigger1 = Pos Y < 0
-Y = .5
+trigger1 = Vel Y < 3
+Y = .3
+
+[State 421, Gravity]
+type = AngleSet
+trigger1 = Vel X = 0
+value = 90
+ignorehitpause = 1
+
+[State 421, Gravity]
+type = AngleSet
+trigger1 = Vel X != 0
+value = 0 + ATan(-Vel Y / Vel X) * 180.0/Pi
+ignorehitpause = 1
+
+[State 421, Gravity]
+type = AngleDraw
+trigger1 = 1
+ignorehitpause = 1
 
 [State 421, Hit]
 type = HitDef
@@ -1179,8 +1199,8 @@ Y = Root, Pos Y  - 16
 [State 10621, End]
 type = PosSet
 trigger1 = Root, Anim = 10621
-X = Root, Pos X  + 11*Facing
-Y = Root, Pos Y  - 4
+X = Root, Pos X  + 12*Facing
+Y = Root, Pos Y  
 
 
 [State 10621, End]

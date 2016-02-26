@@ -609,18 +609,21 @@ y = -Const(velocity.airjump.y)
 [State 7950, Hold]
 type = VelSet
 triggerall = Var(22) > 0 || PalNo = 12
+triggerall = PrevStateNo != [10000, 10999]
 trigger1 = Command = "holdup"
 y = -3.6
 
 [State 7950, Hold]
 type = VelSet
 triggerall = Var(22) > 0 || PalNo = 12
+triggerall = PrevStateNo != [10000, 10999]
 trigger1 = Command = "holddown"
 y = 3.6
 
 [State 7950, Hold]
 type = VelSet
 triggerall = Var(22) > 0 || PalNo = 12
+triggerall = PrevStateNo != [10000, 10999]
 trigger1 = Command != "holdup"
 trigger1 = Command != "holddown"
 y = 0
@@ -644,6 +647,7 @@ Y = IfElse(Abs(Vel Y) < .6, -Vel Y, IfElse(Vel Y > 0, -.6, .6))
 
 [State 7950, Hold]
 type = VelAdd
+triggerall = PrevStateNo != [10000, 10999]
 triggerall = var(21) > 20 || PalNo = 12
 trigger1 = Vel X < Const(velocity.airjump.fwd.x) * 1.5
 trigger1 = Anim = 42 && Command = "holdfwd"
@@ -651,6 +655,7 @@ x = .7
 
 [State 7950, Hold]
 type = VelAdd
+triggerall = PrevStateNo != [10000, 10999]
 triggerall = var(21) > 20 || PalNo = 12
 trigger1 = Vel X > Const(velocity.airjump.back.x) * 1.5
 trigger1 = Anim = 43 && Command = "holdback"

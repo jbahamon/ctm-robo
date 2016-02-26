@@ -617,7 +617,7 @@ physics = N
 [State 600, 2]
 type = ChangeState
 trigger1 = !AnimTime
-value = 7950
+value = 50
 ctrl = 1
 ignorehitpause = 1
 
@@ -796,7 +796,7 @@ ignorehitpause = 1
 type = ChangeState
 trigger1 = Var(0) > 15
 trigger2 = Time > 25 && Var(22) > 0
-value = 7950
+value = 50
 ctrl = 1
 
 
@@ -924,5 +924,5 @@ value = 1
 type = ChangeState
 trigger1 = Var(0) > 15
 trigger2 = Var(22) & Time > 35
-value = 7950
+value = 50
 ctrl = 1
