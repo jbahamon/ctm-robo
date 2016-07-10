@@ -63,7 +63,7 @@ air.hittime = 12                 ;Time before opponent regains control in air
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 12
-getpower = IfElse(Var(22) > 0, 0, 72), IfElse(Var(22) > 0, 0, 36)
+getpower = 72,36
 givepower = 36, 36
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
@@ -165,7 +165,7 @@ ground.velocity = -2
 air.velocity = -2,-.5
 ground.cornerpush.veloff = 0;
 air.cornerpush.veloff = 0;
-getpower = IfElse(Var(22) > 0, 0, ifelse(p2movetype = H, 44, 101)), IfElse(Var(22) > 0, 0, 32)
+getpower = ifelse(p2movetype = H, 44, 101), 32
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
@@ -255,7 +255,7 @@ ground.velocity = -2
 air.velocity = -2,-.5
 ground.cornerpush.veloff = 0;
 air.cornerpush.veloff = 0;
-getpower = IfElse(Var(22) > 0, 0, ifelse(p2movetype = H, 44, 101)), IfElse(Var(22) > 0, 0, 32)
+getpower = ifelse(p2movetype = H, 44, 101), 32
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
@@ -397,7 +397,7 @@ fall.recover = 0
 forcenofall = 1
 ground.cornerpush.veloff = 0;
 air.cornerpush.veloff = 0;
-getpower =ifelse(p2movetype = H, 44, 101), 32
+getpower = ifelse(p2movetype = H, 44, 101), 32
 givepower = 36, 36
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
@@ -583,7 +583,7 @@ air.hittime = 12                 ;Time before opponent regains control in air
 palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 12
-getpower = IfElse(Var(22) > 0, 0, 72), IfElse(Var(22) > 0, 0, 36)
+getpower = 72,36
 givepower = 36, 36
 ground.cornerpush.veloff = 0
 air.cornerpush.veloff = 0
@@ -631,7 +631,7 @@ type    = C
 movetype= A
 physics = C
 juggle  = 0
-poweradd= IfElse(Var(22) > 0, 0, 18)
+poweradd= 18
 velset = 0,0
 ctrl = 0
 anim = 10420
@@ -751,7 +751,7 @@ ground.hittime  = 28
 ground.velocity = -2,-2.3
 air.velocity = -1.2,-3
 guard.hittime  = 24
-getpower = IfElse(Var(22) > 0, 0, ifelse(p2movetype = H, 72, 216)), IfElse(Var(22) > 0, 0, 36)
+getpower = ifelse(p2movetype = H, 72, 216), 0
 givepower = 36, 36
 palfx.invertall = 1
 palfx.color = 0
@@ -918,6 +918,17 @@ type = VelAdd
 trigger1 = Var(21) <= 0
 trigger1 = Time > 10
 Y = 0.2
+ignorehitpause = 1
+
+
+[State 1006, Gravity]
+type = VelSet
+trigger1 = MoveHit
+trigger1 = NumTarget
+X = Target, Vel X
+Y = Target, Vel Y
+persistent = 0
+
 ignorehitpause = 1
 
 [State 1006, Land]
@@ -1143,12 +1154,6 @@ ownpal = 0
 ignorehitpause = 1
 persistent = 0
 
-[State 600, 2]
-type = ChangeState
-trigger1 = !AnimTime
-value = 50
-ctrl = 1
-ignorehitpause = 1
 
 [State 1006, Gravity]
 type = VelAdd

@@ -718,7 +718,7 @@ stateno = 12203
 ID = 12102
 name = "Prometheus Beam Head"
 postype = p1
-pos = 350*0.866,-350*0.5
+pos = Floor(350*0.866),-Floor(350*0.5)
 ownpal = 1
 persistent = 0
 
@@ -1233,6 +1233,23 @@ ctrl = 0
 sprpriority = -1
 velset = 0,0
 
+[State 3055, Hit]
+type = VarSet
+trigger1 = !Time
+v = 2
+value = 0
+ignorehitpause = 1
+
+[State 3055, Hit]
+type = VarAdd
+triggerall = Var(2) < 15
+trigger1 = Command = "a"
+trigger2 = Command = "b"
+trigger3 = Command = "c"
+v = 2
+value = 1
+ignorehitpause = 1
+
 [State 7950,2]
 type = Explod
 trigger1 = Anim = 12303
@@ -1298,8 +1315,14 @@ type = TargetLifeAdd
 triggerall = NumTarget
 trigger1 = AnimElemTime(5) = 10
 trigger2 = AnimElemTime(5) = 45
-trigger3 = AnimElemTime(5) = 60
 value = -90
+kill = 0
+
+[State 1031, Damage]
+type = TargetLifeAdd
+triggerall = NumTarget
+trigger1 = AnimElemTime(5) = 60
+value = -90 - 2*Var(2)
 
 [State 1031, Throw Enemy]
 type = ScreenBound
