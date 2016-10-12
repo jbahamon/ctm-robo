@@ -45,7 +45,7 @@ priority = 4, Hit                ;Attack priority: 0 (least) to 7 (most), 4 defa
 ;Hit/Miss/Dodge type (Def: Hit)
 pausetime = 12, 12                 ;Time attacker pauses, time opponent shakes
 sparkno = S7000                      ;Spark anim no (Def: set above)
-sparkxy = -10, -30               ;X-offset for the "hit spark" rel. to p2,
+sparkxy = -10, -23               ;X-offset for the "hit spark" rel. to p2,
 ;Y-offset for the spark rel. to p1
 hitsound = S0,0                  ;Sound to play on hit
 guardsound = 6, 0                ;Sound to play on guard
@@ -71,8 +71,14 @@ air.cornerpush.veloff = 0
 [State 200, 2]
 type = PlaySnd
 trigger1 = AnimElem = 2
-value = S3, 2
+value = S9,IfElse(Random % 2, 0, 2)
 channel = 0
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S3, 2
+channel = 1
 
 [State 200, 3]
 type = ChangeState
@@ -117,8 +123,14 @@ ignorehitpause = 1
 [State 210, 1]
 type = PlaySnd
 trigger1 = AnimElem = 2
-value = S3, 0
+value = S9, IfElse(Random % 2, 1, 3)
 channel = 0
+
+[State 210, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S3, 0
+channel = 1
 
 [State 210, Explod]
 type = Explod
@@ -171,6 +183,12 @@ palfx.add = 200, 200, 200
 palfx.mul = 256, 256, 256
 palfx.time = 16
 
+
+[State -3, NoEffects]
+Type = RemoveExplod
+Trigger1 = !AnimTime
+ignorehitpause = 1
+
 [State 210, 5]
 type = ChangeState
 trigger1 = !AnimTime
@@ -215,8 +233,14 @@ ignorehitpause = 1
 [State 210, 1]
 type = PlaySnd
 trigger1 = AnimElem = 2
-value = S3, 0
+value = S9,IfElse(Random % 2, 5, 6)
 channel = 0
+
+[State 210, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S3, 1
+channel = 1
 
 [State 210, Explod]
 type = Helper
@@ -335,18 +359,24 @@ Trigger1 = 1
 value = fvar(39)
 ignorehitpause = 1
 
-
 [State -3, Dampener]
 Type = VelAdd
 Trigger1 = AnimElem = 2
 X = 4
 ignorehitpause = 1
 
+
 [State 210, 1]
 type = PlaySnd
 trigger1 = AnimElem = 2
-value = S3, 0
+value = S9,IfElse(Random % 2, 7, 8)
 channel = 0
+
+[State 210, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S3, 1
+channel = 1
 
 [State 210, Explod]
 type = Explod
@@ -371,7 +401,6 @@ shadow = 0,0,0
 ownpal = 0
 removeongethit = 1
 ignorehitpause = 1
-
 
 [State 210, Hit1]
 type = HitDef
@@ -504,12 +533,17 @@ ownpal = 0
 removeongethit = 1
 ignorehitpause = 1
 
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S9, IfElse(Random % 2, 0, 2)
+channel = 0
 
 [State 200, 2]
 type = PlaySnd
 trigger1 = AnimElem = 2
 value = S3, 2
-channel = 0
+channel = 1
 
 [State 200, 3]
 type = ChangeState
@@ -616,8 +650,14 @@ ignorehitpause = 1
 [State 200, 2]
 type = PlaySnd
 trigger1 = AnimElem = 2
-value = S3, 2
+value = S9,IfElse(Random % 2, 1, 3)
 channel = 0
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S3, 0
+channel = 1
 
 [State 200, 3]
 type = ChangeState
@@ -654,11 +694,17 @@ facing = 1
 keyctrl = 0
 ownpal = 1
 
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S9,IfElse(Random % 2, 5, 6)
+channel = 0
+
 [State 420, 1]
 type = PlaySnd
 trigger1 = AnimElem = 3
-value = S2,0
-channel = 0
+value = S3,1
+channel = 1
 
 [State 420, VelAdd]
 type = VelAdd
@@ -684,6 +730,12 @@ ctrl=0
 juggle = 0
 velset=0,0
 sprpriority=4
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = !Time
+value = S2,0
+channel = 0
 
 [State 1001, Override]
 type = HitOverride
@@ -847,11 +899,18 @@ type = VelMul
 trigger1 = !Time
 X = 0.75
 
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S9,IfElse(Random % 2, 0, 2)
+channel = 0
+
 [State 600, 2]
 type = PlaySnd
-trigger1 = Time = 2
+trigger1 = AnimElem = 2
 value = S3, 2
-channel = 0
+channel = 1
 
 [State 600, 2]
 type = HitDef
@@ -925,7 +984,7 @@ ignorehitpause = 1
 type = VelSet
 trigger1 = MoveHit
 trigger1 = NumTarget
-X = Target, Vel X
+X = Target, Vel X * (Facing * Target, Facing)
 Y = Target, Vel Y
 persistent = 0
 
@@ -979,11 +1038,17 @@ Trigger1 = 1
 value = fvar(39)
 ignorehitpause = 1
 
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S9,IfElse(Random % 2, 1, 3)
+channel = 0
+
 [State 600, 2]
 type = PlaySnd
-trigger1 = Time = 2
-value = S3, 2
-channel = 0
+trigger1 = AnimElem = 2
+value = S3, 0
+channel = 1
 
 [State 600, 2]
 type = HitDef
@@ -1105,11 +1170,17 @@ Trigger1 = 1
 value = fvar(39)
 ignorehitpause = 1
 
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S9,IfElse(Random % 2, 5, 6)
+channel = 0
+
 [State 600, 2]
 type = PlaySnd
-trigger1 = Time = 2
-value = S3, 2
-channel = 0
+trigger1 = AnimElem = 2
+value = S3, 1
+channel = 1
 
 [State 600, 2]
 type = HitDef
@@ -1263,23 +1334,24 @@ type = VelSet
 trigger1 = !Time
 Y = -0.1
 
-[State 600, 2]
-type = PlaySnd
-trigger1 = Time = 2
-value = S3, 2
-channel = 0
-
 [State -3, Dampener]
 Type = AttackMulSet
 Trigger1 = 1
 value = fvar(39)
 ignorehitpause = 1
 
+
+[State 200, 2]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S9,IfElse(Random % 2, 7, 8)
+channel = 0
+
 [State 210, 1]
 type = PlaySnd
 trigger1 = AnimElem = 2
-value = S3, 0
-channel = 0
+value = S3, 1
+channel = 1
 
 
 [State 210, Explod]

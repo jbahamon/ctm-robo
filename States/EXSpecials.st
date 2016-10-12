@@ -57,6 +57,11 @@ type = ChangeAnim
 trigger1 = !Time
 value = 11000 + var(0)
 
+[State 420, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S10,IfElse(Random % 3, 3, 0)
+channel = 0
 
 [State 13801, Masa & Mune]
 type = helper
@@ -350,6 +355,13 @@ sprpriority = 0
 poweradd = 0
 velset = 0,0
 
+[State 420, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S10,2
+channel = 0
+
+
 [State 1000, Strength]
 type = PlayerPush
 trigger1 = 1
@@ -401,6 +413,13 @@ anim = 11105
 sprpriority = 0
 poweradd = 0
 velset = 0,0
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = !Time
+value = S10,IfElse(Random % 3, 6, 1)
+channel = 0
+
 
 [State 1000, Strength]
 type = PlayerPush
@@ -949,6 +968,12 @@ type = ChangeAnim
 trigger1 = !Time
 value = 11200 + var(0)
 
+[State 420, 1]
+type = PlaySnd
+trigger1 = !Time
+value = S10,5
+channel = 0
+
 [State 13801, Masa & Mune]
 type = helper
 triggerall = !NumHelper(11200)
@@ -989,6 +1014,13 @@ anim=7050
 ctrl=0
 juggle = 0
 sprpriority=4
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = !Time
+trigger1 = PrevStateNo != 11210
+value = S2,0
+channel = 0
 
 [State 421, Hit]
 type = VarSet

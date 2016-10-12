@@ -111,6 +111,12 @@ anim = 191
 velset = 0,0
 
 [State 193, 2] ;Assert this until you want "round 1, fight" to begin
+type = ChangeState
+trigger1 = !Time
+trigger1 = PalNo = 12
+value = 192
+
+[State 193, 2] ;Assert this until you want "round 1, fight" to begin
 type = PlaySnd
 trigger1 = !Time
 value = S7,1
@@ -124,6 +130,72 @@ flag = Intro
 [State 192, 3] ;Change to stand state when done
 type = ChangeState
 trigger1 = AnimTime = 0
+value = 0
+
+; Iron Man Intro
+[Statedef 192]
+type = S
+ctrl = 0
+anim = 41
+velset = 0,0
+
+[State 7950,2]
+type = Explod
+trigger1 = !NumExplod(7950)
+anim = 7043
+ID = 7950
+pos = 0, -8
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = -1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 1
+
+[State 193, 2]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+
+[State 193, 2] ;Assert this until you want "round 1, fight" to begin
+type = PlaySnd
+trigger1 = !Time
+value = S12, Random % 3
+channel = 0
+
+
+[State 193, 2] ;Assert this until you want "round 1, fight" to begin
+type = PosSet
+trigger1 = !Time
+Y = - 40
+
+[State 193, 2] ;Assert this until you want "round 1, fight" to begin
+type = PosAdd
+trigger1 = Pos Y < 0
+Y = 0.6
+
+[State 192, 3] ;Change to stand state when done
+type = PosSet
+trigger1 = Pos Y >= 0
+Y = 0
+
+[State 193, 2] ;Assert this until you want "round 1, fight" to begin
+type = AssertSpecial
+trigger1 = 1
+flag = Intro
+
+[State 192, 3] ;Change to stand state when done
+type = ChangeState
+trigger1 = Pos Y = 0
 value = 0
 
 ;---------------------------------------------------------------------------

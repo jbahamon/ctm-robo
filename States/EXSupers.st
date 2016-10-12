@@ -11,6 +11,12 @@ poweradd = 0
 facep2 = 1
 velset = 0,0
 
+[State 420, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S11,IfElse(Random % 2, 0, 4)
+channel = 0
+
 [State 220, 2]
 type = HitDef
 trigger1 = Animelem = 2
@@ -81,6 +87,14 @@ trigger1 = Anim = 12100 && AnimElem = 5
 time = 80
 freq = 120
 ampl = 2
+persistent = 0
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = Anim = 12100 && AnimElem = 5
+trigger1 = AnimElem = 5
+value = S11,3
+channel = 0
 persistent = 0
 
 [State 2202, Stop]
@@ -409,6 +423,12 @@ poweradd = 0
 facep2 = 1
 velset = 0,0
 
+[State 420, 1]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = S11,IfElse(Random % 2, 0, 4)
+channel = 0
+
 [State 220, 2]
 type = HitDef
 trigger1 = Animelem = 2
@@ -427,8 +447,8 @@ ground.slidetime = 14
 ground.hittime  = 24
 air.hittime  = 24
 yaccel = 0.1
-ground.velocity = 0, -1
-air.velocity = 0,-1
+ground.velocity = 0, -3
+air.velocity = 0,-3
 getpower = 0,0
 givepower = 36, 36
 palfx.add = 200, 200, 200
@@ -479,6 +499,15 @@ trigger1 = Anim = 12100 && AnimElem = 5
 time = 80
 freq = 120
 ampl = 2
+persistent = 0
+
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = Anim = 12100 && AnimElem = 5
+trigger1 = AnimElem = 5
+value = S11,3
+channel = 0
 persistent = 0
 
 [State 2202, Stop]
@@ -864,7 +893,6 @@ shadow = 0,0,0
 ownpal = 1
 removeongethit = 1
 
-
 [State 2200, Super Pause FX]
 type = helper
 trigger1 = AnimElem = 5
@@ -883,10 +911,23 @@ trigger1 = AnimElem = 5
 time = 45
 movetime = 0
 anim = -1
-sound = S1,1;S a7,2
+sound = -1
 p2defmul = 1
 poweradd = -3000
 darken = 0
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = S11,1
+channel = 0
+
+
+[State 2200, Invincibility]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = S0,2
+channel = 1
 
 [State 2202, Shake]
 type = VelSet
@@ -950,6 +991,29 @@ ctrl = 0
 sprpriority = 1
 velset = 0,0
 
+[State 420, 1]
+type = PlaySnd
+trigger1 = !Time
+value = S11,2
+channel = 0
+
+[State 3055, Hit]
+type = VarSet
+trigger1 = !Time
+v = 2
+value = 0
+ignorehitpause = 1
+
+[State 3055, Hit]
+type = VarAdd
+triggerall = Var(2) < 30
+trigger1 = Command = "a"
+trigger2 = Command = "b"
+trigger3 = Command = "c"
+v = 2
+value = 1
+ignorehitpause = 1
+
 [State 1031, Damage]
 type = TargetLifeAdd
 trigger1 = NumTarget
@@ -990,9 +1054,17 @@ type = PlayerPush
 trigger1 = 1
 value = 0
 
+
+[State 1031, Bind]
+type = PlaySnd
+trigger1 = (Time % 30) = 0
+value = S2,1
+loop = 0
+channel = 1
+
 [State 1031, Bind]
 type = Helper
-trigger1 = Time % 2 = 0
+trigger1 = Time % 3 = 0
 name = "Rock"
 ID = 12310
 stateno = 12310
@@ -1063,6 +1135,16 @@ ctrl = 0
 sprpriority = 1
 velset = 0,0
 
+
+[State 3055, Hit]
+type = VarAdd
+triggerall = Var(2) < 30
+trigger1 = Command = "a"
+trigger2 = Command = "b"
+trigger3 = Command = "c"
+v = 2
+value = 1
+ignorehitpause = 1
 [State 1031, Damage]
 type = TargetLifeAdd
 trigger1 = NumTarget
@@ -1144,6 +1226,19 @@ trigger1 = Time > (Var(0)/FVar(0) - 3)
 V = 1
 value = 1
 persistent =  0
+
+[State 420, 1]
+type = PlaySnd
+trigger1 = Var(1) = 1
+value = S11,5
+channel = 0
+persistent = 0
+
+[State 1031, Bind]
+type = PlaySnd
+trigger1 = Var(1) = 1
+value = 3,1
+channel = 1
 
 [State 1031, Bind]
 type = VarAdd
@@ -1233,22 +1328,28 @@ ctrl = 0
 sprpriority = -1
 velset = 0,0
 
-[State 3055, Hit]
-type = VarSet
-trigger1 = !Time
-v = 2
-value = 0
-ignorehitpause = 1
+[State 1031, Time]
+type = TargetState
+trigger1 = NumTarget
+trigger1 = AnimElem = 15
+value = 12352
+persistent = 0
 
 [State 3055, Hit]
 type = VarAdd
-triggerall = Var(2) < 15
+triggerall = Var(2) < 30
 trigger1 = Command = "a"
 trigger2 = Command = "b"
 trigger3 = Command = "c"
 v = 2
 value = 1
 ignorehitpause = 1
+
+[State 1031, Bind]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = 6,2
+channel = 1
 
 [State 7950,2]
 type = Explod
@@ -1322,7 +1423,8 @@ kill = 0
 type = TargetLifeAdd
 triggerall = NumTarget
 trigger1 = AnimElemTime(5) = 60
-value = -90 - 2*Var(2)
+value = -90 - Var(2)
+persistent = 0
 
 [State 1031, Throw Enemy]
 type = ScreenBound
@@ -1338,7 +1440,7 @@ value = 0
 [State 1031, Time]
 type = TargetState
 trigger1 = NumTarget
-value = 12353
+value = 12352
 persistent = 0
 
 [State 1031, Bind]
@@ -1384,7 +1486,6 @@ ctrl=0
 juggle = 8
 velset=0,0
 sprpriority=4
-
 
 [State 421, StartingVel]
 type = EnvShake
@@ -1495,6 +1596,36 @@ ignorehitpause = 1
 type = SelfState
 trigger1 = !gethitvar(isbound)
 value = 5050
+
+; Iron Avenger - GetHit
+[Statedef 12352]
+type = A
+movetype = H
+physics = N
+sprpriority = 1
+
+[State 1031, Throw Enemy]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 1031, Throw Enemy]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+
+[State 2023, Anim]
+type = ChangeAnim2
+trigger1 = !Time 
+value = 12350
+ignorehitpause = 1
+
+[State 802, Exit]
+type = SelfState
+trigger1 = !gethitvar(isbound)
+value = 5050
+
 
 ; Iron Avenger - GetHit
 [Statedef 12353]
