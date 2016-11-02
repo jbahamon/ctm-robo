@@ -82,6 +82,14 @@ ctrl = 0
 anim = 181
 velset = 0,0
 
+
+[State 195, 1]
+type = PlaySnd
+trigger1 = PalNo = 12
+trigger1 = !Time
+value = S12, 6 + (Random % 2)
+
+
 [State 181, 1]
 type = NotHitBy
 trigger1 = 1
@@ -169,7 +177,7 @@ movecamera = 0,0
 [State 193, 2] ;Assert this until you want "round 1, fight" to begin
 type = PlaySnd
 trigger1 = !Time
-value = S12, Random % 3
+value = S12, Random % 5
 channel = 0
 
 
@@ -204,7 +212,7 @@ value = 0
 [Statedef 195]
 type = S
 ctrl = 0
-anim = 195
+anim = IfElse(PalNo != 12, 195, 196)
 velset = 0,0
 movetype = I
 physics = S
@@ -212,9 +220,17 @@ sprpriority = 1
 
 [State 195, 1]
 type = PlaySnd
+trigger1 = PalNo != 12
 trigger1 = Time % 15 = 0
 trigger1 = Time < 60
 value = S0,1
+
+
+[State 195, 1]
+type = PlaySnd
+trigger1 = PalNo = 12
+trigger1 = !Time
+value = S12, 6 + (Random % 2)
 
 [State 195, 2]
 type = ChangeState

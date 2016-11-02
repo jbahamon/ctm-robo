@@ -1033,7 +1033,7 @@ ignorehitpause=1
 type = VelSet
 trigger1 = !Time
 trigger1 = PrevStateNo != 11210
-X = 2.5 + 1*IfElse(Root, NumHelper(11200) > 1, 1, -1)
+X = 2.2 + 1.1*IfElse(Root, NumHelper(11200) > 1, 1, -1)
 Y = -1
 
 [State 421, Gravity]
