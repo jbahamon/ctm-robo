@@ -38,6 +38,75 @@ color = floor(51.2 * (time - 40))
 type = DestroySelf
 trigger1 = Time >= 45
 
+
+;Pulsing Portrait
+[Statedef 7001]
+type = A
+movetype = I
+physics = N
+velset = 0,0
+anim = 13000
+sprpriority = 999
+
+[State 8520, Pos]
+type = Turn
+trigger1 = facing != Root, Facing
+
+[State 8520, Pos]
+type = PosAdd
+trigger1 = 1
+X = - ScreenPos X
+Y = - ScreenPos Y
+
+[State 8520, Scale]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 8520, Scale]
+type = VarSet
+trigger1 = !Time
+var(0) = 40
+
+[State 8520, Trans]
+type = Trans
+trigger1 = Time < 8
+trans = addalpha
+alpha = Time * 32, 256 - Time * 16
+
+
+[State 8520, Trans]
+type = Offset
+trigger1 = Time < 8
+X = 7 * (8 - Time)
+
+[State 8520, Trans]
+type = Trans
+trigger1 = Time = [8, Var(0)]
+trans = addalpha
+alpha = 256, 128
+
+[State 8520, Scale]
+type = AngleDraw
+trigger1 = 1
+scale = gameheight/480.0, gameheight/480.0
+
+[State 8520, Scale]
+type = Trans
+trigger1 = Time >= Var(0)
+trans = addalpha
+alpha = 256 - 16 * (Time - Var(0)), 128 + 8 * (Time - Var(0))
+
+[State 8520, Safety]
+type = DestroySelf
+trigger1 = Time >= (Var(0) + 16)
+
+[State 7000, End]
+type = DestroySelf
+trigger1 = Var(1) = 1
+trigger1 = Root, StateNo = 13001
+
+
 ;Electrocute Spark
 [Statedef 7100]
 type = S

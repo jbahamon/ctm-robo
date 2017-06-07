@@ -58,6 +58,18 @@ ownpal = 1
 persistent = 0
 supermovetime = 9999
 
+[State 8520, Portrait]
+type = Helper
+trigger1 = AnimElemtime(3) = 10
+stateno = 7001
+name = "Super BG"
+ID = 7001
+sprpriority = -16
+postype = back
+ownpal = 1
+supermovetime = 99999
+pausemovetime = 99999
+
 [State 2200, Super Pause]
 type = SuperPause
 trigger1 = AnimElemtime(3) = 10
@@ -469,6 +481,18 @@ pos = 0,0
 ownpal = 1
 persistent = 0
 supermovetime = 9999
+
+[State 8520, Portrait]
+type = Helper
+trigger1 = AnimElemtime(3) = 10
+stateno = 7001
+name = "Super BG"
+ID = 7001
+sprpriority = -16
+postype = back
+ownpal = 1
+supermovetime = 99999
+pausemovetime = 99999
 
 [State 2200, Super Pause]
 type = SuperPause
@@ -904,6 +928,19 @@ pos = 0,0
 ownpal = 1
 persistent = 0
 supermovetime = 9999
+
+[State 8520, Portrait]
+type = Helper
+trigger1 = AnimElem = 5
+stateno = 7001
+name = "Super BG"
+ID = 7001
+sprpriority = -16
+postype = back
+ownpal = 1
+supermovetime = 99999
+pausemovetime = 99999
+
 
 [State 2200, Super Pause]
 type = SuperPause
