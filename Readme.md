@@ -1,170 +1,156 @@
-
-Robo by SilentProtagonist 
-================================
-
-Robo is a three-button character made for MUGEN 1.0.
+Robo is a three-button character (a+b+c keys) made for MUGEN 1.0.
 This is not a final version but it should be playable.
 
-What's Missing:
+What's missing:
 
-- More palettes.
 - Specific character interactions (intros, winposes, double techs, maybe)
 
-Robo was fun to make. He has many ground moves and funny poses. Still, I 
-wanted to give him something that made him unique and different from other
-characters. I also saw he had a hard time getting close to his opponents.
-The thrusters idea solved (I hope!) both of these issues. 
 
-
-Robo's Moveset
-==============
+## Moveset
 
 Robo is a slow character. He hits hard but can't combo very well. 
 His supers have a medium range, but it can be hard to combo into them if your 
 opponent runs away.
 
-This changes when he activates his thrusters.
+Robo's second jump activates his Robo Burner. It relies on fuel, displayed below
+him. You can hold down Up, Left or Right while jumping and Robo will fly in 
+that direction. You can also fly diagonally up. Fuel replenishes while grounded.
 
-He has a second jump thar works sort of like R.O.B.'s third jump in Super Smash Bros. 
-Brawl (called Robo Burner). Quoting SmashWiki (http://www.ssbwiki.com/): 
+In addition, Robo's Air Medium Punch and Air Hard Punch use up some fuel (10% 
+and 15%, respectively) to execute to its fullest. Robo's air attacks are faster 
+and more comboable.
 
-"Although it deals no damage, it can be used, then deactivated for an attack,
-then reactivated (...) Robo Burner relies on fuel, which automatically
-charges when R.O.B. is touching the ground, taking about 1.5 seconds
-to fully charge."
+Finally, his ground Hard Punch has some super armor frames.
 
-Robo's propulsors do not require any special command to use: just hold down
-Up, Left or Right while jumping and Robo will fly in that direction. You can
-also fly diagonally up.
+### Special Moves
 
-In addition, Robo's medium punch, hard punch require and use up
-some of your fuel (10% and 15%, respectively) to execute to its fullest. 
-Other moves also require fuel, and will be noted in the following. Robo's 
-air attacks are faster and more comboable. Robo has a fuel meter under him at all 
-times so you can keep track of the amount you have.
+- **Robo Launcher**: `D, DB, B + a/b/c` (Air)
 
-This means Robo's fighting style switches between waiting for your fuel to recharge 
-and rushing your opponent with air attacks. Use your thrusters to get close to your 
-opponents!
+Requires 500 Power and 50% Fuel. Robo uses his thrusters to quickly fly towards 
+his opponent. He grabs his opponent, flies them into the air, turns them upside 
+down, then crashes them into the ground.
 
-
-Throws
---------------
-
-**Robo Toss**: F/B + (a+b)/(b+c)/(a+c) (Standing)
-
-A standard throw. Robo grabs the opponent, gives them a few spins and throws them away.
-The direction you press determines the direction your opponent will be thrown.
-
-**Robo Launcher**: D, DB, B + a/b/c (Air). Requires 500 Power, 75% Fuel.
-
-Robo uses his thrusters to quickly fly towards his opponent. He grabs his opponent, 
-flies them into the air, turns them upside down, then crashes them into the ground.
-
-Specials
---------
-
-**Robo Tackle**: F, D, DF + a/b/c (Standing)
+- **Robo Tackle**: `F, D, DF + a/b/c` (Ground)
 
 Robo does a diagonal tackle into the air. The button used determines the
 attack's trajectory and damage.
 
-**Area Bomb**: D, DB, B + a/b/c (Standing)
+- **Area Bomb**: `D, DB, B + a/b/c` (Ground)
 
-Robo stops and creates a small explosion around him. Use this to defend against
-pressuring opponents.
+Robo creates a small explosion around him.
 
-**Rocket Punch**: D, DF, F + a/b/c (Standing/Air) Requires 30% Fuel.
+- **Rocket Punch**: `D, DF, F + a/b/c` (Ground/Air)
 
-Robo sends his fist flying towards the opponent. The button used
-determines the fist's speed. The air version can't be used if you 
-don't have enough fuel.
+Requires 30% Fuel if performed in the air. Robo sends his fist flying towards 
+the opponent. The button used determines the fist's speed. 
 
+### Super Moves
 
-Supers
-------
+- **Shock**: `D, DB, B, D, DB, B + a/b/c` (Ground)
 
-**Shock**: D, DB, B, D, DB, B + a/b/c (Standing). Requires 1000 Power.
+Requires 1000 Power. Similar to Area Bomb. Robo opens up and electrocutes 
+anyone who comes too close.
 
-Similar to Area Bomb. Robo opens up and electrocutes anyone who comes too close.
+- **Uzzi Punch**: `D, DF, F, D, DF, F, a/b/c` (Ground). Requires 1000 Power.
 
-**Uzzi Punch**: D, DF, F, D, DF, F, a/b/c (Standing). Requires 1000 Power.
+Requires 1000 Power. Robo throws a multi-punch in front of him. The attack 
+ends with a small explosion. This super move can be comboed from other moves.
 
-Robo throws a multi-punch in front of him. The attack ends with a small explosion. 
-Try comboing into this super move.
+- **Omega Laser**: `D, B, D, F + a/b/c` (Ground)
 
-**Omega Laser**: ~D, B, D, F + a/b/c (Standing). Requires 1000 Power.
+Requires 1000 Power. Robo shoots a short-range laser towards the enemy.
 
-Robo shoots a short-range laser towards the enemy.
+### Special Mode
 
+- **Electrocute**: `a+c` (Ground)
 
-Special Mode
-------------
+Requires 3000 Power. Robo overloads and electric arcs appear around him. His thrusters are 
+forcefully activated, so only air attacks can be performed while in this state. 
+Fuel reserves are unlimited until his Power depletes completely.
 
-**Electrocute**: a+c (Standing). Requires 3000 Power.
+### Final Move
 
-Robo overloads and electric arcs appear around him. His thrusters are 
-forcefully activated, so you'll be floating all the time. This means you 
-can't use specials and supers that require you to be standing.
+- **Prometheus Cannon**: D, B, D, F + a/b/c (while Electrocute is active)
 
-The high speed can be a little unwieldy, but take advantage of it.
-You can also use any attack that requires fuel as many times as you want.
-
-Your Power will automatically decrease: when you run out of Power, 
-the mode ends. Go on the offensive!
-
-Final Move
-----------
-
-**Prometheus Cannon**: D, B, D, F + a/b/c (must have Electrocute activated). Uses all of your Power, ending Electrocute.
-
-Robo pulls a big cannon out of nowhere, and shoots a huge beam 
-of energy. Note that you'll achieve maximum damage with this move if you 
-shoot at point-blank. Even better if your opponent is cornered. 
-
-"Here's my Sunday best!"
+Spends all remaining Power. Robo pulls a big cannon out of nowhere, and shoots a huge beam 
+of energy.
 
 
-Credits and Acknowledgements
-----------------------------
+## 12p Mode
 
-- bga, for supporting me all this time.
+Robo's 12p mode is based on MvC's Ironman. He uses 4 buttons instead of 3. `a`, `b` and `c` 
+are Light, Mid and Heavy Attack, respectively, and `x` is the Launcher Attack, which can 
+be used to start an air combo.
 
-- The Spriters Resource (http://www.spriters-resource.com) for the sprites. In particular,
-  the sprites ripped by Tonberry2k and Rogultgot were incredibly useful.
+In his 12p Mode you also get access to an Air Dash (pressing twice in the same direction 
+while in the air), a Super Jump (`D, U`). His Air Heavy Attack can be aimed up or down. 
+Damage scaling is implemented: this is, as a combo goes on for longer, additional attacks 
+will inflict less and less damage.
 
-- The Chrono Compendium (http://chronocompendium.com), in particular the user Dirtie, for
-  ripping the sound effects from Chrono Trigger and making them available to everyone.
+### 12p Special Moves
 
-- The guys at the Mugen Fighters Guild forum (http://mugenguild.com/forumx/index.php),
+- **Flight**: `D, DB, B, x` (Ground/Air)
+
+Enables flight for a short while.
+
+- **Repulsor Blast**: `D, DB, B, a/b/c` (Ground)
+
+Ironman channels energy from his hands. This attacks attracts enemies that get caught in it. 
+
+- **Repulsor Spread**: `c` (while performing Repulsor Blast)
+
+An energy explosion that repels enemies.
+
+- **Unibeam**: `D, DF, F, a/b/c` (Ground/Air)
+
+An energy beam from Ironman's chest.
+
+- **Smart Bomb**: `F, D, DF, a/b/c` (Ground/Air)
+
+Ironman drops a pair of bombs. Can hit an opponent that's lying down and put them into a combo.
+
+### 12p Super Moves
+
+- **Proton Cannon**: `D, DF, F, a+b/b+c/a+c` (Ground)
+
+Requires 1000 Power. Ironman calls on his trusted Proton Cannon and fires it horizontally. 
+Both the cannon and the beam can hit the opponent.
+
+- **Angled Proton Cannon**: `F, D, DF, a+b/b+c/a+c` (Ground)
+
+Requires 1000 Power. Same as before, but fired diagonally. Again, both the cannon and the 
+beam can hit the opponent.
+
+- **Iron Avenger**: `D, DB, B, a+b/b+c/a+c` (Ground)
+
+Requires 3000 Power. Ironman charges toward the opponent. If the move connects, they will be 
+dragged and a powerful Unibeam will be fired at them. Has invicibility frames on startup. 
+Qualifies as a throw. This move is not affected by damage scaling.
+
+
+# Copyright, licensing, etc.
+
+Use my code for whatever you want. Chrono Trigger and all of its characters are property of Square-Enix. Bayonetta belongs to Nintendo and Platinum Games. This creation/adaptation was made for entertainment, not for profit. If you want to host this, modify or use it for your own purposes, try to contact me first.
+
+# Credits and Acknowledgments 
+
+Thanks to:
+
+- My friends and family, for supporting me all this time.
+
+- [The Spriters Resource](http://www.spriters-resource.com) for the sprites. Rips by Tonberry2k, Nemu, Dazz
+  and many others were incredibly useful.
+
+- [The Chrono Compendium](http://chronocompendium.com). In particular, the user Dirtie ripped 
+  a ton of Chrono Trigger sound effect and made them available to everyone.
+
+- The guys at the [Mugen Fighters Guild Forum](http://mugenguild.com/forumx/index.php),
   for answering my questions and helping me learn. Their Code Library/Snippet Section rocks.
 
-- POTS, as I read his characters' code whenever I had doubts. I used some of his code as a
-  base for some moves/state controllers.
+- So many MUGEN creators: PoTS, SMEE, Bia, warusaki3 and everyone who creates stuff that others can use.
 
-- Square (now Square-Enix) and the team that created Chrono Trigger, for making this
-wonderful game.
+- Square (now Square-Enix) and the team that created Chrono Trigger.
 
 - Elecbyte, of course, for creating the awesome fighting game engine that is MUGEN.
 
 - And you...
-
----------- 
-Disclaimer
-----------
-
-- Chrono Trigger and all of its characters are property of Square-Enix.
-
-- This creation/adaptation was made for entertainment and not for profit.
-
-- This creation/adaptation, nor any part of it, may not be used for commercial purposes. 
-
-- If you want to host this creation, modify or use it for your own purposes,
-  try to ask me first.
-
--------
-Contact
--------
-
-- If you have questions, suggestions, comments, send me a private message at the Mugen Fighters Guild's forum.
-  I may not answer immediately, but I'll try.

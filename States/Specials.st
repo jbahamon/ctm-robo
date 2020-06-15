@@ -1134,7 +1134,7 @@ velset = 0,0
 type = VarAdd
 trigger1 = !Time
 trigger1 = !Var(22) 
-var(21) = -75
+var(21) = -50
 
 [State 7950,2]
 type = Explod

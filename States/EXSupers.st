@@ -502,7 +502,7 @@ movetime = 0
 anim = -1
 sound = S1,1;S a7,2
 p2defmul = 1
-poweradd = -3000
+poweradd = -1000
 darken = 0
 
 [State 2020, Super Pause FX]
