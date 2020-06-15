@@ -3,6 +3,9 @@ This is not a final version but it should be playable.
 
 What's missing:
 
+- Remake Robo Tackle into an horizontal dash
+- Remake Area Bomb into an explosive command throw
+- Rethink the Fuel mechanic
 - Specific character interactions (intros, winposes, double techs, maybe)
 
 
