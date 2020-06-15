@@ -636,7 +636,6 @@ sprpriority = 3
 poweradd = 0
 velset = 0, 0
 
-
 [State 2201, var]
 type = AngleDraw
 trigger1 = 1
