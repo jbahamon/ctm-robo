@@ -132,14 +132,14 @@ they will be dragged and a powerful Unibeam will be fired at them. Has
 invicibility frames on startup. Qualifies as a throw. This move is not affected 
 by damage scaling.
 
-# Copyright, licensing, etc.
+## Copyright, licensing, etc.
 
 Use my code for whatever you want. Chrono Trigger and all of its characters are 
 property of Square-Enix. Ironman belongs to Marvel. This creation/adaptation was
  made for entertainment, not for profit. If you want to host this, modify or use
   it for your own purposes, try to contact me first.
 
-# Credits and Acknowledgments 
+## Credits and Acknowledgments 
 
 Thanks to:
 
