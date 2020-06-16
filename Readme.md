@@ -27,29 +27,29 @@ Finally, his ground Hard Punch has some super armor frames.
 
 ### Special Moves
 
-- **Robo Launcher**: `D, DB, B + a/b/c` (Air)
+- **Robo Launcher**: `D, DB, B, a/b/c` (Air)
 
 Requires 500 Power and 50% Fuel. Robo uses his thrusters to quickly fly towards 
 his opponent. He grabs his opponent, flies them into the air, turns them upside 
 down, then crashes them into the ground.
 
-- **Robo Tackle**: `F, D, DF + a/b/c` (Ground)
+- **Robo Tackle**: `F, D, DF, a/b/c` (Ground)
 
 Robo does a diagonal tackle into the air. The button used determines the
 attack's trajectory and damage.
 
-- **Area Bomb**: `D, DB, B + a/b/c` (Ground)
+- **Area Bomb**: `D, DB, B, a/b/c` (Ground)
 
 Robo creates a small explosion around him.
 
-- **Rocket Punch**: `D, DF, F + a/b/c` (Ground/Air)
+- **Rocket Punch**: `D, DF, F, a/b/c` (Ground/Air)
 
 Requires 30% Fuel if performed in the air. Robo sends his fist flying towards 
 the opponent. The button used determines the fist's speed. 
 
 ### Super Moves
 
-- **Shock**: `D, DB, B, D, DB, B + a/b/c` (Ground)
+- **Shock**: `D, DB, B, D, DB, B, a/b/c` (Ground)
 
 Requires 1000 Power. Similar to Area Bomb. Robo opens up and electrocutes 
 anyone who comes too close.
@@ -59,7 +59,7 @@ anyone who comes too close.
 Requires 1000 Power. Robo throws a multi-punch in front of him. The attack 
 ends with a small explosion. This super move can be comboed from other moves.
 
-- **Omega Laser**: `D, B, D, F + a/b/c` (Ground)
+- **Omega Laser**: `D, B, D, F, a/b/c` (Ground)
 
 Requires 1000 Power. Robo shoots a short-range laser towards the enemy.
 
@@ -73,7 +73,7 @@ Fuel reserves are unlimited until his Power depletes completely.
 
 ### Final Move
 
-- **Prometheus Cannon**: D, B, D, F + a/b/c (while Electrocute is active)
+- **Prometheus Cannon**: D, B, D, F, a/b/c (while Electrocute is active)
 
 Spends all remaining Power. Robo pulls a big cannon out of nowhere, and shoots a huge beam 
 of energy.
